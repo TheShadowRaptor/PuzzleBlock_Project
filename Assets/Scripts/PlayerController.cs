@@ -1,11 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController playerController;
+
+    [SerializeField] private LayerMask unpassableTerrainMasks;
     [SerializeField] private float rollSpeed = 3;
     private bool isMoving;
+    private bool canMoveForward;
+    private bool canMoveBack;
+    private bool canMoveLeft;
+    private bool canMoveRight;
+
+    public bool IsMoving { get => isMoving; }
+
+    private void Awake()
+    {
+        if (playerController != null && playerController != this)
+        {
+            Destroy(this);
+            return;
+        }
+        playerController = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,21 +38,28 @@ public class PlayerController : MonoBehaviour
     {
         if (isMoving) return;
 
-        Vector3 cameraDirection = Camera.main.transform.forward;
-        cameraDirection.x = 45;
+        Vector3 cameraDirection = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.forward;
         cameraDirection.y = 0f;
-        cameraDirection.Normalize();
+    
 
-        Vector3 cameraDirectionRight = Camera.main.transform.right;
+        Vector3 cameraDirectionRight = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.right;
         cameraDirectionRight.y = 0f;
-        cameraDirectionRight.x = 0;
+
+        // Rotate cameraDirection by 45 degrees around the y-axis
+        cameraDirection = Quaternion.AngleAxis(45f, Vector3.up) * cameraDirection;
+        cameraDirectionRight = Quaternion.AngleAxis(45f, Vector3.up) * cameraDirectionRight;
+
+        cameraDirection.Normalize();
         cameraDirectionRight.Normalize();
 
+        CheckIfCanMove(cameraDirection, cameraDirectionRight);
 
-        if (Input.GetKey(KeyCode.A) && isMoving == false) Assemble(-cameraDirectionRight);
-        if (Input.GetKey(KeyCode.D) && isMoving == false) Assemble(cameraDirectionRight);
-        if (Input.GetKey(KeyCode.W) && isMoving == false) Assemble(cameraDirection);
-        if (Input.GetKey(KeyCode.S) && isMoving == false) Assemble(-cameraDirection);
+        Debug.Log(cameraDirection.x);
+
+        if (Input.GetKey(KeyCode.A) && isMoving == false && canMoveLeft) Assemble(-cameraDirectionRight);
+        if (Input.GetKey(KeyCode.D) && isMoving == false && canMoveRight) Assemble(cameraDirectionRight);
+        if (Input.GetKey(KeyCode.W) && isMoving == false && canMoveForward) Assemble(cameraDirection);
+        if (Input.GetKey(KeyCode.S) && isMoving == false && canMoveBack) Assemble(-cameraDirection);
 
         void Assemble(Vector3 dir)
         {
@@ -39,6 +67,22 @@ public class PlayerController : MonoBehaviour
             var axis = Vector3.Cross(Vector3.up, dir);
             StartCoroutine(Roll(anchor, axis));            
         }
+
+    }
+
+    void CheckIfCanMove(Vector3 cameraDirection, Vector3 cameraDirectionRight)
+    {
+        RaycastHit hit;
+        canMoveForward = true;
+        canMoveBack = true;
+        canMoveLeft = true;
+        canMoveRight = true;
+
+        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, 1.2f, unpassableTerrainMasks)) canMoveLeft = false;
+        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, 1.2f, unpassableTerrainMasks)) canMoveRight = false;
+        if (Physics.Raycast(transform.position, cameraDirection, out hit, 1.2f, unpassableTerrainMasks)) canMoveForward = false;
+        if (Physics.Raycast(transform.position, -cameraDirection, out hit, 1.2f, unpassableTerrainMasks)) canMoveBack = false;
+            
     }
 
     IEnumerator Roll(Vector3 anchor, Vector3 axis)
@@ -53,4 +97,5 @@ public class PlayerController : MonoBehaviour
 
         isMoving = false;
     }
+
 }

@@ -1,22 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController cameraController;
+    [SerializeField] private GameObject cameraPointHolder;
     [SerializeField] private List<GameObject> cameraPoints = new List<GameObject>();
+
     [SerializeField] private int currentCameraPoint = 0;
     [SerializeField] private float cameraPanSpeed = 0.1f;
-    // Start is called before the first frame update
-    void Start()
+
+    public List<GameObject> CameraPoints { get =>  cameraPoints; }
+    public int CurrentCameraPoint { get => currentCameraPoint; }
+
+    private void Awake()
     {
-        
+        if (cameraController != null && cameraController != this)
+        {
+            Destroy(this);
+            return;
+        }
+        cameraController = this;
     }
 
     // Update is called once per frame
     void Update()
     {
         ChangeCameraPosition();
+        FollowPlayer();
     }
     
     void ChangeCameraPosition()
@@ -49,5 +62,15 @@ public class CameraController : MonoBehaviour
             cameraRot = Quaternion.Lerp(cameraRot, cameraPoints[currentCameraPoint].transform.rotation, cameraPanSpeed);   
             this.gameObject.transform.rotation = cameraRot;
         }
+    }
+
+    void FollowPlayer()
+    {
+        //if (!PlayerController.playerController.IsMoving) return;
+        Vector3 pointPos = cameraPointHolder.transform.position;
+        Vector3 playerPos = PlayerController.playerController.gameObject.transform.position;
+        pointPos.x = playerPos.x;
+        pointPos.z = playerPos.z;
+        cameraPointHolder.transform.position = pointPos;
     }
 }
