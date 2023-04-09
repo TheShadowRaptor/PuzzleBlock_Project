@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -7,8 +8,12 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController playerController;
 
+    [Header("Settings")]
     [SerializeField] private LayerMask unpassableTerrainMasks;
     [SerializeField] private float rollSpeed = 3;
+    [SerializeField] private float gravityPower = 3;
+
+
     private bool isMoving;
     private bool canMoveForward;
     private bool canMoveBack;
@@ -36,11 +41,16 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
+
+    void Move()
+    {
         if (isMoving) return;
 
         Vector3 cameraDirection = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.forward;
         cameraDirection.y = 0f;
-    
+
 
         Vector3 cameraDirectionRight = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.right;
         cameraDirectionRight.y = 0f;
@@ -52,25 +62,27 @@ public class PlayerController : MonoBehaviour
         cameraDirection.Normalize();
         cameraDirectionRight.Normalize();
 
-        CheckIfCanMove(cameraDirection, cameraDirectionRight);
+        CheckSurroundingsWithRaycasts(cameraDirection, cameraDirectionRight);
 
         Debug.Log(cameraDirection.x);
 
-        if (Input.GetKey(KeyCode.A) && isMoving == false && canMoveLeft) Assemble(-cameraDirectionRight);
-        if (Input.GetKey(KeyCode.D) && isMoving == false && canMoveRight) Assemble(cameraDirectionRight);
-        if (Input.GetKey(KeyCode.W) && isMoving == false && canMoveForward) Assemble(cameraDirection);
-        if (Input.GetKey(KeyCode.S) && isMoving == false && canMoveBack) Assemble(-cameraDirection);
+        // Input
+        if (Input.GetKey(KeyCode.A) && isMoving == false && canMoveLeft && IsGrounded()) Assemble(-cameraDirectionRight);
+        if (Input.GetKey(KeyCode.D) && isMoving == false && canMoveRight && IsGrounded()) Assemble(cameraDirectionRight);
+        if (Input.GetKey(KeyCode.W) && isMoving == false && canMoveForward && IsGrounded()) Assemble(cameraDirection);
+        if (Input.GetKey(KeyCode.S) && isMoving == false && canMoveBack && IsGrounded()) Assemble(-cameraDirection);
+
+        if (!IsGrounded()) EnableGravity();
 
         void Assemble(Vector3 dir)
         {
             var anchor = transform.position + (Vector3.down + dir) * 0.5f;
             var axis = Vector3.Cross(Vector3.up, dir);
-            StartCoroutine(Roll(anchor, axis));            
+            StartCoroutine(Roll(anchor, axis));
         }
-
     }
 
-    void CheckIfCanMove(Vector3 cameraDirection, Vector3 cameraDirectionRight)
+    void CheckSurroundingsWithRaycasts(Vector3 cameraDirection, Vector3 cameraDirectionRight)
     {
         RaycastHit hit;
         canMoveForward = true;
@@ -78,11 +90,23 @@ public class PlayerController : MonoBehaviour
         canMoveLeft = true;
         canMoveRight = true;
 
+        // Grid
         if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, 1.2f, unpassableTerrainMasks)) canMoveLeft = false;
         if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, 1.2f, unpassableTerrainMasks)) canMoveRight = false;
         if (Physics.Raycast(transform.position, cameraDirection, out hit, 1.2f, unpassableTerrainMasks)) canMoveForward = false;
         if (Physics.Raycast(transform.position, -cameraDirection, out hit, 1.2f, unpassableTerrainMasks)) canMoveBack = false;
-            
+    }
+
+    bool IsGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.2f, unpassableTerrainMasks)) return true;
+        else return false;
+    }
+
+    void EnableGravity()
+    {
+        this.gameObject.transform.Translate(Vector3.down * gravityPower, Space.World);
     }
 
     IEnumerator Roll(Vector3 anchor, Vector3 axis)
