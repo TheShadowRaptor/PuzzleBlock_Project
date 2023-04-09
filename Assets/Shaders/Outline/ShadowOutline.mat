@@ -114,18 +114,18 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _Outline_AcuteDepthThreshhold: 20
+    - _Outline_AcuteDepthThreshhold: 19.35
     - _Outline_AcuteStartDot: 0.9
     - _Outline_DepthStrength: 29.82
     - _Outline_DepthThreshhold: 20
-    - _Outline_DepthTightening: 0.2
+    - _Outline_DepthTightening: 0.15
     - _Outline_FarNormalEndDepth: 10
     - _Outline_FarNormalStartDepth: 1
     - _Outline_FarNormalThreshhold: 1
     - _Outline_NormalStrength: 1
     - _Outline_NormalThreshhold: 0.001
     - _Outline_NormalTightening: 128
-    - _Outline_Thickness: 0.004
+    - _Outline_Thickness: 0.002
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

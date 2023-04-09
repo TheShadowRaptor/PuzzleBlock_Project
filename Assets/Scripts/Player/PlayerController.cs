@@ -28,7 +28,9 @@ public class PlayerController : MonoBehaviour
 
     private bool hitSpring = false;
     private float springPower;
+    private float springLandPower;
     private float springDuration;
+    private float springLandDuration;
 
     // Camera Vectors
     private Vector3 cameraDirection;
@@ -149,14 +151,28 @@ public class PlayerController : MonoBehaviour
 
     void BounceFromSpring()
     {
+        if (springLandDuration < 0) return;
         springDuration -= Time.deltaTime;
 
-        if (springDuration > 0) this.gameObject.transform.Translate(Vector3.up * springPower, Space.World);
+        if (springDuration > 0)
+        {
+            this.gameObject.transform.Translate(Vector3.up * springPower + lastDirMoved * springPower, Space.World);
+        }
+
         else
         {
             springDuration = 0;
-            Assemble(lastDirMoved);
-            hitSpring = false;
+            springLandDuration -= Time.deltaTime;
+
+            if (springLandDuration > 0)
+            {
+                this.gameObject.transform.Translate(Vector3.down * springLandPower + lastDirMoved * springPower, Space.World);
+            }
+
+            else
+            {
+                hitSpring = false;   
+            }
         }
     }
 
@@ -181,10 +197,12 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    public void LandedOnSpring(float power, float duration)
+    public void LandedOnSpring(float power, float landPower, float duration, float landDuration)
     {
         springPower = power;
+        springLandPower = power;
         springDuration = duration;
+        springLandDuration = landDuration;
         hitSpring = true;
     }
 }

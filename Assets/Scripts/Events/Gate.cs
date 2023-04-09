@@ -8,7 +8,7 @@ public class Gate : EventObject
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = transform.GetChild(0).GetComponent<Animator>();
         animator.SetBool("false", true);
     }
 

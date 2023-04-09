@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private int currentCameraPoint = 0;
     [SerializeField] private float cameraPanSpeed = 0.1f;
+    [SerializeField] private float cameraHeight = 10f;
 
     public List<GameObject> CameraPoints { get =>  cameraPoints; }
     public int CurrentCameraPoint { get => currentCameraPoint; }
@@ -66,11 +67,12 @@ public class CameraController : MonoBehaviour
 
     void FollowPlayer()
     {
-        //if (!PlayerController.playerController.IsMoving) return;
         Vector3 pointPos = cameraPointHolder.transform.position;
         Vector3 playerPos = PlayerController.playerController.gameObject.transform.position;
+        //if (!PlayerController.playerController.IsMoving) return;
         pointPos.x = playerPos.x;
         pointPos.z = playerPos.z;
+        pointPos.y = playerPos.y + cameraHeight;
         cameraPointHolder.transform.position = pointPos;
     }
 }
