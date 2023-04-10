@@ -118,14 +118,14 @@ Material:
     - _Outline_AcuteStartDot: 0.9
     - _Outline_DepthStrength: 44.9
     - _Outline_DepthThreshhold: 66.3
-    - _Outline_DepthTightening: 0.2
+    - _Outline_DepthTightening: 2
     - _Outline_FarNormalEndDepth: 10
     - _Outline_FarNormalStartDepth: 1
     - _Outline_FarNormalThreshhold: 1
     - _Outline_NormalStrength: 1
     - _Outline_NormalThreshhold: 0.001
     - _Outline_NormalTightening: 128
-    - _Outline_Thickness: -0.01
+    - _Outline_Thickness: 0
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
