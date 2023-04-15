@@ -1,8 +1,11 @@
+using Cyan;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +19,11 @@ public class PlayerController : MonoBehaviour
     [Header("Rays")]
     [SerializeField] private float surroundingRayLength = 1.2f;
     [SerializeField] private float groundRayLength = 1.01f;
+
+    [Header("UI")]
+    [SerializeField] private Blit blit;
+    [SerializeField] private Material shadowVignette;
+    [SerializeField] private Material lightVignette;
 
     // Movement bools
     private bool isMoving;
@@ -204,5 +212,17 @@ public class PlayerController : MonoBehaviour
         springDuration = duration;
         springLandDuration = landDuration;
         hitSpring = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Light")) blit.blitPass.blitMaterial = lightVignette;
+        else blit.blitPass.blitMaterial = shadowVignette;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Light")) blit.blitPass.blitMaterial = shadowVignette;
+        else blit.blitPass.blitMaterial = lightVignette;
     }
 }
