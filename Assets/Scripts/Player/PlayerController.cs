@@ -214,7 +214,7 @@ public class PlayerController : MonoBehaviour
         hitSpring = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("Light")) blit.blitPass.blitMaterial = lightVignette;
         else blit.blitPass.blitMaterial = shadowVignette;
