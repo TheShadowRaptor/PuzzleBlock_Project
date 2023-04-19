@@ -132,6 +132,9 @@ Material:
     - _RimBrightness: 0.5
     - _RimPower: 1
     - _RimSmoothness: 0.5
+    - _ShadowRippleDensity: 20.61
+    - _ShadowRipplePower: 20.15
+    - _ShadowRippleSpeed: 1.21
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
