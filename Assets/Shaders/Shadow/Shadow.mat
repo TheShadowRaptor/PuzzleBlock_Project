@@ -130,8 +130,8 @@ Material:
     - _Range: 2000
     - _ReceiveShadows: 1
     - _RimBrightness: 0.5
-    - _RimPower: 1
-    - _RimSmoothness: 0.5
+    - _RimPower: 1.33
+    - _RimSmoothness: 0.278
     - _ShadowRippleDensity: 20.61
     - _ShadowRipplePower: 20.15
     - _ShadowRippleSpeed: 1.21
@@ -143,8 +143,8 @@ Material:
     - _StepAmount: 9.02
     - _Subtract: 1
     - _Surface: 0
-    - _ToonOffset: 0.2
-    - _ToonSmoothness: 0.5
+    - _ToonOffset: 0.383
+    - _ToonSmoothness: 0.517
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -153,9 +153,11 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
-    - _RegularColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 0}
+    - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
+    - _RegularColor: {r: 0.9811321, g: 0.81060106, b: 0.45817015, a: 0}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 0.36078432, g: 0, b: 1, a: 0}
+    - _ShadowColor: {r: 1.6577295, g: 0, b: 4.594794, a: 0}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TopColor: {r: 1, g: 0.85301054, b: 0.5235849, a: 1}
   m_BuildTextureStacks: []

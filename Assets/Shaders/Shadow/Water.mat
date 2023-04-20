@@ -142,10 +142,10 @@ Material:
     - _Surface: 0
     - _ToonOffset: 0.2
     - _ToonSmoothness: 0.5
-    - _WaterDensity: 7.56
-    - _WaterPower: 2.95
-    - _WaterShadowDensity: 9.5
-    - _WaterShadowPower: 58.7
+    - _WaterDensity: 50.64
+    - _WaterPower: 1.6
+    - _WaterShadowDensity: 24.52
+    - _WaterShadowPower: 8.9
     - _WaterShadowSpeed: 1
     - _WaterSpeed: 1.21
     - _WorkflowMode: 1
@@ -156,10 +156,10 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
-    - _RegularColor: {r: 0, g: 0.82210016, b: 1, a: 0}
+    - _RegularColor: {r: 0.027189402, g: 0.3699481, b: 0.4433962, a: 0}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - _ShadowColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _WaterColor: {r: 0, g: 0.39272016, b: 1, a: 0}
-    - _WaterShadowColor: {r: 0.36154175, g: 0, b: 1, a: 0}
+    - _WaterShadowColor: {r: 4.5392475, g: 1.6070755, b: 9.734287, a: 0}
   m_BuildTextureStacks: []

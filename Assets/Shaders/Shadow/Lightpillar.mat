@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Lightpillar
-  m_Shader: {fileID: -6465566751694194690, guid: a2a8e675b66471b4694bb0ba8f6df15e,
+  m_Shader: {fileID: -6465566751694194690, guid: 818607d0ee60326449f842936b688aba,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -153,9 +153,11 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
-    - _RegularColor: {r: 1, g: 0.9397965, b: 0, a: 0}
+    - _RealLightShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - _RegularColor: {r: 3.4133248, g: 8.47419, b: 0, a: 0}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 1, b: 0.75631857, a: 0}
     - _ShadowRippleColor: {r: 0, g: 1, b: 0.7568628, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _TopColor: {r: 1.0408088, g: 2.6082377, b: 0.8739645, a: 0}
   m_BuildTextureStacks: []
