@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
+using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,11 +36,13 @@ public class PlayerController : MonoBehaviour
 
     Vector3 lastDirMoved;
 
+    // Spring Varibles
     private bool hitSpring = false;
-    private float springPower;
-    private float springLandPower;
-    private float springDuration;
-    private float springLandDuration;
+    private bool springingUp = false;
+    private bool springingDown = false;
+    private int blocksTraveled;
+    private int maxBlocksToTravel;
+    private Vector3 springDir;
 
     // Camera Vectors
     private Vector3 cameraDirection;
@@ -150,6 +154,8 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveRight = false;
         if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveForward = false;
         if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveBack = false;
+
+        IsGrounded();
     }
 
     void EnableGravity()
@@ -159,29 +165,35 @@ public class PlayerController : MonoBehaviour
 
     void BounceFromSpring()
     {
-        if (springLandDuration < 0) return;
-        springDuration -= Time.deltaTime;
+        Vector3 travelUp = Vector3.up / 4; // These values are mor for visual reasons. Stops the player from spring really high.
+        Vector3 travelDown = Vector3.down / 4; // These values are mor for visual reasons. Stops the player from spring really high.
 
-        if (springDuration > 0)
+        float speed = 0.5f / 2;
+
+        blocksTraveled++;
+        if (blocksTraveled <= maxBlocksToTravel)
         {
-            this.gameObject.transform.Translate(Vector3.up * springPower + lastDirMoved * springPower, Space.World);
+            if (springingUp)
+            {
+                this.gameObject.transform.Translate(travelUp + springDir * speed, Space.World);
+                if (blocksTraveled == maxBlocksToTravel / 2) // If half
+                {
+                    springingUp = false;
+                    springingDown = true;
+                }
+            }
+            else if (springingDown)
+            {
+                this.gameObject.transform.Translate(travelDown + springDir * speed, Space.World);
+            }
         }
-
         else
         {
-            springDuration = 0;
-            springLandDuration -= Time.deltaTime;
-
-            if (springLandDuration > 0)
-            {
-                this.gameObject.transform.Translate(Vector3.down * springLandPower + lastDirMoved * springPower, Space.World);
-            }
-
-            else
-            {
-                hitSpring = false;   
-            }
+            hitSpring = false;
+            springingDown = false;
+            blocksTraveled = 0;
         }
+
     }
 
     bool IsGrounded()
@@ -205,13 +217,12 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    public void LandedOnSpring(float power, float landPower, float duration, float landDuration)
+    public void LandedOnSpring(Vector3 springDirection, int blocksToTravel)
     {
-        springPower = power;
-        springLandPower = power;
-        springDuration = duration;
-        springLandDuration = landDuration;
+        springDir = springDirection;
+        maxBlocksToTravel = blocksToTravel * 4; // Player moves quarter a block. So this value is raised to make a whole block movement
         hitSpring = true;
+        springingUp = true;
     }
 
     private void OnTriggerStay(Collider other)

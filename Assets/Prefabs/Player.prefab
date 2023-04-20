@@ -103,7 +103,7 @@ MonoBehaviour:
   rollSpeed: 6
   gravityPower: 0.2
   surroundingRayLength: 1.4
-  groundRayLength: 0.58
+  groundRayLength: 0.51
   blit: {fileID: -6465781213825772889, guid: c40be3174f62c4acf8c1216858c64956, type: 2}
   shadowVignette: {fileID: 2100000, guid: dcd88ffaa035e67418b7080ffa551e09, type: 2}
   lightVignette: {fileID: 2100000, guid: 3cd4e6a2a065feb4fb7a2e37808f05a3, type: 2}
