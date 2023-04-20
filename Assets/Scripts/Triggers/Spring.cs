@@ -5,12 +5,13 @@ using UnityEngine;
 public class Spring : TriggerObject
 {
     [SerializeField] private int blocksToTravel = 5;
+    [SerializeField] bool isElevationSpring = false;
     // Update is called once per frame
     void Update()
     {
         if (IsActivated())
         {
-            playerController.LandedOnSpring(Vector3.forward, blocksToTravel);
+            playerController.LandedOnSpring(gameObject.transform.forward, blocksToTravel, isElevationSpring);
         }
     }
 }

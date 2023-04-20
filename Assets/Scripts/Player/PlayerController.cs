@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private bool hitSpring = false;
     private bool springingUp = false;
     private bool springingDown = false;
+    private bool elevationSpring = false;
     private int blocksTraveled;
     private int maxBlocksToTravel;
     private Vector3 springDir;
@@ -165,33 +166,54 @@ public class PlayerController : MonoBehaviour
 
     void BounceFromSpring()
     {
-        Vector3 travelUp = Vector3.up / 4; // These values are mor for visual reasons. Stops the player from spring really high.
-        Vector3 travelDown = Vector3.down / 4; // These values are mor for visual reasons. Stops the player from spring really high.
-
         float speed = 0.5f / 2;
-
-        blocksTraveled++;
-        if (blocksTraveled <= maxBlocksToTravel)
+        // Moves Player Upwards
+        if (elevationSpring)
         {
-            if (springingUp)
+            blocksTraveled++;
+            if (blocksTraveled <= maxBlocksToTravel)
             {
-                this.gameObject.transform.Translate(travelUp + springDir * speed, Space.World);
-                if (blocksTraveled == maxBlocksToTravel / 2) // If half
-                {
-                    springingUp = false;
-                    springingDown = true;
-                }
+                this.gameObject.transform.Translate(Vector3.up * speed, Space.World);
             }
-            else if (springingDown)
+            else
             {
-                this.gameObject.transform.Translate(travelDown + springDir * speed, Space.World);
+                Assemble(springDir);
+                hitSpring = false;
+                springingDown = false;
+                blocksTraveled = 0;
             }
         }
+
+        // Move player Fowards
         else
         {
-            hitSpring = false;
-            springingDown = false;
-            blocksTraveled = 0;
+            Vector3 travelUp = Vector3.up / 4; // These values are mor for visual reasons. Stops the player from spring really high.
+            Vector3 travelDown = Vector3.down / 4; // These values are mor for visual reasons. Stops the player from spring really high.
+
+
+            blocksTraveled++;
+            if (blocksTraveled <= maxBlocksToTravel)
+            {
+                if (springingUp)
+                {
+                    this.gameObject.transform.Translate(travelUp + springDir * speed, Space.World);
+                    if (blocksTraveled == maxBlocksToTravel / 2) // If half
+                    {
+                        springingUp = false;
+                        springingDown = true;
+                    }
+                }
+                else if (springingDown)
+                {
+                    this.gameObject.transform.Translate(travelDown + springDir * speed, Space.World);
+                }
+            }
+            else
+            {
+                hitSpring = false;
+                springingDown = false;
+                blocksTraveled = 0;
+            }
         }
 
     }
@@ -217,8 +239,9 @@ public class PlayerController : MonoBehaviour
         isMoving = false;
     }
 
-    public void LandedOnSpring(Vector3 springDirection, int blocksToTravel)
+    public void LandedOnSpring(Vector3 springDirection, int blocksToTravel, bool isElevationSpring)
     {
+        elevationSpring = isElevationSpring;
         springDir = springDirection;
         maxBlocksToTravel = blocksToTravel * 4; // Player moves quarter a block. So this value is raised to make a whole block movement
         hitSpring = true;
