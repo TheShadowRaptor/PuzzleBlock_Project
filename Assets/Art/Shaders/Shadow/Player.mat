@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water
-  m_Shader: {fileID: -6465566751694194690, guid: 06462a7b00876cb4187ce818f2b98c0e,
+  m_Name: Player
+  m_Shader: {fileID: -6465566751694194690, guid: a2a8e675b66471b4694bb0ba8f6df15e,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -34,7 +34,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _ShadowRippleDensity
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -132,6 +132,9 @@ Material:
     - _RimBrightness: 0.5
     - _RimPower: 1
     - _RimSmoothness: 0.5
+    - _ShadowRippleDensity: 20.61
+    - _ShadowRipplePower: 6.6
+    - _ShadowRippleSpeed: 1.21
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -142,12 +145,6 @@ Material:
     - _Surface: 0
     - _ToonOffset: 0.2
     - _ToonSmoothness: 0.5
-    - _WaterDensity: 50.64
-    - _WaterPower: 1.6
-    - _WaterShadowDensity: 24.52
-    - _WaterShadowPower: 8.9
-    - _WaterShadowSpeed: 1
-    - _WaterSpeed: 1.21
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -156,10 +153,11 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
-    - _RegularColor: {r: 0.027189402, g: 0.3699481, b: 0.4433962, a: 0}
+    - _RealLightShadowColor: {r: 0.9528302, g: 0.8643763, b: 0.46293166, a: 0}
+    - _RegularColor: {r: 0, g: 1, b: 0.10077143, a: 0}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
+    - _ShadowColor: {r: 0, g: 1, b: 0.06504679, a: 0}
+    - _ShadowRippleColor: {r: 0, g: 1, b: 0.94117653, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _WaterColor: {r: 0, g: 0.39272016, b: 1, a: 0}
-    - _WaterShadowColor: {r: 4.5392475, g: 1.6070755, b: 9.734287, a: 0}
+    - _TopColor: {r: 0.6581381, g: 1, b: 0.5801887, a: 0}
   m_BuildTextureStacks: []

@@ -1,31 +1,31 @@
 using Cyan;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
-using static UnityEngine.ProBuilder.AutoUnwrapSettings;
 
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController playerController;
 
     [Header("Settings")]
-    [SerializeField] private LayerMask unpassableTerrainMasks;
     [SerializeField] private float rollSpeed = 3;
     [SerializeField] private float gravityPower = 3;
 
     [Header("Rays")]
+    [SerializeField] private LayerMask detectTerrainMasks;
     [SerializeField] private float surroundingRayLength = 1.2f;
     [SerializeField] private float groundRayLength = 1.01f;
+    public bool rayCastHitting;
 
     [Header("UI")]
     [SerializeField] private Blit blit;
     [SerializeField] private Material shadowVignette;
     [SerializeField] private Material lightVignette;
+
+    // Input Bools
+    bool leftInput;
+    bool rightInput;
+    bool upInput;
+    bool downInput;
 
     // Movement bools
     private bool isMoving;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private bool canMoveLeft;
     private bool canMoveRight;
 
-    Vector3 lastDirMoved;
+    Vector3 lastDirInput;
 
     // Spring Varibles
     private bool hitSpring = false;
@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 cameraDirectionRight;
 
     public bool IsMoving { get => isMoving; }
+    public Vector3 CameraDirection { get => cameraDirection; }
+    public Vector3 CameraDirectionRight{ get => cameraDirectionRight; }
 
     private void Awake()
     {
@@ -70,8 +72,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckSurroundingsWithRaycasts(cameraDirection, cameraDirectionRight);
         CheckInput();
+        CheckSurroundingsWithRaycasts();
     }
 
     private void FixedUpdate()
@@ -82,6 +84,28 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if (isMoving) return;
+
+        if (canMoveLeft)
+        {
+            Assemble(-cameraDirectionRight);
+        }
+        else if (canMoveRight)
+        {
+            Assemble(cameraDirectionRight);
+        }
+        else if (canMoveForward)
+        {
+            Assemble(cameraDirection);
+        }
+        else if (canMoveBack)
+        {
+            Assemble(-cameraDirection);
+        }
+
+        canMoveLeft = false;
+        canMoveRight = false;
+        canMoveForward = false;
+        canMoveBack = false;
 
         if (!IsGrounded() && !hitSpring) EnableGravity();
         if (hitSpring) BounceFromSpring();
@@ -99,30 +123,42 @@ public class PlayerController : MonoBehaviour
     void CheckInput()
     {
         if (!IsGrounded()) return;
-        if (isMoving) return;
         if (hitSpring) return;
+        if (isMoving) return;
+
+        leftInput = false;
+        rightInput = false;
+        upInput = false;
+        downInput = false;
+
+        leftInput = Input.GetKey(KeyCode.A);
+        rightInput = Input.GetKey(KeyCode.D);
+        upInput = Input.GetKey(KeyCode.W);
+        downInput = Input.GetKey(KeyCode.S);
 
         // Input
-        if (Input.GetKey(KeyCode.A) && canMoveLeft)
+        if (leftInput)
         {
-            Assemble(-cameraDirectionRight); 
-            lastDirMoved = -cameraDirectionRight;
+            lastDirInput = -cameraDirectionRight;
+            canMoveLeft = true;
         }
 
-        else if (Input.GetKey(KeyCode.D) && canMoveRight)
+        else if (rightInput)
         {
-            Assemble(cameraDirectionRight); 
-            lastDirMoved = cameraDirectionRight;
+            lastDirInput = cameraDirectionRight;
+            canMoveRight = true;
         }
 
-        else if (Input.GetKey(KeyCode.W) && canMoveForward)
+        else if (upInput)
         {
-            Assemble(cameraDirection); lastDirMoved = cameraDirection;
+            lastDirInput = cameraDirection;
+            canMoveForward = true;
         }
 
-        else if (Input.GetKey(KeyCode.S) && canMoveBack)
+        else if (downInput)
         {
-            Assemble(-cameraDirection); lastDirMoved = -cameraDirection;
+            lastDirInput = -cameraDirection;
+            canMoveBack = true;            
         }
     }
 
@@ -142,19 +178,50 @@ public class PlayerController : MonoBehaviour
         cameraDirectionRight.Normalize();
     }
 
-    void CheckSurroundingsWithRaycasts(Vector3 cameraDirection, Vector3 cameraDirectionRight)
+    void CheckSurroundingsWithRaycasts()
     {
         RaycastHit hit;
-        canMoveForward = true;
-        canMoveBack = true;
-        canMoveLeft = true;
-        canMoveRight = true;
 
-        // Grid
-        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveLeft = false;
-        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveRight = false;
-        if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveForward = false;
-        if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, unpassableTerrainMasks)) canMoveBack = false;
+        rayCastHitting = false;
+
+        // Grid --------------------------------------------------------------------------------------------------------------------
+        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveLeft = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && leftInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveRight = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && rightInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveForward = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && upInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveBack = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && downInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        // --------------------------------------------------------------------------------------------------------------------------
 
         IsGrounded();
     }
@@ -222,7 +289,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit hit;
         Debug.DrawRay(transform.position, Vector3.down, Color.red, groundRayLength);
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundRayLength, unpassableTerrainMasks)) return true;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundRayLength, detectTerrainMasks)) return true;
         else return false;
     }
 
@@ -247,6 +314,8 @@ public class PlayerController : MonoBehaviour
         hitSpring = true;
         springingUp = true;
     }
+
+
 
     private void OnTriggerStay(Collider other)
     {
