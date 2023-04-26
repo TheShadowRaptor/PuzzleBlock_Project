@@ -11,6 +11,6 @@ public interface ICellOccupier
     }
 
     public Vector3 GetPosition();
-    public void PlayerEnteredHere(PlayerControllerGrid entered, Vector3Int dir);
-    public void PlayerExitHere(PlayerControllerGrid exited);
+    public void BlockEnteredHere(BlockCharacter entered, Vector3Int dir);
+    public void BlockExitHere(BlockCharacter exited);
 }

@@ -91,14 +91,5 @@ public class PlayerControllerGrid : BlockCharacter
     }
 
     public override Vector3 GetPosition() { return transform.position; }
-    public override void PlayerEnteredHere(PlayerControllerGrid entered, Vector3Int dir)
-    {
-
-    }
-
-    public override void PlayerExitHere(PlayerControllerGrid exited)
-    {
-
-    }
 
 }
