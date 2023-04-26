@@ -2,19 +2,9 @@ using Cyan;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : BlockCharacter
 {
     public static PlayerController playerController;
-
-    [Header("Settings")]
-    [SerializeField] private float rollSpeed = 3;
-    [SerializeField] private float gravityPower = 3;
-
-    [Header("Rays")]
-    [SerializeField] private LayerMask detectTerrainMasks;
-    [SerializeField] private float surroundingRayLength = 1.2f;
-    [SerializeField] private float groundRayLength = 1.01f;
-    public bool rayCastHitting;
 
     [Header("UI")]
     [SerializeField] private Blit blit;
@@ -27,15 +17,6 @@ public class PlayerController : MonoBehaviour
     bool upInput;
     bool downInput;
 
-    // Movement bools
-    private bool isMoving;
-    private bool canMoveForward;
-    private bool canMoveBack;
-    private bool canMoveLeft;
-    private bool canMoveRight;
-
-    Vector3 lastDirInput;
-
     // Spring Varibles
     private bool hitSpring = false;
     private bool springingUp = false;
@@ -44,14 +25,6 @@ public class PlayerController : MonoBehaviour
     private int blocksTraveled;
     private int maxBlocksToTravel;
     private Vector3 springDir;
-
-    // Camera Vectors
-    private Vector3 cameraDirection;
-    private Vector3 cameraDirectionRight;
-
-    public bool IsMoving { get => isMoving; }
-    public Vector3 CameraDirection { get => cameraDirection; }
-    public Vector3 CameraDirectionRight{ get => cameraDirectionRight; }
 
     private void Awake()
     {
@@ -160,76 +133,7 @@ public class PlayerController : MonoBehaviour
             lastDirInput = -cameraDirection;
             canMoveBack = true;            
         }
-    }
-
-    void CalculateCameraVectors()
-    {
-        cameraDirection = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.forward;
-        cameraDirection.y = 0f;
-
-        cameraDirectionRight = CameraController.cameraController.CameraPoints[CameraController.cameraController.CurrentCameraPoint].transform.right;
-        cameraDirectionRight.y = 0f;
-
-        // Rotate cameraDirection by 45 degrees around the y-axis
-        cameraDirection = Quaternion.AngleAxis(45f, Vector3.up) * cameraDirection;
-        cameraDirectionRight = Quaternion.AngleAxis(45f, Vector3.up) * cameraDirectionRight;
-
-        cameraDirection.Normalize();
-        cameraDirectionRight.Normalize();
-    }
-
-    void CheckSurroundingsWithRaycasts()
-    {
-        RaycastHit hit;
-
-        rayCastHitting = false;
-
-        // Grid --------------------------------------------------------------------------------------------------------------------
-        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveLeft = false;
-
-            rayCastHitting = true;
-
-            GameObject objectHit = hit.collider.gameObject;
-            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && leftInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
-        }
-        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveRight = false;
-
-            rayCastHitting = true;
-
-            GameObject objectHit = hit.collider.gameObject;
-            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && rightInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
-        }
-        if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveForward = false;
-
-            rayCastHitting = true;
-
-            GameObject objectHit = hit.collider.gameObject;
-            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && upInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
-        }
-        if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveBack = false;
-
-            rayCastHitting = true;
-
-            GameObject objectHit = hit.collider.gameObject;
-            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && downInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
-        }
-        // --------------------------------------------------------------------------------------------------------------------------
-
-        IsGrounded();
-    }
-
-    void EnableGravity()
-    {
-        this.gameObject.transform.Translate(Vector3.down * gravityPower, Space.World);
-    }
+    } 
 
     void BounceFromSpring()
     {
@@ -285,27 +189,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    bool IsGrounded()
-    {
-        RaycastHit hit;
-        Debug.DrawRay(transform.position, Vector3.down, Color.red, groundRayLength);
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, groundRayLength, detectTerrainMasks)) return true;
-        else return false;
-    }
-
-    IEnumerator Roll(Vector3 anchor, Vector3 axis)
-    {
-        isMoving = true;
-
-        for (int i = 0; i < (90 / rollSpeed); i++)
-        {
-            transform.RotateAround(anchor, axis, rollSpeed);
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        isMoving = false;
-    }
-
     public void LandedOnSpring(Vector3 springDirection, int blocksToTravel, bool isElevationSpring)
     {
         elevationSpring = isElevationSpring;
@@ -315,7 +198,53 @@ public class PlayerController : MonoBehaviour
         springingUp = true;
     }
 
+    protected override void CheckSurroundingsWithRaycasts()
+    {
+        RaycastHit hit;
 
+        rayCastHitting = false;
+
+        // Grid --------------------------------------------------------------------------------------------------------------------
+        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveLeft = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && leftInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveRight = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && rightInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveForward = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && upInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
+        {
+            canMoveBack = false;
+
+            rayCastHitting = true;
+
+            GameObject objectHit = hit.collider.gameObject;
+            if (objectHit.layer == LayerMask.NameToLayer("Pushable") && downInput && !isMoving) objectHit.GetComponent<IPushable>().Push(lastDirInput);
+        }
+        // --------------------------------------------------------------------------------------------------------------------------
+
+        IsGrounded();
+    }
 
     private void OnTriggerStay(Collider other)
     {

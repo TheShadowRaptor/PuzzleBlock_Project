@@ -97,13 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e39b4caad0a9fc5428c86cdf961e1599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unpassableTerrainMasks:
-    serializedVersion: 2
-    m_Bits: 72
-  rollSpeed: 6
+  speed: 10
   gravityPower: 0.2
+  detectTerrainMasks:
+    serializedVersion: 2
+    m_Bits: 0
   surroundingRayLength: 1.4
   groundRayLength: 0.51
+  rayCastHitting: 0
   blit: {fileID: -6465781213825772889, guid: c40be3174f62c4acf8c1216858c64956, type: 2}
   shadowVignette: {fileID: 2100000, guid: dcd88ffaa035e67418b7080ffa551e09, type: 2}
   lightVignette: {fileID: 2100000, guid: 3cd4e6a2a065feb4fb7a2e37808f05a3, type: 2}
