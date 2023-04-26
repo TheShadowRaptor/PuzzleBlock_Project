@@ -1,94 +1,57 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Box : BlockCharacter, IPushable
+public class Box : BlockCharacter, ICellOccupier
 {
-    private bool isBeingPushed = false;
-    private Vector3 direction;
-
-    // Update is called once per frame
-    private void Update()
+    protected void Start()
     {
-        CheckSurroundingsWithRaycasts();
+        Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+        transform.position = cellPos;
+        _currentCell = GridCell.GetCell(cellPos);
     }
 
-    void FixedUpdate()
+    protected void Update()
     {
-        Debug.Log(transform.position);
-        if (isBeingPushed && CanMoveThisDir())
+        //Get a new position based on the direction.
+        Vector3Int potentialNewPosition = _currentCell.cellPos + Vector3Int.down;
+        //Find the new cell
+        GridCell newCell = GridCell.GetCell(potentialNewPosition);
+        //Debug.Log($"Called movement {newCell.cellPos} is solid? {newCell.hasAnySolid}  non occupier? {newCell.hasNonOccupierSolid} occupier count {newCell.occupiers.Count}");
+        bool hasSolidInNewCell = newCell.hasAnySolid;
+
+        Vector3Int newPotentialPosForBox = potentialNewPosition + Vector3Int.down;
+        GridCell newBoxCell = GridCell.GetCell(newPotentialPosForBox);
+
+        if (newBoxCell.hasAnySolid)
         {
-            direction /= 16;
-            for (int i = 0; i < 8; i++)
-            {                
-                gameObject.transform.Translate(direction.x, -direction.z, 0);
+            for (int i = 0; i < newCell.occupiers.Count; i++)
+            {
+                //IT CAN MOVE TO NEW BOX POS!
+                hasSolidInNewCell = false;
+                var Box = newCell.occupiers[i];
+                gameObject.transform.DOMove(newPotentialPosForBox, moveTime).OnComplete(() =>
+                {
+                    newCell.RefreshCellContents();
+                    newBoxCell.RefreshCellContents();
+                });
             }
-            isBeingPushed = false;
         }
     }
 
-    void IPushable.Push(Vector3 playerPushDir)
+    public Vector3 GetPosition()
     {
-        direction = playerPushDir;
-        isBeingPushed = true;
+        return transform.position;
     }
 
-    bool CanMoveThisDir()
+    public void PlayerEnteredHere(PlayerControllerGrid entered, Vector3Int dir)
     {
-        PlayerController playerController = PlayerController.playerController;
-        if (direction == -playerController.transform.right && canMoveLeft)
-        {
-            return true;
 
-        }
-        else if (direction == playerController.transform.right && canMoveRight)
-        {
-            return true;
-        }
-        else if (direction == playerController.transform.forward && canMoveForward)
-        {
-            return true;
-        }
-        else if (direction == -playerController.transform.forward && canMoveBack)
-        {
-            return true;
-        }
-        else return false;
     }
 
-    protected override void CheckSurroundingsWithRaycasts()
+    public void PlayerExitHere(PlayerControllerGrid exitted)
     {
-        RaycastHit hit;
 
-        rayCastHitting = false;
-
-        // Grid --------------------------------------------------------------------------------------------------------------------
-        if (Physics.Raycast(transform.position, -cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveLeft = false;
-
-            rayCastHitting = true;
-        }
-        if (Physics.Raycast(transform.position, cameraDirectionRight, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveRight = false;
-
-            rayCastHitting = true;
-        }
-        if (Physics.Raycast(transform.position, cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveForward = false;
-
-            rayCastHitting = true;
-        }
-        if (Physics.Raycast(transform.position, -cameraDirection, out hit, surroundingRayLength, detectTerrainMasks))
-        {
-            canMoveBack = false;
-
-            rayCastHitting = true;
-        }
-        // --------------------------------------------------------------------------------------------------------------------------
-
-        IsGrounded();
     }
 }
