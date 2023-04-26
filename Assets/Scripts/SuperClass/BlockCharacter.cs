@@ -107,6 +107,20 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         //Refresh new cell contents to realize it's now solid since my player is there.
         _nextCell.RefreshCellContents();
         if (!_nextCell.occupiers.Contains(this)) _nextCell.occupiers.Add(this);
+        
+        //Check if anyone should fall.
+        if (!_currentCell.hasAnySolid)
+        {
+            Vector3Int above = _currentCell.cellPos + Vector3Int.up;
+            GridCell aboveCell = GridCell.GetCell(above);
+            for (int i = 0; i < aboveCell.occupiers.Count; i++)
+            {
+                if (aboveCell.occupiers[i] is BlockCharacter) {
+                    ((BlockCharacter) aboveCell.occupiers[i]).DoMove(Vector3Int.down, false);
+                }
+            }
+        }
+
         //Set the current cell to be the new cell.
         _currentCell = _nextCell;
         for (int i = 0; i < _currentCell.occupiers.Count; i++) {
