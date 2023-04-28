@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class PlayerControllerGrid : BlockCharacter
@@ -28,11 +29,13 @@ public class PlayerControllerGrid : BlockCharacter
 
     public void Update()
     {
-        var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
-        if (!CellDown.hasAnySolid)
-        {
-            DoMove(Vector3Int.down);
-        }
+        //var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
+        //if (!CellDown.hasAnySolid)
+        //{
+        //    DoMove(Vector3Int.down);
+        //}
+
+        DetectChangeInLight();
 
         // Take move commands
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))

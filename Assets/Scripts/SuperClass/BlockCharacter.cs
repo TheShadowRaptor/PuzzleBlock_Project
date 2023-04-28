@@ -147,11 +147,11 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         }
         isMoving = false;
 
-        //var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
-        //if (!CellDown.hasAnySolid)
-        //{
-        //    DoMove(Vector3Int.down);
-        //}
+        var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
+        if (!CellDown.hasAnySolid)
+        {
+            DoMove(Vector3Int.down);
+        }
 
     }
 
@@ -187,6 +187,42 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         isMoving = false;
         moveTween = null;
         DoMove(direction);
+    }
+
+    float lastTimeCheckedLightChange;
+    bool isInLight;
+    public void DetectChangeInLight()
+    {
+        if (lastTimeCheckedLightChange + 0.2f < Time.time)
+        {
+            lastTimeCheckedLightChange = Time.time;
+            bool wasInLight = isInLight;
+            isInLight = LightEmitter.IsInLightRange(transform.position);
+            if (wasInLight != isInLight)
+            {
+                StartCoroutine(CheckSurrounding());
+            }
+        }
+    }
+
+    private WaitForSeconds waitAndCheckSurrounding;
+    IEnumerator CheckSurrounding()
+    {
+        yield return waitAndCheckSurrounding;
+        for (int i = 0; i < _currentCell.occupiers.Count; i++)
+        {
+            if (_currentCell.occupiers[i] != (ICellOccupier)this && _currentCell.occupiers[i].IsSolid)
+            {
+                DoMove(Vector3Int.up);
+                break;
+            }
+        }
+
+        var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
+        if (!CellDown.hasAnySolid)
+        {
+            DoMove(Vector3Int.down);
+        }
     }
 
     public virtual Vector3 GetPosition() { return transform.position; }

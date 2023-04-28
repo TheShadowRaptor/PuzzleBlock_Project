@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shadow
-  m_Shader: {fileID: -6465566751694194690, guid: a2a8e675b66471b4694bb0ba8f6df15e,
+  m_Name: CheaperLightPillar
+  m_Shader: {fileID: -6465566751694194690, guid: eae28520f56c0664ebbcf6ec1ba4a087,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,12 +29,12 @@ Material:
   - _MAIN_LIGHT_SHADOWS
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
+  m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _ShadowRippleSpeed _TopColor
+  m_LockedProperties: _DarkShadowColor _ShadowRippleSpeed _TopColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -74,6 +74,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Noise:
+        m_Texture: {fileID: 2800000, guid: 10f0f05cdfbe64f44b9e3b2655c32308, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -84,6 +88,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _VornoiNoiseTexture:
+        m_Texture: {fileID: 2800000, guid: 8fda172b188d7f342ba64c2c53acc2e4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -134,8 +142,8 @@ Material:
     - _RimPower: 1.33
     - _RimSmoothness: 0.278
     - _ShadowRippleDensity: 20.61
-    - _ShadowRipplePower: 20.15
-    - _ShadowRippleSpeed: 1.21
+    - _ShadowRipplePower: 2.82
+    - _ShadowRippleSpeed: 0.05
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -146,19 +154,21 @@ Material:
     - _Surface: 0
     - _ToonOffset: 0.383
     - _ToonSmoothness: 0.517
+    - _VoronoiTiling: 0.03
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkShadowColor: {r: 0, g: 1, b: 0.96000004, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
-    - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
-    - _RegularColor: {r: 0.9811321, g: 0.81060106, b: 0.45817012, a: 1}
+    - _RealLightShadowColor: {r: 0.83456606, g: 0.8980392, b: 0.5882353, a: 0}
+    - _RegularColor: {r: 21.361256, g: 17.613066, b: 6.7509623, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 1.6577295, g: 0, b: 4.594794, a: 0}
+    - _ShadowColor: {r: 4.052723, g: 15.309804, b: 2.8235288, a: 0}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TopColor: {r: 1, g: 0.85301054, b: 0.5235849, a: 1}
+    - _TopColor: {r: 6.457123, g: 5.0861797, b: 1.5533643, a: 1}
   m_BuildTextureStacks: []

@@ -100,6 +100,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _AlphaClip: 0
     - _AlphaToMask: 0
     - _Blend: 0
@@ -133,7 +134,7 @@ Material:
     - _RimPower: 1
     - _RimSmoothness: 0.5
     - _ShadowRippleDensity: 20.61
-    - _ShadowRipplePower: 6.6
+    - _ShadowRipplePower: 20.15
     - _ShadowRippleSpeed: 1.21
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -156,8 +157,8 @@ Material:
     - _RealLightShadowColor: {r: 0.9528302, g: 0.8643763, b: 0.46293166, a: 0}
     - _RegularColor: {r: 0, g: 1, b: 0.10077143, a: 0}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 0, g: 1, b: 0.06504679, a: 0}
-    - _ShadowRippleColor: {r: 0, g: 1, b: 0.94117653, a: 1}
+    - _ShadowColor: {r: 0, g: 0.5315094, b: 1, a: 0}
+    - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopColor: {r: 0.6581381, g: 1, b: 0.5801887, a: 0}
   m_BuildTextureStacks: []
