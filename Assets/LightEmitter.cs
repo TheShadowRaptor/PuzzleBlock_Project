@@ -22,8 +22,11 @@ public class LightEmitter : MonoBehaviour
     {
         for (int i = 0; i < all.Count; i++)
         {
+            Debug.Log($"{all[i].actualLight.range * all[i].actualLight.range}");
             if ((position - all[i].transform.position).sqrMagnitude < all[i].actualLight.range * all[i].actualLight.range)
-            return true;
+            {
+                return true;
+            }
         }
         return false;
     }

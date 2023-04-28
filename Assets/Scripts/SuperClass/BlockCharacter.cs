@@ -124,7 +124,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
             }
         }
 
-        // Detects anything below only the player
+        // Detects anything below the player
         if (_nextCell == PlayerControllerGrid.playerControllerGrid._nextCell)
         {       
             Vector3Int below = _nextCell.cellPos + Vector3Int.down;
@@ -146,11 +146,12 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
             _currentCell.occupiers[i].BlockEnteredHere(this, dir);
         }
         isMoving = false;
-        var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
-        if (!CellDown.hasAnySolid)
-        {
-            DoMove(Vector3Int.down);
-        }
+
+        //var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
+        //if (!CellDown.hasAnySolid)
+        //{
+        //    DoMove(Vector3Int.down);
+        //}
 
     }
 

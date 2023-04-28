@@ -28,6 +28,12 @@ public class PlayerControllerGrid : BlockCharacter
 
     public void Update()
     {
+        var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
+        if (!CellDown.hasAnySolid)
+        {
+            DoMove(Vector3Int.down);
+        }
+
         // Take move commands
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {
