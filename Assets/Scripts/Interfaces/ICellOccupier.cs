@@ -13,4 +13,5 @@ public interface ICellOccupier
     public Vector3 GetPosition();
     public void BlockEnteredHere(BlockCharacter entered, Vector3Int dir);
     public void BlockExitHere(BlockCharacter exited);
+    public void OnBlockMoveAttemptFail(BlockCharacter attempt);
 }

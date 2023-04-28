@@ -11,6 +11,9 @@ public class Box : BlockCharacter, ICellOccupier
         transform.position = cellPos;
         _currentCell = GridCell.GetCell(cellPos);
     }
+
+    public override Vector3 GetPosition() { return transform.position; }
+
     //
     // protected void Update()
     // {
@@ -40,18 +43,4 @@ public class Box : BlockCharacter, ICellOccupier
     //     }
     // }
 
-    public Vector3 GetPosition()
-    {
-        return transform.position;
-    }
-
-    public void BlockEnteredHere(PlayerControllerGrid entered, Vector3Int dir)
-    {
-
-    }
-
-    public void BlockEnteredHere(BlockCharacter entered, Vector3Int dir)
-    {
-
-    }
 }

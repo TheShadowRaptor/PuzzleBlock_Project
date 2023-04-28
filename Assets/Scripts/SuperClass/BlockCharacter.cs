@@ -2,7 +2,9 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Windows;
 
 public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
@@ -39,6 +41,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         {
             for (int i = 0; i < newCell.occupiers.Count; i++)
             {
+                newCell.occupiers[i].OnBlockMoveAttemptFail(this);
                 if (newCell.occupiers[i] is Box)
                 {
                     var Box = (Box)newCell.occupiers[i];
@@ -121,8 +124,24 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
             }
         }
 
+        // Detects anything below only the player
+        if (_nextCell == PlayerControllerGrid.playerControllerGrid._nextCell)
+        {       
+            Vector3Int below = _nextCell.cellPos + Vector3Int.down;
+            GridCell belowCell = GridCell.GetCell(below);
+
+            for (int i = 0; i < belowCell.occupiers.Count; i++)
+            {
+                if (belowCell.occupiers[i] is TriggerObject)
+                {
+                    ((TriggerObject)belowCell.occupiers[i]).DOFlip(); // PlaceHolder
+                }
+            }
+        }
+
         //Set the current cell to be the new cell.
         _currentCell = _nextCell;
+
         for (int i = 0; i < _currentCell.occupiers.Count; i++) {
             _currentCell.occupiers[i].BlockEnteredHere(this, dir);
         }
@@ -132,6 +151,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         {
             DoMove(Vector3Int.down);
         }
+
     }
 
     public Quaternion FindNewRotation(Vector3Int dir)
@@ -177,6 +197,11 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
     public void BlockExitHere(BlockCharacter exited)
     {
         
+        
+    }
+
+    public void OnBlockMoveAttemptFail(BlockCharacter attempt)
+    {
         
     }
 }

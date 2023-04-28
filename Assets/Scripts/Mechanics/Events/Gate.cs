@@ -12,15 +12,14 @@ public class Gate : EventObject
         animator.SetBool("false", true);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (activated) PlayEvent();
-    }
-
-    protected override void PlayEvent()
+    public override void PlayEvent()
     {
         // Open Gate
         animator.SetBool("Open", true);     
+    }
+
+    public override void CancelEvent()
+    {
+        animator.SetBool("Open", false);
     }
 }

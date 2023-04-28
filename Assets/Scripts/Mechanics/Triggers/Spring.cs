@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spring : TriggerObject, ICellOccupier
+public class Spring : MonoBehaviour, ICellOccupier
 {
     public bool IsSolid { get => false; set { } }
     public int elevation = 2;
@@ -62,5 +62,10 @@ public class Spring : TriggerObject, ICellOccupier
     public void BlockExitHere(BlockCharacter exited)
     {
         
+    }
+
+    public void OnBlockMoveAttemptFail(BlockCharacter attempt)
+    {
+
     }
 }

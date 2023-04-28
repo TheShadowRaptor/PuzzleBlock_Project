@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class EventObject : MonoBehaviour
 {
-    public bool activated = false;
-    abstract protected void PlayEvent();
+    abstract public void PlayEvent();
+    abstract public void CancelEvent();
 }
