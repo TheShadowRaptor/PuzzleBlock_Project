@@ -2,16 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightBlock : MonoBehaviour
+public class LightBlock : MonoBehaviour, ICellOccupier
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool IsSolid
+    {
+        get
+        {
+            return LightEmitter.IsInLightRange(transform.position);
+        }
+        set { }
+    }
+
+    private void Update()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public virtual Vector3 GetPosition() { return transform.position; }
+
+    public void BlockEnteredHere(BlockCharacter entered, Vector3Int dir)
+    {
+
+    }
+
+    public void BlockExitHere(BlockCharacter exited)
+    {
+
+    }
+
+    public void OnBlockMoveAttemptFail(BlockCharacter attempt)
     {
         
     }

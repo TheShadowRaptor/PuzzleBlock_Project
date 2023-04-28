@@ -22,17 +22,6 @@ public class Lightpillar : EventObject, ICellOccupier
     // Update is called once per frame
     void Update()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, light.range);
-
-        foreach (Collider collider in colliders)
-        {
-            // Check if the collider is not part of the point light's own GameObject
-            if (collider.gameObject == PlayerControllerGrid.playerControllerGrid.gameObject)
-            {
-                Debug.Log("Point light is touching " + collider.gameObject.name);
-            }
-        }
-
         if (playEvent) 
         {
             Vector3 scale = lightSize.transform.localScale;
