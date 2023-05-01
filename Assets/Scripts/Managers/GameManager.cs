@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
     private GameState state;
     public GameState State { get => state; }
 
+    private void Awake()
+    {
+        GridCell.all.Clear();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,20 +41,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SwitchGameState(GameState gameState)
+    public void SwitchGameState(GameState _gameState)
     {
-        switch (gameState)
+        switch (_gameState)
         {
             case GameState.mainmenu:
-                gameState = GameState.mainmenu;
+                state = GameState.mainmenu;
                 break;
 
             case GameState.gameplay:
-                gameState = GameState.gameplay;
+                state = GameState.gameplay;
                 break;
 
             case GameState.paused:
-                gameState = GameState.paused;
+                state = GameState.paused;
                 break;
         }
     }

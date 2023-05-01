@@ -11,6 +11,7 @@ public class PlayerControllerGrid : BlockCharacter
         Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
         transform.position = cellPos;
         _currentCell = GridCell.GetCell(cellPos);
+        visual.transform.position = cellPos;
     }
 
     public void Update()

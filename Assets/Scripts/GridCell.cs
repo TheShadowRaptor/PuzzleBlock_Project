@@ -22,7 +22,20 @@ public class GridCell
             return false;
         }
     }
-    public bool hasNonOccupierSolid;
+
+    public bool hasNonOccupierSolid
+    {
+        get
+        {
+            Collider[] hitColliders = Physics.OverlapBox(new Vector3(cellPos.x, cellPos.y, cellPos.z), Vector3.one * 0.45f, Quaternion.identity, ~0);
+            //Iterate trough them.
+            for (int i = 0; i < hitColliders.Length; i++)
+                if (!hitColliders[i].TryGetComponent<ICellOccupier>(out ICellOccupier cellOccupier))
+                    return true;
+
+            return false;
+        }
+    }
 
     //This bool will check the cell underneath if it has a solid.
     public bool hasGround => GetCell(new Vector3Int(cellPos.x, cellPos.y - 1, cellPos.z)).hasAnySolid;
@@ -42,7 +55,6 @@ public class GridCell
 
     public void RefreshCellContents()
     {
-        hasNonOccupierSolid = false;
         //Make sure occupiers are cleared when refreshing cell contents.
         occupiers.Clear();
         //Find things occupying that space. Make it a little smaller than a box to not hit adjascent grid spaces.
@@ -57,11 +69,6 @@ public class GridCell
                 //Check if it's in range
                 if ((cellPos - cellOccupier.GetPosition()).sqrMagnitude < 0.86f)
                     occupiers.Add(cellOccupier);
-            }
-            else
-            {
-                //I'm assuming whatever I don't have a ICellOccupier script on is a solid
-                hasNonOccupierSolid = true;
             }
         }
         //Debug.Log($"Refreshing cell concents for {cellPos} hassolid? {hasAnySolid}");

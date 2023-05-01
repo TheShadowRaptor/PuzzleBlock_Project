@@ -25,12 +25,15 @@ public class MasterSingleton : MonoBehaviour
     // GameCharacters gets
     public PlayerControllerGrid Player { get =>  player; }
 
+    bool hasInstance;
+
     // Awake is called when object is first initialized
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            hasInstance = true;
         }
 
         else
@@ -45,5 +48,11 @@ public class MasterSingleton : MonoBehaviour
         levelManager = GetComponentInChildren<LevelManager>();
         inputManager = GetComponentInChildren<InputManager>();
         player = GetComponentInChildren<PlayerControllerGrid>();
+    }
+
+    private void OnDestroy()
+    {
+        hasInstance = false;
+        instance = null;
     }
 }
