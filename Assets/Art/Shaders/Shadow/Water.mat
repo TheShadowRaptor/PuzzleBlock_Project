@@ -127,7 +127,7 @@ Material:
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Range: 2000
+    - _Range: 300000
     - _ReceiveShadows: 1
     - _RimBrightness: 0.5
     - _RimPower: 1
@@ -161,5 +161,5 @@ Material:
     - _ShadowColor: {r: 0.05660379, g: 0.05660379, b: 0.05660379, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _WaterColor: {r: 0, g: 0.39272016, b: 1, a: 0}
-    - _WaterShadowColor: {r: 4.5392475, g: 1.6070755, b: 9.734287, a: 0}
+    - _WaterShadowColor: {r: 1.6308751, g: 1.909706, b: 9.734288, a: 0}
   m_BuildTextureStacks: []

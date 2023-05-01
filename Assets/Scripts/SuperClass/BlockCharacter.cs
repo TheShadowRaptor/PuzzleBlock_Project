@@ -9,11 +9,12 @@ using UnityEngine.Windows;
 
 public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 {
+    [HideInInspector] public GridCell _currentCell, _nextCell;
+
     public Tween moveTween;
     protected Quaternion originalRotation;
     protected Quaternion desiredRotation;
 
-    protected GridCell _currentCell, _nextCell;
     public float moveTime = 0.5f;
     public Renderer visual;
 
@@ -125,7 +126,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         }
 
         // Detects anything below the player
-        if (_nextCell == PlayerControllerGrid.playerControllerGrid._nextCell)
+        if (_nextCell == MasterSingleton.Instance.Player._nextCell)
         {       
             Vector3Int below = _nextCell.cellPos + Vector3Int.down;
             GridCell belowCell = GridCell.GetCell(below);

@@ -6,20 +6,6 @@ using UnityEngine;
 
 public class PlayerControllerGrid : BlockCharacter
 {
-    public static PlayerControllerGrid playerControllerGrid;
-
-    private void Awake()
-    {
-        if (playerControllerGrid != null && playerControllerGrid != this)
-        {
-            Destroy(this);
-            return;
-        }
-        playerControllerGrid = this;
-
-        GridCell.all.Clear();
-    }
-
     protected void Start()
     {
         Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
@@ -29,6 +15,7 @@ public class PlayerControllerGrid : BlockCharacter
 
     public void Update()
     {
+        if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay) return;
         //var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
         //if (!CellDown.hasAnySolid)
         //{

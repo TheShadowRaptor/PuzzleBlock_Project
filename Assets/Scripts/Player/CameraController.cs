@@ -68,7 +68,7 @@ public class CameraController : MonoBehaviour
     void FollowPlayer()
     {
         Vector3 pointPos = cameraPointHolder.transform.position;
-        Vector3 playerPos = PlayerControllerGrid.playerControllerGrid.gameObject.transform.position;
+        Vector3 playerPos = MasterSingleton.Instance.Player.gameObject.transform.position;
         //if (!PlayerController.playerController.IsMoving) return;
         pointPos.x = playerPos.x;
         pointPos.z = playerPos.z;

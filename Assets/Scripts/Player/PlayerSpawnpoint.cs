@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Drawing;
+using UnityEngine;
+
+public class PlayerSpawnpoint : MonoBehaviour, ICellOccupier
+{
+    protected GridCell _currentCell, _nextCell;
+    // Start is called before the first frame update
+    protected void Start()
+    {
+        Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+        transform.position = cellPos;
+        _currentCell = GridCell.GetCell(cellPos);
+    }
+
+
+    public Vector3 GetPosition() { return transform.position; }
+    public Vector3Int GetPositionInt()
+    {
+        Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
+        return cellPos; 
+    }
+    public void BlockEnteredHere(BlockCharacter entered, Vector3Int dir)
+    {
+        // If checkpoints are ever used put them here
+    }
+
+    public void BlockExitHere(BlockCharacter exited)
+    {
+
+
+    }
+
+    public void OnBlockMoveAttemptFail(BlockCharacter attempt)
+    {
+
+    }
+    private void OnDrawGizmos()
+    {
+        Vector3 size = Vector3.one;
+        Gizmos.color = UnityEngine.Color.red;
+        Gizmos.DrawWireCube(transform.position, size);
+    }
+}
