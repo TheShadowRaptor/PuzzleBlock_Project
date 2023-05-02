@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -9,22 +10,34 @@ using UnityEngine.Windows;
 
 public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 {
-    [HideInInspector] public GridCell _currentCell, _nextCell;
+    protected GridCell _currentCell, _nextCell;
 
-    public Tween moveTween;
-    protected Quaternion originalRotation;
-    protected Quaternion desiredRotation;
-
+    [Header("Settings")]
+    [SerializeField] protected int health = 3;
+    protected int startHealth;
+    [SerializeField] protected bool isAlive = true;
     public float moveTime = 0.5f;
+    [SerializeField] protected int deathBoxHeight = -5;
+
+    [Header("Components")]
     public Renderer visual;
 
-    protected bool isMoving = false;
+    public int Health { get => health; }
 
     public bool IsSolid
     {
         get => true;
         set { }
     }
+
+    public bool IsAlive { get => isAlive; }
+
+
+    public Tween moveTween;
+    protected Quaternion originalRotation;
+    protected Quaternion desiredRotation;
+
+    protected bool isMoving = false;
 
     protected virtual bool DoMove(Vector3Int dir, bool withRotation = true)
     {
@@ -111,7 +124,12 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         //Refresh new cell contents to realize it's now solid since my player is there.
         _nextCell.RefreshCellContents();
         if (!_nextCell.occupiers.Contains(this)) _nextCell.occupiers.Add(this);
-        
+
+        if (_currentCell.cellPos.y <= deathBoxHeight)
+        {
+            TakeDamage(int.MaxValue);
+        }
+
         //Check if anyone should fall.
         if (!_currentCell.hasAnySolid)
         {
@@ -206,6 +224,14 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         }
     }
 
+    public void Teleport(Vector3Int newCellPos)
+    {
+        ForceSetNextCell(newCellPos);
+        if (_currentCell.occupiers.Contains(this)) _currentCell.occupiers.Remove(this);
+        transform.position = newCellPos;
+        _currentCell = _nextCell;
+    }
+
     private WaitForSeconds waitAndCheckSurrounding;
     IEnumerator CheckSurrounding()
     {
@@ -224,6 +250,43 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         {
             DoMove(Vector3Int.down);
         }
+    }
+
+    void CheckIfKillingBlow()
+    {
+        if (health <= 0)
+        {
+            health = 0;
+            isAlive = false;
+            return;
+        }
+        isAlive = true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        CheckIfKillingBlow();
+    }
+
+    // I made IsAlive to so DeathAnimation knows when to play;
+    // I made DeathAnimationPlaying to detect when the character is done dying;
+
+    public bool FinishedDying()
+    {
+        if (IsAlive) return false;
+        else
+        {
+            // Put Death animation here
+            return true;
+        }
+    }
+
+    public void ResetStats()
+    {
+        health = startHealth;
+        isAlive = true;
+        Debug.Log($"Health = {health}");
     }
 
     public virtual Vector3 GetPosition() { return transform.position; }

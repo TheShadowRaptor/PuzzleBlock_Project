@@ -6,7 +6,20 @@ using UnityEngine;
 public class MasterSingleton : MonoBehaviour
 {
     static private MasterSingleton instance;
-    static public MasterSingleton Instance { get => instance; }
+    static private bool hasInstance = false;
+    static public MasterSingleton Instance
+    {
+        get
+        {
+            if (!hasInstance)
+            {
+                GameObject prefab = Resources.Load<GameObject>("MasterSingleton");
+                instance = Instantiate(prefab).GetComponent<MasterSingleton>();
+                hasInstance = true;
+            }
+            return instance;
+        }
+    }
 
     [Header("SingletonObjects")]
     // Managers
@@ -24,8 +37,6 @@ public class MasterSingleton : MonoBehaviour
 
     // GameCharacters gets
     public PlayerControllerGrid Player { get =>  player; }
-
-    bool hasInstance;
 
     // Awake is called when object is first initialized
     void Awake()

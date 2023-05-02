@@ -8,23 +8,30 @@ public class PlayerControllerGrid : BlockCharacter
 {
     protected void Start()
     {
+        startHealth = health;
         Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
         transform.position = cellPos;
         _currentCell = GridCell.GetCell(cellPos);
-        visual.transform.position = cellPos;
     }
 
     public void Update()
     {
         if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay) return;
-        //var CellDown = GridCell.GetCell(_currentCell.cellPos + Vector3Int.down);
-        //if (!CellDown.hasAnySolid)
-        //{
-        //    DoMove(Vector3Int.down);
-        //}
 
+        if (IsAlive == false)
+        {
+            if (FinishedDying() == true)
+            {
+                MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
+            }
+        }
         DetectChangeInLight();
+        Move();
+        
+    }
 
+    void Move()
+    {
         // Take move commands
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
         {

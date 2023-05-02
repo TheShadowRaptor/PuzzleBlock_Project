@@ -4185,7 +4185,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -6732,7 +6732,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e83e04d91a71468489af14d168915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
+  deathBoxHeight: -5
   visual: {fileID: 0}
 --- !u!65 &292493886
 BoxCollider:
@@ -13008,7 +13011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e83e04d91a71468489af14d168915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
+  deathBoxHeight: -5
   visual: {fileID: 0}
 --- !u!65 &516196286
 BoxCollider:
@@ -14223,7 +14229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e83e04d91a71468489af14d168915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
+  deathBoxHeight: -5
   visual: {fileID: 0}
 --- !u!65 &575482555
 BoxCollider:
@@ -40431,7 +40440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e83e04d91a71468489af14d168915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
+  deathBoxHeight: -5
   visual: {fileID: 0}
 --- !u!65 &1863171909
 BoxCollider:

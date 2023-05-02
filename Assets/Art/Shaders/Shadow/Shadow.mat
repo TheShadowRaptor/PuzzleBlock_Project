@@ -157,7 +157,7 @@ Material:
     - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
     - _RegularColor: {r: 0.9811321, g: 0.81060106, b: 0.45817012, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 1.6577295, g: 0, b: 4.594794, a: 0}
+    - _ShadowColor: {r: 0.06985466, g: 0, b: 3.067205, a: 0}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopColor: {r: 1, g: 0.85301054, b: 0.5235849, a: 1}

@@ -67,6 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9f46b4b27da7b41a4272bf7fb583ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
   visual: {fileID: 7953889726291673866}
 --- !u!1 &2757208532720676338
@@ -114,7 +116,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   validSceneNames:
+  - Mainmenu
   - TestScene2
+  - LoadingScene
 --- !u!1 &3515351822644645035
 GameObject:
   m_ObjectHideFlags: 0
