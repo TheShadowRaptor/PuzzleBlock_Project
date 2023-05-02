@@ -21,7 +21,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _VornoiNoiseTexture
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -113,15 +113,17 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CellDivide: 1
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthFade: 1
     - _DepthMaxHeight: 4
-    - _DepthMinHeight: 0
+    - _DepthMinHeight: -1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Divide: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -172,21 +174,24 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _CellColor: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkShadowBottomColor: {r: 0, g: 0, b: 0, a: 0}
     - _DarkShadowColor: {r: 0.003929385, g: 0, b: 0.047169805, a: 0}
     - _DeepColor: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 0, g: 0, b: 0, a: 0}
     - _OuterOutlineColor: {r: 0.0064520836, g: 0, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0.047340393, b: 1, a: 0}
-    - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
-    - _RegularColor: {r: 0.9811321, g: 0.81060106, b: 0.45817012, a: 1}
+    - _RealLightShadowColor: {r: 0.7264151, g: 0.43516377, b: 0.4630224, a: 0}
+    - _RegularBottemColor: {r: 0, g: 0, b: 0, a: 0}
+    - _RegularColor: {r: 0.7454045, g: 0.023153365, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
     - _RippleColor: {r: 1, g: 1, b: 1, a: 0}
     - _ShadowColor: {r: 10.703477, g: 0.30808672, b: 0, a: 0}
+    - _ShadowColorTop: {r: 5.963236, g: 0.18522692, b: 0, a: 1}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShallowColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TopColor: {r: 1, g: 0.85301054, b: 0.5235849, a: 1}
+    - _TopColor: {r: 11.921569, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1317652184381768803
 MonoBehaviour:

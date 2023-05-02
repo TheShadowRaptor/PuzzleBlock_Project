@@ -17,12 +17,13 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         GridCell.all.Clear();
+        SwitchGameState(GameState.mainmenu);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        SwitchGameState(GameState.mainmenu);
+        
     }
 
     // Update is called once per frame

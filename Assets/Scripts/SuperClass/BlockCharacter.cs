@@ -226,8 +226,9 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 
     public void Teleport(Vector3Int newCellPos)
     {
+        moveTween.Kill(false);
         ForceSetNextCell(newCellPos);
-        if (_currentCell.occupiers.Contains(this)) _currentCell.occupiers.Remove(this);
+        if (_currentCell != null && _currentCell.occupiers.Contains(this)) _currentCell.occupiers.Remove(this);
         transform.position = newCellPos;
         _currentCell = _nextCell;
     }
@@ -284,6 +285,9 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 
     public void ResetStats()
     {
+        transform.transform.localRotation = Quaternion.identity;
+        transform.transform.position = transform.position;
+
         health = startHealth;
         isAlive = true;
         Debug.Log($"Health = {health}");

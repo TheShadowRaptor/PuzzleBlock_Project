@@ -114,14 +114,16 @@ Material:
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
+    - _CellDivide: -0.4
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
     - _DepthMaxHeight: 4
-    - _DepthMinHeight: 0
+    - _DepthMinHeight: -1
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
+    - _Divide: -0.38
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
@@ -162,16 +164,19 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DarkShadowBottomColor: {r: 0, g: 0, b: 0, a: 0}
     - _DarkShadowColor: {r: 0.003929385, g: 0, b: 0.047169805, a: 0}
     - _DepthColor: {r: 0.007843018, g: 0, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _OuterOutlineColor: {r: 0.0064520836, g: 0, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0.047340393, b: 1, a: 0}
-    - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
-    - _RegularColor: {r: 0.9811321, g: 0.81060106, b: 0.45817012, a: 1}
+    - _RealLightShadowColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 0}
+    - _RegularBottemColor: {r: 0, g: 0, b: 0, a: 0}
+    - _RegularColor: {r: 0.9528302, g: 0.6254475, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 0.34676853, g: 0, b: 10.703477, a: 0}
+    - _ShadowColor: {r: 0.06663986, g: 0.007630837, b: 1.6177336, a: 0}
+    - _ShadowColorTop: {r: 0.5647059, g: 0, b: 8, a: 1}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TopColor: {r: 1, g: 0.85301054, b: 0.5235849, a: 1}
+    - _TopColor: {r: 0, g: 1.2965803, b: 0.01357663, a: 1}
   m_BuildTextureStacks: []

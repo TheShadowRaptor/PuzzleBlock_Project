@@ -147,7 +147,7 @@ Material:
     - _RimPower: 1.33
     - _RimSmoothness: 0.278
     - _ShadowRippleDensity: 20.61
-    - _ShadowRipplePower: 3.34
+    - _ShadowRipplePower: 0.81
     - _ShadowRippleSpeed: 0.44
     - _ShadowWaterVoronoiTiling: 0.1
     - _Smoothness: 0.5
@@ -173,8 +173,8 @@ Material:
     - _RealLightShadowColor: {r: 0.7924528, g: 0.7800222, b: 0, a: 0}
     - _RegularColor: {r: 1, g: 0.98823535, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
-    - _ShadowColor: {r: 1, g: 0.8718554, b: 0.23113209, a: 0}
-    - _ShadowRippleColor: {r: 0.8867924, g: 0.79925495, b: 0, a: 1}
+    - _ShadowColor: {r: 0.3018868, g: 0.262949, b: 0, a: 0}
+    - _ShadowRippleColor: {r: 1, g: 0.9545417, b: 0.5330188, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopColor: {r: 1, g: 0.98867923, b: 0.2783019, a: 1}
   m_BuildTextureStacks: []

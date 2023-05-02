@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
+        GridCell.all.Clear();
         waitCoroutine = StartCoroutine(WaitInLoadingScene());     
     }
 
@@ -68,9 +69,8 @@ public class LevelManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        // Instantiate the player prefab at the spawn point
-        MasterSingleton.Instance.Player.ResetStats();
         MasterSingleton.Instance.Player.Teleport(PlayerSpawnpoint.spawnpoint.GetPositionInt());
+        MasterSingleton.Instance.Player.ResetStats();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
     }
 
