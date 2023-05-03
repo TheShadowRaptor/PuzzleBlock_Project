@@ -1,0 +1,98 @@
+.uIButton {
+    width: 25%;
+    height: 50%;
+    font-size: 250%;
+    background-color: rgba(249, 255, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font-style: bold;
+    color: rgb(0, 0, 0);
+    align-self: center;
+    justify-content: flex-end;
+    align-items: center;
+    transition-property: all;
+    transition-duration: 0s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    -unity-text-outline-width: 1.5px;
+}
+
+.uIButton:hover {
+    width: 25%;
+    height: 50%;
+    font-size: 250%;
+    background-color: rgba(249, 255, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-top-width: 5px;
+    border-bottom-width: 5px;
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(0, 0, 0, 0);
+    border-top-color: rgba(0, 0, 0, 0);
+    border-bottom-color: rgba(0, 0, 0, 0);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    -unity-font-style: bold;
+    color: rgb(0, 0, 0);
+    align-self: center;
+    justify-content: flex-end;
+    align-items: center;
+    transition-property: all;
+    transition-duration: 0s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+    -unity-text-outline-width: 1.5px;
+    scale: 1 1;
+    rotate: 5deg;
+}
+
+.screenSize {
+    width: 100%;
+    height: 100%;
+}
+
+.instructionSquares {
+    background-color: rgb(0, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    width: 10%;
+    height: 50px;
+    align-items: auto;
+    left: 2.5%;
+}
+
+.titles {
+    -unity-text-align: upper-center;
+    align-self: center;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    -unity-text-outline-width: 1.5px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    margin-top: 3%;
+}
+
+.visualItemText {
+    justify-content: flex-start;
+    align-self: auto;
+    align-items: auto;
+    right: -65%;
+    width: 50%;
+    height: 10%;
+    font-size: 175%;
+    -unity-text-outline-width: 1.5px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+}

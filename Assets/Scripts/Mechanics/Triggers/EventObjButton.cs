@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour, ICellOccupier
+public class EventObjButton : MonoBehaviour, ICellOccupier
 {
     public bool IsSolid { get => false; set { } }
     public EventObject eventObject;
