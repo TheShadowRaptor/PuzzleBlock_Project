@@ -5,6 +5,8 @@ using UnityEngine;
 public class Gate : EventObject
 {
     Animator animator;
+    public bool exitGate = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -12,14 +14,32 @@ public class Gate : EventObject
         animator.SetBool("false", true);
     }
 
+    private void Update()
+    {
+        if (exitGate)
+        {
+            if (LightEmitter.IsInLightRange(transform.position)) PlayEvent();
+            else CancelEvent();
+        }
+        
+    }
+
     public override void PlayEvent()
     {
         // Open Gate
-        animator.SetBool("Open", true);     
+        if (exitGate)
+        {
+            animator.SetBool("OpenExit", true);
+        }
+        else animator.SetBool("Open", true);
     }
 
     public override void CancelEvent()
     {
-        animator.SetBool("Open", false);
+        if (exitGate)
+        {
+            animator.SetBool("OpenExit", false);
+        }
+        else animator.SetBool("Open", false);
     }
 }

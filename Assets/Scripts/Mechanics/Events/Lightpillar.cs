@@ -6,6 +6,7 @@ public class Lightpillar : EventObject, ICellOccupier
 {
     public bool IsSolid { get => true; set { } }
     [SerializeField] float maxLightRange;
+    [SerializeField] float minLightRange;
 
     private Light light;
     private GameObject lightSize;
@@ -35,9 +36,17 @@ public class Lightpillar : EventObject, ICellOccupier
             }
         }
 
-        else if (!playEvent)
+        else if (playEvent == false)
         {
-
+            Vector3 scale = lightSize.transform.localScale;
+            if (light.range > minLightRange)
+            {
+                light.range -= speed * Time.deltaTime;
+                scale.x -= speed * Time.deltaTime;
+                scale.y -= speed * Time.deltaTime;
+                scale.z -= speed * Time.deltaTime;
+                lightSize.transform.localScale = scale;
+            }
         }
     }
 
@@ -66,7 +75,10 @@ public class Lightpillar : EventObject, ICellOccupier
 
     public void OnBlockMoveAttemptFail(BlockCharacter attempt)
     {
-        Debug.Log("Attempted");
-        PlayEvent();
+        if (!attempt.CanInteract()) return;
+        attempt.Interact();
+        //Debug.Log("Attempted");
+        if (playEvent == false) PlayEvent();
+        else CancelEvent();
     }
 }

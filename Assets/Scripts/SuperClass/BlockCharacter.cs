@@ -18,11 +18,14 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
     [SerializeField] protected bool isAlive = true;
     public float moveTime = 0.5f;
     [SerializeField] protected int deathBoxHeight = -5;
+    [SerializeField] protected float timeUntilNextInteract = 1;
+    protected float startTimeTillNextInteract;
 
     [Header("Components")]
     public Renderer visual;
 
     public int Health { get => health; }
+    public float TimeUntillNextInteract { get => timeUntilNextInteract; }
 
     public bool IsSolid
     {
@@ -253,7 +256,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
         }
     }
 
-    void CheckIfKillingBlow()
+    protected void CheckIfKillingBlow()
     {
         if (health <= 0)
         {
@@ -262,6 +265,22 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
             return;
         }
         isAlive = true;
+    }
+
+    public bool CanInteract()
+    {
+        timeUntilNextInteract -= Time.deltaTime;
+        if (timeUntilNextInteract <= 0)
+        {           
+            return true;
+        }
+        return false;
+        
+    }
+
+    public void Interact()
+    {
+        timeUntilNextInteract = startTimeTillNextInteract;
     }
 
     public void TakeDamage(int damage)

@@ -80,6 +80,9 @@
         },
         {
             "m_Id": "1104f57f3b7747dea798c4ee41f1d658"
+        },
+        {
+            "m_Id": "4f373aa195ce4ca3b80217a957ffcc7a"
         }
     ],
     "m_Keywords": [
@@ -4450,9 +4453,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3161.0,
+            "x": 3047.0,
             "y": 2310.0,
-            "width": 120.0,
+            "width": 119.999755859375,
             "height": 149.0
         }
     },
@@ -4797,6 +4800,36 @@
         "e32": 0.0,
         "e33": 1.0
     }
+}
+
+{
+    "m_SGVersion": 3,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
+    "m_ObjectId": "4f373aa195ce4ca3b80217a957ffcc7a",
+    "m_Guid": {
+        "m_GuidSerialized": "74d1d10c-bcf4-43de-b875-8b946b33417b"
+    },
+    "m_Name": "DarkShadowWaterColor",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "DarkShadowWaterColor",
+    "m_DefaultReferenceName": "_DarkShadowWaterColor",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "r": 0.0,
+        "g": 0.0,
+        "b": 0.0,
+        "a": 0.0
+    },
+    "isMainColor": false,
+    "m_ColorMode": 0
 }
 
 {
@@ -6088,8 +6121,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3058.0,
-            "y": -2654.0,
+            "x": 2942.0,
+            "y": -2640.0,
             "width": 188.0,
             "height": 34.0
         }
@@ -6403,10 +6436,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2873.0,
-            "y": 2276.0,
-            "width": 208.0,
-            "height": 433.0
+            "x": 2870.99951171875,
+            "y": 2275.99951171875,
+            "width": 208.00048828125,
+            "height": 433.00048828125
         }
     },
     "m_Slots": [
@@ -7908,7 +7941,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "9e98a4da05e44d229d39c590c7e65021",
     "m_Id": 0,
-    "m_DisplayName": "ShadowWaterVornoiNoiseTexture",
+    "m_DisplayName": "VornoiNoiseTexture",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -8093,10 +8126,10 @@
     "m_Guid": {
         "m_GuidSerialized": "94fe63fe-cc3c-48a5-b0c6-8312831592f5"
     },
-    "m_Name": "ShadowWaterVoronoiTiling",
+    "m_Name": "VoronoiTiling",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "ShadowWaterVoronoiTiling",
-    "m_DefaultReferenceName": "_ShadowWaterVoronoiTiling",
+    "m_RefNameGeneratedByDisplayName": "VoronoiTiling",
+    "m_DefaultReferenceName": "_VoronoiTiling",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -9168,10 +9201,10 @@
     "m_Guid": {
         "m_GuidSerialized": "190b08cf-14a5-4f48-824c-4078f48ee306"
     },
-    "m_Name": "ShadowWaterVornoiNoiseTexture",
+    "m_Name": "VornoiNoiseTexture",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "ShadowWaterVornoiNoiseTexture",
-    "m_DefaultReferenceName": "_ShadowWaterVornoiNoiseTexture",
+    "m_RefNameGeneratedByDisplayName": "VornoiNoiseTexture",
+    "m_DefaultReferenceName": "_VornoiNoiseTexture",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -9772,9 +9805,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 2604.0,
+            "x": 2602.0,
             "y": 2276.0,
-            "width": 114.0,
+            "width": 113.999755859375,
             "height": 34.0
         }
     },
@@ -10253,7 +10286,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "d04d27f59d9243358ca7898d21de28b5",
     "m_Id": 0,
-    "m_DisplayName": "ShadowWaterVoronoiTiling",
+    "m_DisplayName": "VoronoiTiling",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -11032,8 +11065,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 3390.0,
-            "y": -2554.0,
+            "x": 3389.999755859375,
+            "y": -2552.999755859375,
             "width": 208.0,
             "height": 433.0
         }
@@ -11839,6 +11872,9 @@
         },
         {
             "m_Id": "a0d87d74f2dd42d586047c5352a729f2"
+        },
+        {
+            "m_Id": "4f373aa195ce4ca3b80217a957ffcc7a"
         }
     ]
 }

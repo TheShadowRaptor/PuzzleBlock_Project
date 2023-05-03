@@ -8,6 +8,7 @@ public class PlayerControllerGrid : BlockCharacter
 {
     protected void Start()
     {
+        startTimeTillNextInteract = timeUntilNextInteract;
         startHealth = health;
         Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
         transform.position = cellPos;
@@ -25,6 +26,7 @@ public class PlayerControllerGrid : BlockCharacter
                 MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
             }
         }
+        CanInteract();
         DetectChangeInLight();
         Move();
         
