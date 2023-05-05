@@ -7,10 +7,10 @@ public class Lightpillar : EventObject, ICellOccupier
     public bool IsSolid { get => true; set { } }
     [SerializeField] float maxLightRange;
     [SerializeField] float minLightRange;
+    [SerializeField] private float speed = 2;
 
     private Light light;
     private GameObject lightSize;
-    private float speed = 2;
 
     bool playEvent = false;
     // Start is called before the first frame update

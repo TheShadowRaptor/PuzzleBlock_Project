@@ -395,6 +395,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: MasterSingleton
       objectReference: {fileID: 0}
+    - target: {fileID: 4210048504081489684, guid: 0ab618a631016d3428ac202082bd1180,
+        type: 3}
+      propertyPath: m_ParentUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4210048504081489684, guid: 0ab618a631016d3428ac202082bd1180,
+        type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ffa6eb6486e4a24a8ee04f0bd3d66a2,
+        type: 2}
+    - target: {fileID: 5162034915330579542, guid: 0ab618a631016d3428ac202082bd1180,
+        type: 3}
+      propertyPath: m_ParentUI
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5162034915330579542, guid: 0ab618a631016d3428ac202082bd1180,
+        type: 3}
+      propertyPath: m_PanelSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 6ffa6eb6486e4a24a8ee04f0bd3d66a2,
+        type: 2}
     - target: {fileID: 8800153755510339100, guid: 0ab618a631016d3428ac202082bd1180,
         type: 3}
       propertyPath: m_RootOrder
@@ -450,7 +472,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9129057271753535323, guid: 0ab618a631016d3428ac202082bd1180, type: 3}
+    - {fileID: 7914558925465142294, guid: 0ab618a631016d3428ac202082bd1180, type: 3}
+    - {fileID: 669515447399546366, guid: 0ab618a631016d3428ac202082bd1180, type: 3}
     m_RemovedGameObjects:
     - {fileID: 2313386224190846759, guid: 0ab618a631016d3428ac202082bd1180, type: 3}
     m_AddedGameObjects: []

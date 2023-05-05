@@ -110,7 +110,7 @@ Material:
     m_Floats:
     - _Alpha: 1
     - _AlphaClip: 0
-    - _AlphaFresnel: 1.83
+    - _AlphaFresnel: 3.78
     - _AlphaToMask: 0
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
@@ -167,8 +167,8 @@ Material:
     - _OuterOutlineColor: {r: 1, g: 0.9318807, b: 0, a: 0}
     - _OutlineColor: {r: 0.9756192, g: 1, b: 0, a: 0}
     - _RealLightShadowColor: {r: 0.004494493, g: 0.012963778, b: 0.9528302, a: 0}
-    - _RegularColor: {r: 0.076951765, g: 0, b: 0.9811321, a: 1}
-    - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
+    - _RegularColor: {r: 0.07999992, g: 0, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 0.07450981, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0.69109607, b: 1, a: 1}
     - _ShadowRippleColor: {r: 0.21568629, g: 0, b: 0.76470596, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

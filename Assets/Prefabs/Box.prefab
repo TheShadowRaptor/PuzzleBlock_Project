@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6027714264266008033}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4926758344979153195
 BoxCollider:
@@ -67,8 +67,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 038e83e04d91a71468489af14d168915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
+  isAlive: 1
   moveTime: 0.2
-  visual: {fileID: 0}
+  deathBoxHeight: -5
+  timeUntilNextInteract: 1
+  visual: {fileID: 1548452082536576690}
 --- !u!1 &2506289458140839808
 GameObject:
   m_ObjectHideFlags: 0

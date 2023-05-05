@@ -1,0 +1,14 @@
+.TitleLabel {
+    justify-content: flex-start;
+    align-items: auto;
+    align-self: center;
+    font-size: 32px;
+    -unity-font-style: bold;
+}
+
+.Button {
+    width: 20%;
+    align-items: auto;
+    align-self: center;
+    justify-content: flex-start;
+}

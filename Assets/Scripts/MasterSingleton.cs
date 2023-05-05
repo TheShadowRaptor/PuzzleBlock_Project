@@ -26,7 +26,7 @@ public class MasterSingleton : MonoBehaviour
     private GameManager gameManager;
     private LevelManager levelManager;
     private InputManager inputManager;
-    private MainmenuElements uIElements;
+    private UIManager uIManager;
 
     // GameCharacters
     private PlayerControllerGrid player;
@@ -35,7 +35,7 @@ public class MasterSingleton : MonoBehaviour
     public GameManager GameManager { get => gameManager; }
     public LevelManager LevelManager { get => levelManager; }
     public InputManager InputManager { get => inputManager; }
-    public MainmenuElements UIElements { get => UIElements; }
+    public UIManager UIManager { get => uIManager; }
 
     // GameCharacters gets
     public PlayerControllerGrid Player { get =>  player; }
@@ -60,7 +60,7 @@ public class MasterSingleton : MonoBehaviour
         gameManager = GetComponentInChildren<GameManager>();
         levelManager = GetComponentInChildren<LevelManager>();
         inputManager = GetComponentInChildren<InputManager>();
-        uIElements = GetComponentInChildren<MainmenuElements>();
+        uIManager = GetComponentInChildren<UIManager>();
         player = GetComponentInChildren<PlayerControllerGrid>();
     }
 

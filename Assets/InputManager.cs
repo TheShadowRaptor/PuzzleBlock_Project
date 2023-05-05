@@ -5,9 +5,21 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private bool space;
-    private bool y;
+    private bool esc;
+    private bool r;
+    private bool w;
+    private bool a;
+    private bool s;
+    private bool d;
+
     public bool Space { get => space; }
-    public bool Y { get => y; }
+    public bool Esc { get => esc; }
+    public bool R { get => r; }
+    public bool W { get => r; }
+    public bool A { get => r; }
+    public bool S { get => r; }
+    public bool D { get => r; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,11 +30,11 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         space = Input.GetKey(KeyCode.Space);
-        y = Input.GetKeyDown(KeyCode.Y);
-
-        if (y)
-        {
-            MasterSingleton.Instance.Player.TakeDamage(1);
-        }
+        esc = Input.GetKeyDown(KeyCode.Escape);
+        r = Input.GetKey(KeyCode.R);
+        w = Input.GetKey(KeyCode.W);
+        a = Input.GetKey(KeyCode.A);
+        s = Input.GetKey(KeyCode.S);
+        d = Input.GetKey(KeyCode.D);
     }
 }

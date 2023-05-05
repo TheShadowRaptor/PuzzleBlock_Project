@@ -1,37 +1,9 @@
-using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class PlayerControllerGrid : BlockCharacter
+public class Enemy : BlockCharacter
 {
-    protected void Start()
-    {
-        startTimeTillNextInteract = timeUntilNextInteract;
-        startHealth = health;
-        Vector3Int cellPos = new Vector3Int((int)transform.position.x, (int)transform.position.y, (int)transform.position.z);
-        transform.position = cellPos;
-        _currentCell = GridCell.GetCell(cellPos);
-    }
-
-    public void Update()
-    {
-        if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay) return;
-
-        if (IsAlive == false)
-        {
-            if (FinishedDying() == true)
-            {
-                MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
-            }
-        }
-        CanInteract();
-        DetectChangeInLight();
-        Move();
-        
-    }
-
     void Move()
     {
         // Take move commands
@@ -97,5 +69,4 @@ public class PlayerControllerGrid : BlockCharacter
     }
 
     public override Vector3 GetPosition() { return transform.position; }
-
 }

@@ -13,6 +13,9 @@ public class LevelManager : MonoBehaviour
 
     Coroutine waitCoroutine = null;
 
+    public string PreviousScene { get => previousScene; }
+    public string CurrentScene { get => currentScene; }
+
     private void Update()
     {
         ToggleCoroutines();
@@ -37,7 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public void SwitchScene(string name)
     {
-        if (validSceneNames.Contains(name))
+        if (validSceneNames.Contains(name) && currentScene != name)
         {
             SceneManager.LoadScene(name);
         }

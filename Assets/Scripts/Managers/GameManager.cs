@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     {
         mainmenu,
         gameplay,
-        paused
+        paused,
+        win
     }
 
     private GameState state;
@@ -39,6 +40,9 @@ public class GameManager : MonoBehaviour
 
             case GameState.paused:
                 break;
+
+            case GameState.win:
+                break;
         }
     }
 
@@ -56,6 +60,10 @@ public class GameManager : MonoBehaviour
 
             case GameState.paused:
                 state = GameState.paused;
+                break;
+
+            case GameState.win:
+                state = GameState.win;
                 break;
         }
     }
