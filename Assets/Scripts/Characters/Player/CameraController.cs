@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using DG.Tweening;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -11,6 +12,8 @@ public class CameraController : MonoBehaviour
 
     [SerializeField] private int currentCameraPoint = 0;
     [SerializeField] private float cameraPanSpeed = 0.1f;
+    [SerializeField] private float cameraPanSpeedDuringRotation = 0.1f;
+    [SerializeField] private float cameraRotationDuration = 0.25f;
     [SerializeField] private float cameraHeight = 10f;
 
     public List<GameObject> CameraPoints { get =>  cameraPoints; }
@@ -46,25 +49,24 @@ public class CameraController : MonoBehaviour
         {
             if (currentCameraPoint == cameraPoints.Count - 1) currentCameraPoint = 0;
             else currentCameraPoint += 1;
+            isRotating = true;
+            transform.DOKill();
+            transform.DORotate(cameraPoints[currentCameraPoint].transform.rotation.eulerAngles, cameraRotationDuration)
+                .SetEase(Ease.Linear).OnComplete(
+                    () => { isRotating = false; });
         }
 
         // Camera lerps to currentCameraPoint untill it reaches it
         Vector3 cameraPos = this.gameObject.transform.position;
-        Quaternion cameraRot = this.gameObject.transform.rotation;
 
         if (cameraPos != cameraPoints[currentCameraPoint].transform.position)
         {
-            cameraPos = Vector3.Lerp(cameraPos, cameraPoints[currentCameraPoint].transform.position, cameraPanSpeed);   
+            cameraPos = Vector3.Lerp(cameraPos, cameraPoints[currentCameraPoint].transform.position, isRotating ? cameraPanSpeedDuringRotation : cameraPanSpeed);   
             this.gameObject.transform.position = cameraPos;
-        }
-
-        if (cameraRot != cameraPoints[currentCameraPoint].transform.rotation)
-        {
-            cameraRot = Quaternion.Lerp(cameraRot, cameraPoints[currentCameraPoint].transform.rotation, cameraPanSpeed);   
-            this.gameObject.transform.rotation = cameraRot;
         }
     }
 
+    public static bool isRotating = false;
     void FollowPlayer()
     {
         Vector3 pointPos = cameraPointHolder.transform.position;

@@ -29564,6 +29564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLightRange: 20
   minLightRange: 0
+  speed: 2
 --- !u!23 &860724714
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65150,6 +65151,8 @@ MonoBehaviour:
   - {fileID: 1437694238}
   currentCameraPoint: 0
   cameraPanSpeed: 0.1
+  cameraPanSpeedDuringRotation: 0.125
+  cameraRotationDuration: 0.5
   cameraHeight: 10
 --- !u!1 &1975630397
 GameObject:

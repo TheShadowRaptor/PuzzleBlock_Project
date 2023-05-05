@@ -48,63 +48,52 @@ public class PlayerControllerGrid : BlockCharacter
 
     void Move()
     {
-        // Take move commands
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A)) A = true;
+        if (Input.GetKey(KeyCode.W)) W = true;
+        if (Input.GetKey(KeyCode.S)) S = true;
+        if (Input.GetKey(KeyCode.D)) D = true;
+
+        if ((D || A || W || S) && !CameraController.isRotating)
         {
-            Vector3 camRightDirection = Camera.main.transform.right;
-            camRightDirection.y = 0;
-            //WANTS TO MOVE IN THAT DIRECTION'S X
-            if (Mathf.Abs(camRightDirection.x) > Mathf.Abs(camRightDirection.z))
-            {
-                //Ignore Z direction because X is bigger
-                camRightDirection.z = 0;
-                camRightDirection.Normalize();
-                //We now should have a vector direction that should conform to the right of the current camera.
-                //So we'll multiply the x by -1 if we're trying to go left. and by 1 if we're trying to go right to keep the vector the same.
-                camRightDirection.x *= (Input.GetKey(KeyCode.A) ? -1 : 1);
-            }
-            else
-            {
-                //WANTS TO MOVE IN THAT DIRECTION'S Z
-                //Ignore X direction because Z is bigger
-                camRightDirection.x = 0;
-                camRightDirection.Normalize();
-                //We now should have a vector direction that should conform to the right of the current camera.
-                //So we'll multiply the z by -1 if we're trying to go left. and by 1 if we're trying to go right to keep the vector the same.
-                camRightDirection.z *= (Input.GetKey(KeyCode.A) ? -1 : 1);
-            }
-            DoMove(new Vector3Int((int)camRightDirection.x, 0, (int)camRightDirection.z));
+             Camera mainCamera = Camera.main;
+            // Vector3 cameraRight = mainCamera.transform.right; Vector3 cameraUp = mainCamera.transform.up;
+            //
+            // actualForward = Vector3.Lerp(cameraUp, cameraRight, 0.5f);
+            // actualForward.y = 0;
+            // actualForward = actualForward.normalized;
+            //
+            
+            Vector3 cameraForward = mainCamera.transform.forward;
+            cameraForward.y = 0; // Project onto XZ plane
+            cameraForward.Normalize();
+            
+            Quaternion rotation = Quaternion.Euler(0, 45, 0);
+            cameraForward = rotation * cameraForward;
+
+            Vector3 cameraRight = mainCamera.transform.right;
+            cameraRight.y = 0; // Project onto XZ plane
+            cameraRight = rotation * cameraRight;
+            cameraRight.Normalize();
+            int vertical = 0;
+            if (W || S) vertical = W ? 1 : -1;
+            int horizontal = 0;
+            if (D || A) horizontal = D ? 1 : -1;
+            
+            Vector3 moveDirection = ((cameraForward * vertical) + (cameraRight * horizontal)).normalized;
+            Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.z);
+            Vector3Int movementRounded = Vector3Int.RoundToInt(movement);
+            if (movementRounded.x == movementRounded.z) movementRounded.x = 0;
+            
+            DoMove(movementRounded);
         }
 
-        //Take move commands
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-        {
-            Vector3 camForwardDirection = Camera.main.transform.forward;
-            camForwardDirection.y = 0;
-            //WANTS TO MOVE IN THAT DIRECTION'S X
-            if (Mathf.Abs(camForwardDirection.x) > Mathf.Abs(camForwardDirection.z))
-            {
-                //Ignore Z direction because X is bigger
-                camForwardDirection.z = 0;
-                camForwardDirection.Normalize();
-                //We now should have a vector direction that should conform to the Forward of the current camera.
-                //So we'll multiply the x by -1 if we're trying to go left. and by 1 if we're trying to go Forward to keep the vector the same.
-                camForwardDirection.x *= (Input.GetKey(KeyCode.S) ? -1 : 1);
-            }
-            else
-            {
-                //WANTS TO MOVE IN THAT DIRECTION'S Z
-                //Ignore X direction because Z is bigger
-                camForwardDirection.x = 0;
-                camForwardDirection.Normalize();
-                //We now should have a vector direction that should conform to the Forward of the current camera.
-                //So we'll multiply the z by -1 if we're trying to go left. and by 1 if we're trying to go Forward to keep the vector the same.
-                camForwardDirection.z *= (Input.GetKey(KeyCode.S) ? -1 : 1);
-            }
-            DoMove(new Vector3Int((int)camForwardDirection.x, 0, (int)camForwardDirection.z));
-        }
+        W = false;
+        S = false;
+        D = false;
+        A = false;
     }
 
+    public bool W, A, S, D;
     public void LateUpdate()
     {
         //transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, Time.deltaTime * 12);

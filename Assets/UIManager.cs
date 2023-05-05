@@ -36,6 +36,21 @@ public class UIManager : MonoBehaviour {
     public void ShowMainMenu()
     {
         ShowMenu("PuzzleBlocks Yay");
+        buttonsContainer.Add(CreateButton("W", () => {
+            MasterSingleton.Instance.Player.W = true;
+        }));
+        
+        buttonsContainer.Add(CreateButton("S", () => {
+            MasterSingleton.Instance.Player.S = true;
+        }));
+        
+        buttonsContainer.Add(CreateButton("A", () => {
+            MasterSingleton.Instance.Player.A = true;
+        }));
+        
+        buttonsContainer.Add(CreateButton("D", () => {
+            MasterSingleton.Instance.Player.D = true;
+        }));
         buttonsContainer.Add(CreateButton("Play game", () =>
         {
             Debug.Log("Go to play game");
@@ -44,6 +59,8 @@ public class UIManager : MonoBehaviour {
         buttonsContainer.Add(CreateButton("Quit Game", () => {
             Application.Quit();
         }));
+
+        mainMenuContainer.style.width = new StyleLength(Length.Percent(50));
     }
 
     public void ShowSettingsMenu()
