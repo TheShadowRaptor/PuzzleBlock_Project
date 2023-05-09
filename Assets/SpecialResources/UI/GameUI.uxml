@@ -1,11 +1,18 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
     <Style src="project://database/Assets/SpecialResources/UI/Stylelist.uss?fileID=7433441132597879392&amp;guid=045dbcf0420581048aa11723e116b5bf&amp;type=3#Stylelist" />
-    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
-        <ui:VisualElement name="Header" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0);">
-            <ui:Label tabindex="-1" text="PuzzleBlock_Project" display-tooltip-when-elided="true" name="HeaderLabel" class="TitleLabel" />
+    <ui:VisualElement name="GameplayContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
+        <ui:VisualElement name="Compass" class="Compass" style="display: flex;" />
+    </ui:VisualElement>
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex;">
+        <ui:VisualElement name="Header" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex; min-width: 20%; min-height: 25%;">
+            <ui:Label tabindex="-1" text="PuzzleBlock_Project" display-tooltip-when-elided="true" name="HeaderLabel" class="TitleLabel" style="flex-shrink: 1;" />
         </ui:VisualElement>
-        <ui:VisualElement name="MenuArea" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: space-around; height: 100%; position: absolute; width: 100%;">
-            <ui:VisualElement name="ButtonsContainer" class="ButtonsContainer" />
+        <ui:VisualElement name="MenuArea" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: flex-start; height: 100%; position: relative; width: 100%; display: flex; min-width: 100%; min-height: 50%;">
+            <ui:VisualElement name="ButtonsContainer" class="ButtonsContainer">
+                <ui:Button text="Button" display-tooltip-when-elided="true" enable-rich-text="false" class="Button" style="flex-shrink: 1;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
+    <ui:VisualElement name="BuilderContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-self: flex-start; align-items: flex-start; justify-content: flex-start; flex-direction: column; display: none;" />
 </ui:UXML>
