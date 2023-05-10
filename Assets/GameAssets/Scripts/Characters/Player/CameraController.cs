@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -19,10 +20,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float startCameraMoveDelay = 1f;
 
     [Header("TitleCameraSettings")]
-    [SerializeField] private bool titleCamera = false;
     [SerializeField] private Transform target;
     [SerializeField] private float rotationSpeed = 10.0f;
     [SerializeField] private Vector3 offset;
+
+    [Header("EditorCameraSettings")]
+    [SerializeField] private float editerCameraMoveSpeed = 1;
 
     public List<GameObject> CameraPoints { get =>  cameraPoints; }
     public int CurrentCameraPoint { get => currentCameraPoint; }
@@ -45,13 +48,19 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!titleCamera)
+        if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.edit)
+        {
+            ControlEditorCamera();
+        }
+
+        if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay)
         {
             ChangeCameraPosition();
             FollowPlayer();
             CameraCanMove();
         }
-        else
+
+        if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.mainmenu)
         {
             OrbitCamera();
         }
@@ -121,7 +130,38 @@ public class CameraController : MonoBehaviour
     void OrbitCamera()
     {
         //transform.position = target.position + offset;
-        transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
-        transform.LookAt(target.position);
+        if (target != null)
+        {
+            transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
+            transform.LookAt(target.position);
+        }
+        else transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed * Time.deltaTime);
+    }
+
+    void ControlEditorCamera()
+    {
+        InputManager input = MasterSingleton.Instance.InputManager;
+        // -----------------------------------
+        Vector3 cameraForward = transform.forward;
+        cameraForward.y = 0; // Project onto XZ plane
+        cameraForward.Normalize();
+
+        Quaternion rotation = Quaternion.Euler(0, 45, 0);
+        cameraForward = rotation * cameraForward;
+
+        Vector3 cameraRight = transform.right;
+        cameraRight.y = 0; // Project onto XZ plane
+        cameraRight = rotation * cameraRight;
+        cameraRight.Normalize();
+        int vertical = 0;
+        if (input.W || input.S) vertical = input.W ? 1 : -1;
+        int horizontal = 0;
+        if (input.D || input.A) horizontal = input.D ? 1 : -1;
+
+        Vector3 moveDirection = ((cameraForward * vertical) + (cameraRight * horizontal)).normalized;
+        Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.z);
+
+        transform.position += movement * Time.deltaTime * editerCameraMoveSpeed;
+        // -----------------------------------
     }
 }

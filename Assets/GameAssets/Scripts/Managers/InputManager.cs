@@ -15,10 +15,10 @@ public class InputManager : MonoBehaviour
     public bool Space { get => space; }
     public bool Esc { get => esc; }
     public bool R { get => r; }
-    public bool W { get => r; }
-    public bool A { get => r; }
-    public bool S { get => r; }
-    public bool D { get => r; }
+    public bool W { get => w; }
+    public bool A { get => a; }
+    public bool S { get => s; }
+    public bool D { get => d; }
 
     // Start is called before the first frame update
     void Start()

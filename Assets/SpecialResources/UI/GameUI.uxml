@@ -3,7 +3,7 @@
     <ui:VisualElement name="GameplayContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
         <ui:VisualElement name="Compass" class="Compass" style="display: flex;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex;">
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
         <ui:VisualElement name="Header" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex; min-width: 20%; min-height: 25%;">
             <ui:Label tabindex="-1" text="PuzzleBlock_Project" display-tooltip-when-elided="true" name="HeaderLabel" class="TitleLabel" style="flex-shrink: 1;" />
         </ui:VisualElement>
@@ -14,5 +14,6 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="BuilderContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-self: flex-start; align-items: flex-start; justify-content: flex-start; flex-direction: column; display: none;" />
+    <ui:VisualElement name="BuilderTopContainer" style="justify-content: space-between; align-items: auto; align-self: auto; flex-direction: row; min-height: 10%; height: auto; color: rgb(231, 192, 136); background-color: rgb(118, 81, 57); -unity-text-outline-color: rgba(231, 192, 136, 0); -unity-text-outline-width: 0; border-left-color: rgb(91, 63, 45); border-right-color: rgb(91, 63, 45); border-top-color: rgb(91, 63, 45); border-bottom-color: rgb(91, 63, 45); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; max-height: 10%; display: none;" />
+    <ui:VisualElement name="BuilderTileContainer" style="justify-content: flex-start; align-items: flex-start; align-self: flex-start; flex-direction: column; min-height: 90%; height: auto; color: rgb(231, 192, 136); background-color: rgb(118, 81, 57); -unity-text-outline-color: rgba(231, 192, 136, 0); -unity-text-outline-width: 0; border-left-color: rgb(91, 63, 45); border-right-color: rgb(91, 63, 45); border-top-color: rgb(91, 63, 45); border-bottom-color: rgb(91, 63, 45); border-left-width: 5px; border-right-width: 5px; border-top-width: 5px; border-bottom-width: 5px; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; min-width: 10%; width: auto; flex-wrap: wrap; max-width: 100%; display: none;" />
 </ui:UXML>

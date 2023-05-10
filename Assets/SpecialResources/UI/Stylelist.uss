@@ -106,3 +106,70 @@
     left: 85%;
     top: 75%;
 }
+
+.BuilderMenuButton {
+    width: auto;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    min-width: 40%;
+    min-height: 7%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: rgb(255, 212, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 42px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.BuilderTopButton {
+    width: auto;
+    align-items: auto;
+    align-self: center;
+    justify-content: flex-start;
+    min-width: 10%;
+    min-height: 80%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: rgb(255, 212, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 32px;
+    margin-left: 2%;
+    margin-right: 2%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: auto;
+    max-width: 80%;
+    max-height: 100%;
+}

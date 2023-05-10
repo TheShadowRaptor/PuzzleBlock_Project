@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class UIManager : MonoBehaviour {
     
     public UIDocument document;
-    private VisualElement root,mainMenuContainer,buttonsContainer,gameplayContainer,builderContainer;
+    private VisualElement root,mainMenuContainer,buttonsContainer,gameplayContainer,builderTileContainer,builderTopContainer;
     private Label headerLabel;
     public static bool IsInMenu = false;
 
@@ -18,17 +18,18 @@ public class UIManager : MonoBehaviour {
 
     void Start()
     {
+        chosenTile = "GrassBlock";
         root = document.rootVisualElement;
         mainMenuContainer = root.Query("Container");
         buttonsContainer = root.Query("ButtonsContainer");
         gameplayContainer = root.Query("GameplayContainer");
-        builderContainer = root.Query("BuilderContainer");
+        builderTileContainer = root.Query("BuilderTileContainer");
+        builderTopContainer = root.Query("BuilderTopContainer");
         headerLabel = root.Query<Label>("HeaderLabel");
-        ShowMainMenu();
+        ShowMainmenu();
     }
 
     public void ShowMenu(string menuTitle) {
-        HideGameplayHud();
         buttonsContainer.Clear();
         headerLabel.text = menuTitle;
         mainMenuContainer.SetDisplayBasedOnBool(true);
@@ -37,31 +38,42 @@ public class UIManager : MonoBehaviour {
 
     public void ShowGameplayHud()
     {
-        HideMenu();
         gameplayContainer.SetDisplayBasedOnBool(true);
     }
 
-    public void ShowBuilderMenu()
+    public void ShowBuilderMenu(string menu)
     {
-        builderContainer.SetDisplayBasedOnBool(true);
+        //builderTileContainer.SetDisplayBasedOnBool(true);
+        if (menu == "Top")
+        {
+            builderTopContainer.Clear();
+            builderTopContainer.SetDisplayBasedOnBool(true);
+            builderTileContainer.SetDisplayBasedOnBool(false);
+        }
+        else if (menu == "Tiles")
+        {
+            builderTileContainer.Clear();
+            builderTileContainer.SetDisplayBasedOnBool(true);
+        }
     }
 
-    public void HideGameplayHud()
+    public void HideGameplayMenu()
     {
         gameplayContainer.SetDisplayBasedOnBool(false);
     }
 
-    public void HideMenu() {
+    public void HideMainmenu() {
         mainMenuContainer.SetDisplayBasedOnBool(false);
         IsInMenu = false;
     }
 
     public void HideBuilderMenu()
     {
-        builderContainer.SetDisplayBasedOnBool(false);
+        builderTopContainer.SetDisplayBasedOnBool(false);
+        builderTileContainer.SetDisplayBasedOnBool(false);
     }
 
-    public void ShowMainMenu()
+    public void ShowMainmenu()
     {
         ShowMenu("PuzzleBlocks_Project");
 
@@ -82,7 +94,7 @@ public class UIManager : MonoBehaviour {
         //}));
 
         buttonsContainer.Add(CreateButton("Play game", ShowControlsMenu));
-        buttonsContainer.Add(CreateButton("Build Level", ShowBuilderScreen));
+        buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Settings", ShowSettingsMenu));
         buttonsContainer.Add(CreateButton("Quit Game", () => {
             Application.Quit();
@@ -97,7 +109,7 @@ public class UIManager : MonoBehaviour {
         buttonsContainer.Add(CreateLabel("Work In Progress"));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(CreateSpacer(50));
-        buttonsContainer.Add(CreateButton("Back to main menu", ShowMainMenu));
+        buttonsContainer.Add(CreateButton("Back to main menu", ShowMainmenu));
     }
 
     public void ShowControlsMenu()
@@ -132,14 +144,21 @@ public class UIManager : MonoBehaviour {
         buttonsContainer.Add(CreateButton("Next", SwitchToGameplay));
     }
 
-    private void ShowBuilderScreen()
+    private void ShowBuilderTileMenu()
     {
-        MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
-        ShowMenu("Tiles");
-        buttonsContainer.Add(CreateButton("GrassBlock", () => chosenTile = "GrassBlock"));
-        buttonsContainer.Add(CreateSpacer());
-        buttonsContainer.Add(CreateButton("DirtBlock", () => chosenTile = "DirtBlock"));
-        buttonsContainer.Add(CreateSpacer());
+        ShowBuilderMenu("Tiles");
+        builderTileContainer.Add(CreateTileButton("GrassBlock", () => chosenTile = "GrassBlock"));
+        builderTileContainer.Add(CreateSpacer());
+        builderTileContainer.Add(CreateTileButton("DirtBlock", () => chosenTile = "DirtBlock"));
+        builderTileContainer.Add(CreateSpacer());
+    }
+
+    private void ShowBuilderTopMenu()
+    {
+        ShowBuilderMenu("Top");
+        builderTopContainer.Add(CreateTopButton("Tiles", ShowBuilderTileMenu));
+        builderTopContainer.Add(CreateTopButton("Play", ShowBuilderTileMenu));
+        builderTopContainer.Add(CreateTopButton("Exit", SwitchToMainmenu));
     }
 
     public void ShowLevelCompleteMenu()
@@ -152,12 +171,31 @@ public class UIManager : MonoBehaviour {
 
     public void SwitchToGameplay()
     {
+        HideMainmenu();
+        HideBuilderMenu();
         MasterSingleton.Instance.LevelManager.SwitchScene("TestScene2");
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
         ShowGameplayHud();
     }
 
-    public const string ButtonClass = "Button", MenuLabelClass = "MenuLabel";
+    public void SwitchToMainmenu()
+    {
+        //MasterSingleton.Instance.LevelManager.SwitchScene("Mainmenu");
+        HideGameplayMenu();
+        HideBuilderMenu();
+        MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.mainmenu);
+        ShowMainmenu();
+    }
+    public void SwitchToBuilder()
+    {
+        HideMainmenu();
+        HideGameplayMenu();
+        MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
+        ShowBuilderTopMenu();
+    }
+
+
+    public const string ButtonClass = "Button", BuilderTopButtonClass = "BuilderTopButton", BuilderTileButtonClass = "BuilderTileButton", MenuLabelClass = "MenuLabel";
 
     public Button CreateButton(string buttonText, Action buttonAction)
     {
@@ -166,7 +204,23 @@ public class UIManager : MonoBehaviour {
         newbutton.AddToClassList(ButtonClass);
         return newbutton;
     }
-    
+
+    public Button CreateTopButton(string buttonText, Action buttonAction)
+    {
+        Button newbutton = new Button(buttonAction);
+        newbutton.text = buttonText;
+        newbutton.AddToClassList(BuilderTopButtonClass);
+        return newbutton;
+    }
+
+    public Button CreateTileButton(string buttonText, Action buttonAction)
+    {
+        Button newbutton = new Button(buttonAction);
+        newbutton.text = buttonText;
+        newbutton.AddToClassList(BuilderTileButtonClass);
+        return newbutton;
+    }
+
     public Label CreateLabel(string buttonText)
     {
         Label newLabel = new Label(buttonText);
