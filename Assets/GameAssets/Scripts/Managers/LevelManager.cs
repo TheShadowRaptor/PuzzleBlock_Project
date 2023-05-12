@@ -65,7 +65,7 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         MasterSingleton.Instance.Player.Teleport(PlayerSpawnpoint.spawnpoint.GetPositionInt());
         MasterSingleton.Instance.Player.ResetStats();

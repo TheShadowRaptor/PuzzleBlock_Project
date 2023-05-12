@@ -23,6 +23,21 @@
     flex-grow: 0;
 }
 
+.MenuLabel {
+    margin-left: 6px;
+    margin-right: 6px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    -unity-font-definition: initial;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    font-size: 42px;
+    border-left-color: rgba(255, 255, 255, 0);
+    border-right-color: rgba(255, 255, 255, 0);
+    border-top-color: rgba(255, 255, 255, 0);
+    border-bottom-color: rgba(255, 255, 255, 0);
+    color: rgb(231, 192, 136);
+}
+
 .Button:hover {
     background-color: rgb(255, 170, 124);
     color: rgb(168, 45, 0);
@@ -34,25 +49,107 @@
     border-bottom-color: rgb(255, 148, 0);
 }
 
-.ButtonsContainer {
-    flex-grow: 0;
-    background-color: rgba(118, 81, 57, 0.81);
+.BuilderTileButton:hover {
     width: auto;
-    min-width: 15%;
-    min-height: auto;
-    flex-shrink: 1;
-    max-height: none;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    min-width: 40%;
+    min-height: 7%;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding-left: 2%;
-    padding-right: 2%;
-    padding-top: 2%;
-    padding-bottom: 2%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: rgb(255, 170, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 42px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    translate: 0 -10px;
+}
+
+.BuilderTopButton:hover {
+    width: auto;
+    align-items: auto;
+    align-self: center;
     justify-content: flex-start;
-    align-items: stretch;
-    align-self: auto;
+    min-width: 10%;
+    min-height: 80%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    background-color: rgb(255, 170, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 32px;
+    margin-left: 2%;
+    margin-right: 2%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    height: auto;
+    max-width: 80%;
+    max-height: 100%;
+    translate: 0 -10px;
+}
+
+.BuilderEventButton:hover {
+    width: auto;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    min-width: 40%;
+    min-height: 7%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: rgb(255, 170, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 42px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    display: flex;
+    translate: 0 -10px;
 }
 
 .Button {
@@ -83,31 +180,7 @@
     flex-grow: 0;
 }
 
-.MenuLabel {
-    margin-left: 6px;
-    margin-right: 6px;
-    margin-top: 6px;
-    margin-bottom: 6px;
-    -unity-font-definition: initial;
-    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
-    font-size: 42px;
-    border-left-color: rgba(255, 255, 255, 0);
-    border-right-color: rgba(255, 255, 255, 0);
-    border-top-color: rgba(255, 255, 255, 0);
-    border-bottom-color: rgba(255, 255, 255, 0);
-    color: rgb(231, 192, 136);
-}
-
-.Compass {
-    background-image: url('project://database/Assets/GameAssets/Art/UI/Compass.png?fileID=2800000&guid=642b169e333c6d540b828150e0b94ca3&type=3#Compass');
-    min-width: 12%;
-    min-height: 25%;
-    position: absolute;
-    left: 85%;
-    top: 75%;
-}
-
-.BuilderMenuButton {
+.BuilderTileButton {
     width: auto;
     align-items: auto;
     align-self: flex-start;
@@ -172,4 +245,91 @@
     height: auto;
     max-width: 80%;
     max-height: 100%;
+}
+
+.BuilderEventButton {
+    width: auto;
+    align-items: auto;
+    align-self: flex-start;
+    justify-content: flex-start;
+    min-width: 40%;
+    min-height: 7%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    background-color: rgb(255, 212, 124);
+    border-left-color: rgb(226, 152, 25);
+    border-right-color: rgb(226, 152, 25);
+    border-top-color: rgb(226, 152, 25);
+    border-bottom-color: rgb(226, 152, 25);
+    border-bottom-width: 3px;
+    -unity-font: url('project://database/Assets/UI%20Toolkit/Rubik-SemiBold.ttf?fileID=12800000&guid=65b8bac69eda49b4698a8e4bd98fb4be&type=3#Rubik-SemiBold');
+    -unity-font-definition: initial;
+    color: rgb(168, 87, 0);
+    font-size: 42px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-grow: 0;
+    padding-left: 1px;
+    padding-right: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    display: flex;
+}
+
+.ButtonsContainer {
+    flex-grow: 0;
+    background-color: rgba(118, 81, 57, 0.81);
+    width: auto;
+    min-width: 15%;
+    min-height: auto;
+    flex-shrink: 1;
+    max-height: none;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-self: auto;
+}
+
+.Compass {
+    background-image: url('project://database/Assets/GameAssets/Art/UI/Compass.png?fileID=2800000&guid=642b169e333c6d540b828150e0b94ca3&type=3#Compass');
+    min-width: 12%;
+    min-height: 25%;
+    position: absolute;
+    left: 85%;
+    top: 75%;
+}
+
+.SaveTextField {
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    background-color: rgba(255, 212, 124, 0);
+    -unity-background-image-tint-color: rgb(127, 127, 127);
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    min-width: 5%;
+    min-height: 5%;
+    max-height: none;
+    max-width: 10%;
 }

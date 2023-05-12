@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector3 offset;
 
     [Header("EditorCameraSettings")]
-    [SerializeField] private float editerCameraMoveSpeed = 1;
+    [SerializeField] private float editorCameraMoveSpeed = 1;
 
     public List<GameObject> CameraPoints { get =>  cameraPoints; }
     public int CurrentCameraPoint { get => currentCameraPoint; }
@@ -48,6 +48,8 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (MasterSingleton.Instance.UIManager.isFocused) return;
+
         if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.edit)
         {
             ControlEditorCamera();
@@ -103,6 +105,20 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public void ReAlignGameCamera()
+    {
+        // Camera will not be in right spot on playtest. This fixes that.
+        if (this.gameObject.transform.rotation != cameraPoints[currentCameraPoint].transform.rotation)
+        {
+            cameraMoveDelay = startCameraMoveDelay;
+            isRotating = true;
+            transform.DOKill();
+            transform.DORotate(cameraPoints[currentCameraPoint].transform.rotation.eulerAngles, cameraRotationDuration)
+                .SetEase(Ease.Linear).OnComplete(
+                    () => { isRotating = false; });
+        }
+    }
+
     public bool CameraCanMove()
     {
         cameraMoveDelay -= Time.deltaTime;
@@ -129,13 +145,25 @@ public class CameraController : MonoBehaviour
 
     void OrbitCamera()
     {
+        Vector3 orbitCamera = transform.position;
+        orbitCamera.y = 8;
+        transform.position = orbitCamera;
+
         //transform.position = target.position + offset;
         if (target != null)
         {
             transform.RotateAround(target.position, Vector3.up, rotationSpeed * Time.deltaTime);
-            transform.LookAt(target.position);
+            //transform.LookAt(target.position);
         }
-        else transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed * Time.deltaTime);
+        else
+        {
+            transform.RotateAround(Vector3.zero, Vector3.up, rotationSpeed * Time.deltaTime);
+            try
+            {
+                target = GameObject.Find("Target").transform;
+            }
+            catch { }
+        }
     }
 
     void ControlEditorCamera()
@@ -146,13 +174,29 @@ public class CameraController : MonoBehaviour
         cameraForward.y = 0; // Project onto XZ plane
         cameraForward.Normalize();
 
-        Quaternion rotation = Quaternion.Euler(0, 45, 0);
-        cameraForward = rotation * cameraForward;
+        Quaternion cameraRotation = transform.rotation;
+        Vector3 cameraEulerAngles = cameraRotation.eulerAngles; // Get the current Euler angles of the camera
+
+        if (Input.GetKey(KeyCode.E))
+        {
+            float rotateSpeed = 50.0f; 
+            cameraEulerAngles.y += rotateSpeed * Time.deltaTime; // Increment the Y angle to rotate the camera around the Y-axis
+        }
+        if (Input.GetKey(KeyCode.Q))
+        {
+            float rotateSpeed = 50.0f;
+            cameraEulerAngles.y -= rotateSpeed * Time.deltaTime; // Decrement the Y angle to rotate the camera around the Y-axis
+        }
+
+        cameraRotation = Quaternion.Euler(cameraEulerAngles);
+
+        //cameraForward = rotation * cameraForward;
 
         Vector3 cameraRight = transform.right;
         cameraRight.y = 0; // Project onto XZ plane
-        cameraRight = rotation * cameraRight;
+        //cameraRight = rotation * cameraRight;
         cameraRight.Normalize();
+
         int vertical = 0;
         if (input.W || input.S) vertical = input.W ? 1 : -1;
         int horizontal = 0;
@@ -161,7 +205,10 @@ public class CameraController : MonoBehaviour
         Vector3 moveDirection = ((cameraForward * vertical) + (cameraRight * horizontal)).normalized;
         Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.z);
 
-        transform.position += movement * Time.deltaTime * editerCameraMoveSpeed;
+        transform.position += movement * Time.deltaTime * editorCameraMoveSpeed;
+        transform.rotation = cameraRotation;
+
+        
         // -----------------------------------
     }
 }

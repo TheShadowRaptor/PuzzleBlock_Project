@@ -39,7 +39,11 @@ public class PlayerControllerGrid : BlockCharacter
         {
             if (FinishedDying() == true)
             {
-                MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
+                if (MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder")
+                {
+                    MasterSingleton.Instance.LevelManager.SpawnPlayer();
+                }
+                else MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
             }
         }
         CanInteract();

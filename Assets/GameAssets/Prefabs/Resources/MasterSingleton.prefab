@@ -125,6 +125,7 @@ MonoBehaviour:
   - Mainmenu
   - TestScene2
   - LoadingScene
+  - LevelBuilder
 --- !u!1 &3515351822644645035
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   document: {fileID: 3752006315690170131}
+  isFocused: 0
   chosenTile: 
 --- !u!114 &3752006315690170131
 MonoBehaviour:
@@ -502,6 +504,11 @@ PrefabInstance:
         type: 3}
       propertyPath: editerCameraMoveSpeed
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4564728591094298302, guid: 3d4d23576b8e69f49ac661347a0aa594,
+        type: 3}
+      propertyPath: editorCameraMoveSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7828269253859538820, guid: 3d4d23576b8e69f49ac661347a0aa594,
         type: 3}

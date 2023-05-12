@@ -1,5 +1,7 @@
+using Defective.JSON;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Serialization;
 using UnityEngine;
 
 public class LevelBlock : MonoBehaviour
@@ -18,4 +20,23 @@ public class LevelBlock : MonoBehaviour
     {
         blocks.Remove(this);   
     }
+
+    public virtual void Serialize(JSONObject jsonObject)
+    {    
+        jsonObject.SetField("x", transform.position.x);
+        jsonObject.SetField("y", transform.position.y);
+        jsonObject.SetField("z", transform.position.z);
+        jsonObject.SetField("hashID", hashID);
+    }
+
+    public virtual void DeSerialize(JSONObject jsonObject)
+    {
+        // Not yet
+    }
+
+    public virtual bool OpenMenu()
+    {
+        return false;
+    }
+
 }

@@ -2,10 +2,11 @@ using Defective.JSON;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelSaveSystem : MonoBehaviour
 {
-    Dictionary<int, LevelBlock> prefabDic = new Dictionary<int, LevelBlock>();
+    public static Dictionary<int, LevelBlock> prefabDic = new Dictionary<int, LevelBlock>();
     [SerializeField] private List<LevelBlock> levelBlocks = new List<LevelBlock>();
     [SerializeField] private string level;
 
@@ -26,38 +27,52 @@ public class LevelSaveSystem : MonoBehaviour
     }
 
     [ContextMenu("Serialize")]
-    void Serialize()
+    public void DoSerialize()
     {
+        level = Serialize();
+    }
+
+    public static string Serialize()
+    {
+        // Parent container
         var save = new JSONObject();
 
         for (int i = 0;i < LevelBlock.blocks.Count; i++)
         {
+            // Child container
             var blockInfo = new JSONObject();
-            blockInfo.SetField("x", LevelBlock.blocks[i].transform.position.x);
-            blockInfo.SetField("y", LevelBlock.blocks[i].transform.position.y);
-            blockInfo.SetField("z", LevelBlock.blocks[i].transform.position.z);
-            blockInfo.SetField("hashID", LevelBlock.blocks[i].hashID);
-
-            save.Add(blockInfo);
-            
+            LevelBlock block = LevelBlock.blocks[i];
+            // Save blockinfo to child
+            block.Serialize(blockInfo);
+            save.Add(blockInfo);           
         }
 
-        level = save.Print();
+        // return child infor back to parent
+        return save.Print();
     }
 
     [ContextMenu("DeSerialize")]
-    void DeSerialize()
+    public void DoDeSerialize()
     {
-        var save = JSONObject.Create(level);
+        DeSerialize(level);
+    }
+
+    public static void DeSerialize(string str)
+    {
+        // Parent container
+        var save = JSONObject.Create(str);
         for (int i = LevelBlock.blocks.Count-1; i >= 0; i--)
         {
+            // clean up
             GameObject.Destroy(LevelBlock.blocks[i].gameObject);
         }
 
         for (int i = 0; i < save.list.Count; i++) 
         {
+            // Child container
             var blockInfo = save.list[i];
 
+            // Find block info in each Child container
             blockInfo.GetField(out float x, "x" ,0);
             blockInfo.GetField(out float y, "y", 0);
             blockInfo.GetField(out float z, "z", 0);
@@ -65,7 +80,9 @@ public class LevelSaveSystem : MonoBehaviour
 
             if (prefabDic.TryGetValue(hashID, out LevelBlock levelblock))
             {
-                Instantiate(levelblock.gameObject, new Vector3(x, y, z), Quaternion.identity);
+                // Spawn block and give them information within child container
+                LevelBlock levelblockSpawned = Instantiate(levelblock, new Vector3(x, y, z), Quaternion.identity);
+                levelblockSpawned.DeSerialize(blockInfo);
             }
         }
     }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6312961331177394495}
   - component: {fileID: -7931130448986785649}
   m_Layer: 0
-  m_Name: Lightpillar
+  m_Name: LightPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

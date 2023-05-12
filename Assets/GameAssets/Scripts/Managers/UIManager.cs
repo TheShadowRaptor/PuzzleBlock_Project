@@ -3,15 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement;
+using System.IO;
+using UnityEngine.Tilemaps;
 
+public class UIManager : MonoBehaviour
+{
 
-public class UIManager : MonoBehaviour {
-    
     public UIDocument document;
-    private VisualElement root,mainMenuContainer,buttonsContainer,gameplayContainer,builderTileContainer,builderTopContainer;
+    private VisualElement root, mainMenuContainer, buttonsContainer, gameplayContainer, builderTileContainer, builderEventContainer, builderTopContainer;
     private Label headerLabel;
     public static bool IsInMenu = false;
+
+    public TextField levelName;
+    public bool isFocused;
 
     //Editor
     [HideInInspector] public string chosenTile;
@@ -24,12 +28,19 @@ public class UIManager : MonoBehaviour {
         buttonsContainer = root.Query("ButtonsContainer");
         gameplayContainer = root.Query("GameplayContainer");
         builderTileContainer = root.Query("BuilderTileContainer");
+        builderEventContainer = root.Query("BuilderEventContainer");
         builderTopContainer = root.Query("BuilderTopContainer");
         headerLabel = root.Query<Label>("HeaderLabel");
         ShowMainmenu();
     }
 
-    public void ShowMenu(string menuTitle) {
+    private void Update()
+    {
+        isFocused = levelName != null && levelName.panel != null && levelName.panel.focusController != null && levelName.panel.focusController.focusedElement == levelName;
+    }
+
+    public void ShowMenu(string menuTitle)
+    {
         buttonsContainer.Clear();
         headerLabel.text = menuTitle;
         mainMenuContainer.SetDisplayBasedOnBool(true);
@@ -49,11 +60,18 @@ public class UIManager : MonoBehaviour {
             builderTopContainer.Clear();
             builderTopContainer.SetDisplayBasedOnBool(true);
             builderTileContainer.SetDisplayBasedOnBool(false);
+            builderEventContainer.SetDisplayBasedOnBool(false);
         }
         else if (menu == "Tiles")
         {
             builderTileContainer.Clear();
             builderTileContainer.SetDisplayBasedOnBool(true);
+        }
+
+        else if (menu == "Events")
+        {
+            builderEventContainer.Clear();
+            builderEventContainer.SetDisplayBasedOnBool(true);
         }
     }
 
@@ -62,7 +80,8 @@ public class UIManager : MonoBehaviour {
         gameplayContainer.SetDisplayBasedOnBool(false);
     }
 
-    public void HideMainmenu() {
+    public void HideMainmenu()
+    {
         mainMenuContainer.SetDisplayBasedOnBool(false);
         IsInMenu = false;
     }
@@ -71,6 +90,7 @@ public class UIManager : MonoBehaviour {
     {
         builderTopContainer.SetDisplayBasedOnBool(false);
         builderTileContainer.SetDisplayBasedOnBool(false);
+        builderEventContainer.SetDisplayBasedOnBool(false);
     }
 
     public void ShowMainmenu()
@@ -96,7 +116,8 @@ public class UIManager : MonoBehaviour {
         buttonsContainer.Add(CreateButton("Play game", ShowControlsMenu));
         buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Settings", ShowSettingsMenu));
-        buttonsContainer.Add(CreateButton("Quit Game", () => {
+        buttonsContainer.Add(CreateButton("Quit Game", () =>
+        {
             Application.Quit();
         }));
 
@@ -131,33 +152,84 @@ public class UIManager : MonoBehaviour {
         Color brown = new Color(75, 25, 0);
         Color lightBlue = new Color(0, 171, 240);
         ShowMenu("Shadow realm Colour Code");
-        buttonsContainer.Add(SquareGraphic(50, 50, Color.red, "= Buttons/Switches",50));
+        buttonsContainer.Add(SquareGraphic(50, 50, Color.red, "= Buttons/Switches", 50));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(SquareGraphic(50, 50, Color.green, "= Events", 50));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(SquareGraphic(50, 50, Color.grey, "= Pushables", 50));
         buttonsContainer.Add(CreateSpacer());
-        buttonsContainer.Add(SquareGraphic(50, 50, brown , "= Springs", 50));
+        buttonsContainer.Add(SquareGraphic(50, 50, brown, "= Springs", 50));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(SquareGraphic(50, 50, lightBlue, "= Light", 50));
         buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("Next", SwitchToGameplay));
     }
 
+    bool inTileMenu = false;
     private void ShowBuilderTileMenu()
     {
         ShowBuilderMenu("Tiles");
         builderTileContainer.Add(CreateTileButton("GrassBlock", () => chosenTile = "GrassBlock"));
-        builderTileContainer.Add(CreateSpacer());
         builderTileContainer.Add(CreateTileButton("DirtBlock", () => chosenTile = "DirtBlock"));
-        builderTileContainer.Add(CreateSpacer());
+        builderTileContainer.Add(CreateTileButton("LightBlock", () => chosenTile = "LightBlock"));
+        builderTileContainer.Add(CreateTileButton("ShadowBlock", () => chosenTile = "ShadowBlock"));
+        builderTileContainer.Add(CreateTileButton("Box", () => chosenTile = "Box"));
+        builderTileContainer.Add(CreateTileButton("Gate", () => chosenTile = "Gate"));
+        builderTileContainer.Add(CreateTileButton("LightPillar", () => chosenTile = "LightPillar"));
+        builderTileContainer.Add(CreateTileButton("Button", () => chosenTile = "Button"));
+        builderTileContainer.Add(CreateTileButton("Spring", () => chosenTile = "Spring"));
+        builderTileContainer.Add(CreateTileButton("PlayerSpawner", () => chosenTile = "PlayerSpawner"));
+    }
+
+    private void ShowBuilderEventMenu()
+    {
+        builderEventContainer.SetDisplayBasedOnBool(true);
+        ShowBuilderMenu("Events");
     }
 
     private void ShowBuilderTopMenu()
     {
         ShowBuilderMenu("Top");
-        builderTopContainer.Add(CreateTopButton("Tiles", ShowBuilderTileMenu));
-        builderTopContainer.Add(CreateTopButton("Play", ShowBuilderTileMenu));
+
+        builderTopContainer.Add(CreateTopButton("ToggleLight", () =>
+        {
+            LevelArea.Instance.ToggleEditorLight();
+
+        }));
+        builderTopContainer.Add(CreateTopButton("Tiles", () =>
+        {
+            if (inTileMenu == true) 
+            {
+                inTileMenu = false;
+                builderTileContainer.SetDisplayBasedOnBool(false);
+            }
+
+            else if (inTileMenu == false)
+            {
+                inTileMenu = true;
+                builderTileContainer.SetDisplayBasedOnBool(true);
+                ShowBuilderTileMenu();
+            }
+        }));
+        builderTopContainer.Add(levelName = CreateTextField("SaveLevel"));
+        builderTopContainer.Add(CreateTopButton("Save", () =>
+        {
+            var saveText = LevelSaveSystem.Serialize();
+            string filePath = $"{Application.streamingAssetsPath}/{levelName.text}.txt";
+            File.WriteAllText(filePath, saveText);
+        }
+        ));
+        builderTopContainer.Add(CreateTopButton("Load", () =>
+        {
+            string filePath = $"{Application.streamingAssetsPath}/{levelName.text}.txt";
+            if (File.Exists(filePath))
+            {
+                var readText = File.ReadAllText(filePath);
+                LevelSaveSystem.DeSerialize(readText);
+            }
+        }
+        ));
+        builderTopContainer.Add(CreateTopButton("Play", SwitchToPlaytest));
         builderTopContainer.Add(CreateTopButton("Exit", SwitchToMainmenu));
     }
 
@@ -177,6 +249,16 @@ public class UIManager : MonoBehaviour {
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
         ShowGameplayHud();
     }
+    public void SwitchToPlaytest()
+    {
+        HideMainmenu();
+        HideBuilderMenu();
+        MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
+        MasterSingleton.Instance.LevelManager.SpawnPlayer();
+        CameraController.cameraController.ReAlignGameCamera();
+        ShowGameplayHud();
+    }
+
 
     public void SwitchToMainmenu()
     {
@@ -194,8 +276,34 @@ public class UIManager : MonoBehaviour {
         ShowBuilderTopMenu();
     }
 
+    bool inEventMenu = false;
+    public void ShowLevelEditorConnectButtonMenu(EventObjButton lbb) {
+        if (inEventMenu == false) 
+        {
+            inEventMenu = true;
+            builderEventContainer.Clear();
+            ShowBuilderEventMenu();
+            for (int i = 0; i < EventObject.eventObjects.Count; i++) {
+                EventObject objReference = EventObject.eventObjects[i];
+                builderEventContainer.Add(CreateEventButton($"{objReference.gameObject.name} {Vector3Int.RoundToInt(objReference.transform.position)}",
+                    () =>
+                    {
+                        lbb.eventInformation = Vector3Int.RoundToInt(objReference.transform.position);
+                        builderEventContainer.Clear();
+                        ShowBuilderEventMenu();
+                    }));
+            }        
+        }
+        else
+        {
+            inEventMenu = false;
+            builderEventContainer.Clear();
+            builderEventContainer.SetDisplayBasedOnBool(false);
+        }
+    }
 
-    public const string ButtonClass = "Button", BuilderTopButtonClass = "BuilderTopButton", BuilderTileButtonClass = "BuilderTileButton", MenuLabelClass = "MenuLabel";
+
+    public const string ButtonClass = "Button", BuilderTopButtonClass = "BuilderTopButton", BuilderTileButtonClass = "BuilderTileButton", BuilderEventButtonClass = "BuilderEventButton", MenuLabelClass = "MenuLabel", TextFieldClass = "SaveTextField";
 
     public Button CreateButton(string buttonText, Action buttonAction)
     {
@@ -203,6 +311,14 @@ public class UIManager : MonoBehaviour {
         newbutton.text = buttonText;
         newbutton.AddToClassList(ButtonClass);
         return newbutton;
+    }
+
+    public TextField CreateTextField(string labelText)
+    {
+        TextField textField = new TextField();
+        textField.label = labelText;
+        textField.AddToClassList(TextFieldClass);
+        return textField;
     }
 
     public Button CreateTopButton(string buttonText, Action buttonAction)
@@ -221,13 +337,21 @@ public class UIManager : MonoBehaviour {
         return newbutton;
     }
 
+    public Button CreateEventButton(string buttonText, Action buttonAction)
+    {
+        Button newbutton = new Button(buttonAction);
+        newbutton.text = buttonText;
+        newbutton.AddToClassList(BuilderEventButtonClass);
+        return newbutton;
+    }
+
     public Label CreateLabel(string buttonText)
     {
         Label newLabel = new Label(buttonText);
         newLabel.AddToClassList(MenuLabelClass);
         return newLabel;
     }
-    
+
     public VisualElement CreateSpacer(float space = 10)
     {
         VisualElement spacer = new VisualElement();

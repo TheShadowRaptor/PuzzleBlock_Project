@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class LevelArea : MonoBehaviour
 {
+    static public LevelArea Instance;
     private Plane groundPlane;
     private Camera myCamera;
 
@@ -15,10 +16,24 @@ public class LevelArea : MonoBehaviour
     [SerializeField] private Material debugMaterial;
     [SerializeField] private List<GameObject> tiles = new List<GameObject>();
 
+    [SerializeField] private Light levelEditorLight;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {        
         groundPlane = new Plane(Vector3.zero, Vector3.forward, Vector3.right);
+
+
     }
 
     // Update is called once per frame
@@ -38,7 +53,16 @@ public class LevelArea : MonoBehaviour
             foundPos = Vector3Int.RoundToInt(foundPos);
             if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject())
             {
-                GameObject.Destroy(hit.collider.gameObject);
+                var lvlBlock = hit.collider.GetComponent<LevelBlock>();
+                if (lvlBlock == null)
+                {
+                    lvlBlock = hit.collider.GetComponentInParent<LevelBlock>();
+                }
+
+                if (lvlBlock != null)
+                {
+                    Destroy(lvlBlock.gameObject);
+                }
             }
         }
 
@@ -57,11 +81,45 @@ public class LevelArea : MonoBehaviour
                 Instantiate(ChooseTile(MasterSingleton.Instance.UIManager.chosenTile), foundPos, Quaternion.identity);
             }
         }
+
+        if (Input.GetMouseButtonDown(2) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            if (hit.collider == null) return;
+            //First try to get tthe level block that we're targetting on the object itself
+            var lvlBlock = hit.collider.GetComponent<LevelBlock>();
+            //If It's null, try getting it on the parent.
+            if (lvlBlock == null)
+            {
+                lvlBlock = hit.collider.GetComponentInParent<LevelBlock>();
+            }
+            //If it's not null
+            if (lvlBlock != null)
+            {
+                //Call open menu on it, since the button overrides it, it'll call the connect button if it's a button, otherwise it won't do anything.
+                if (lvlBlock.OpenMenu())
+                {
+
+                }
+            }
+        }
     }
 
     public GameObject ChooseTile(string blockName)
     {
         GameObject foundTile = tiles.FirstOrDefault(t => t.name == blockName);
         return foundTile;
+    }
+
+    public void ToggleEditorLight()
+    {
+        if (levelEditorLight.enabled)
+        {
+            levelEditorLight.enabled = false;
+        }
+
+        else
+        {
+            levelEditorLight.enabled = true;
+        }
     }
 }
