@@ -304,7 +304,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-
     public const string ButtonClass = "Button", BuilderTopButtonClass = "BuilderTopButton", BuilderTileButtonClass = "BuilderTileButton", BuilderEventButtonClass = "BuilderEventButton", MenuLabelClass = "MenuLabel", TextFieldClass = "SaveTextField";
 
     public Button CreateButton(string buttonText, Action buttonAction)

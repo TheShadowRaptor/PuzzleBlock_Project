@@ -2,8 +2,9 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Defective.JSON;
 
-public class Spring : MonoBehaviour, ICellOccupier
+public class Spring : LevelBlock, ICellOccupier
 {
     public bool IsSolid { get => false; set { } }
     public int elevation = 2;
@@ -67,5 +68,39 @@ public class Spring : MonoBehaviour, ICellOccupier
     public void OnBlockMoveAttemptFail(BlockCharacter attempt)
     {
 
+    }
+
+    public override bool MiddleMouseEvent()
+    {
+        
+        return true;
+    }
+
+    public override void Serialize(JSONObject jsonObject)
+    {
+        base.Serialize(jsonObject);
+
+        // Save Event info
+        if (this.gameObject != null)
+        {
+            // Save to eventInformation
+            jsonObject.SetField("elevation", elevation);
+            jsonObject.SetField("distance", distance);
+            jsonObject.SetField("springTime", springTime);
+        }
+    }
+
+    public override void DeSerialize(JSONObject jsonObject)
+    {
+        base.DeSerialize(jsonObject);
+
+        // Load Event info
+        jsonObject.GetField(out int e, "elevation", 0);
+        jsonObject.GetField(out int d, "distance", 0);
+        jsonObject.GetField(out float s, "springTime", 0);
+
+        elevation = e;
+        distance = d;
+        springTime = s;
     }
 }

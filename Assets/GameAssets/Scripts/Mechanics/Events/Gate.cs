@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Defective.JSON;
 
-public class Gate : EventObject
+public class Gate : LevelBlock
 {
     Animator animator;
     public bool exitGate = false;
@@ -25,7 +25,7 @@ public class Gate : EventObject
         
     }
 
-    public override void PlayEvent()
+    public void PlayEvent()
     {
         // Open Gate
         if (exitGate)
@@ -35,7 +35,7 @@ public class Gate : EventObject
         else animator.SetBool("Open", true);
     }
 
-    public override void CancelEvent()
+    public void CancelEvent()
     {
         if (exitGate)
         {

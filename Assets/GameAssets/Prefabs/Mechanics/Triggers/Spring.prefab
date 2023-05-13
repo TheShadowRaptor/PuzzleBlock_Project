@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1141846789335778913}
   - component: {fileID: 5854861068605838682}
   - component: {fileID: 2066070931989789989}
-  - component: {fileID: -353024489837961218}
   m_Layer: 0
   m_Name: Spring
   m_TagString: Untagged
@@ -68,23 +67,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cbd7464210c574e9c2e990b5b19861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockID: Spring
+  hashID: 0
   elevation: 3
   distance: 4
   springTime: 1
---- !u!114 &-353024489837961218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2711716547911799561}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34fd72258d6164e42824e85250361102, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockID: Spring
-  hashID: 1821512031
 --- !u!1 &3704354234885294155
 GameObject:
   m_ObjectHideFlags: 0
