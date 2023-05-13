@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class EventObject : MonoBehaviour
+public abstract class EventObject : LevelBlock
 {
     public static List<EventObject> eventObjects = new List<EventObject>();
     abstract public void PlayEvent();

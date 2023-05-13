@@ -175,6 +175,7 @@ public class UIManager : MonoBehaviour
         builderTileContainer.Add(CreateTileButton("ShadowBlock", () => chosenTile = "ShadowBlock"));
         builderTileContainer.Add(CreateTileButton("Box", () => chosenTile = "Box"));
         builderTileContainer.Add(CreateTileButton("Gate", () => chosenTile = "Gate"));
+        builderTileContainer.Add(CreateTileButton("Exit", () => chosenTile = "Exit"));
         builderTileContainer.Add(CreateTileButton("LightPillar", () => chosenTile = "LightPillar"));
         builderTileContainer.Add(CreateTileButton("Button", () => chosenTile = "Button"));
         builderTileContainer.Add(CreateTileButton("Spring", () => chosenTile = "Spring"));
@@ -277,6 +278,7 @@ public class UIManager : MonoBehaviour
     }
 
     bool inEventMenu = false;
+
     public void ShowLevelEditorConnectButtonMenu(EventObjButton lbb) {
         if (inEventMenu == false) 
         {

@@ -433,6 +433,7 @@ MonoBehaviour:
   - {fileID: 6314037236778533954, guid: edd08650792ff354085e78f4c24487de, type: 3}
   - {fileID: 1692485397383406296, guid: 3673254b062206742bdbe4e88753da43, type: 3}
   - {fileID: 8913230894605809790, guid: df16c3ca1977907459f67be4f3eff457, type: 3}
+  - {fileID: 2798994051331185667, guid: 456c2829cc836ec4b9c3e4af2ae8e328, type: 3}
   levelEditorLight: {fileID: 45239676}
 --- !u!4 &1401288827
 Transform:
@@ -477,4 +478,5 @@ MonoBehaviour:
   - {fileID: -7931130448986785649, guid: edd08650792ff354085e78f4c24487de, type: 3}
   - {fileID: -1077139933946684743, guid: 3673254b062206742bdbe4e88753da43, type: 3}
   - {fileID: -1283174229286011274, guid: df16c3ca1977907459f67be4f3eff457, type: 3}
+  - {fileID: -3650735287369657045, guid: 456c2829cc836ec4b9c3e4af2ae8e328, type: 3}
   level: '[{"x":-7,"y":0,"z":4,"hashID":1042007487},{"x":-7,"y":0,"z":5,"hashID":1042007487},{"x":-7,"y":0,"z":6,"hashID":1042007487},{"x":-7,"y":0,"z":7,"hashID":1042007487},{"x":-7,"y":0,"z":8,"hashID":1042007487},{"x":-8,"y":0,"z":7,"hashID":1042007487},{"x":-6,"y":0,"z":7,"hashID":1042007487},{"x":-5,"y":0,"z":7,"hashID":1042007487},{"x":-9,"y":0,"z":7,"hashID":1042007487}]'

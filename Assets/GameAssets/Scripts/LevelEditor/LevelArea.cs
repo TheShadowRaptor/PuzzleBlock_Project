@@ -96,7 +96,7 @@ public class LevelArea : MonoBehaviour
             if (lvlBlock != null)
             {
                 //Call open menu on it, since the button overrides it, it'll call the connect button if it's a button, otherwise it won't do anything.
-                if (lvlBlock.OpenMenu())
+                if (lvlBlock.MiddleMouseEvent())
                 {
 
                 }

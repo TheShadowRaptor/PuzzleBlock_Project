@@ -17,11 +17,16 @@ public class PlayerControllerGrid : BlockCharacter
 
     public void Update()
     {
-        if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay)
+        if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene != "LevelBuilder")
         {
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.paused);
             MasterSingleton.Instance.UIManager.ShowControlsMenu();
             return;
+        }
+        else if ((MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder"))
+        {
+            MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
+            MasterSingleton.Instance.UIManager.SwitchToBuilder();
         }
 
         else if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay && MasterSingleton.Instance.GameManager.State != GameManager.GameState.mainmenu)

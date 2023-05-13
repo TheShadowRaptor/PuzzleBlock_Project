@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Defective.JSON;
 
 public class Gate : EventObject
 {
@@ -41,5 +42,32 @@ public class Gate : EventObject
             animator.SetBool("OpenExit", false);
         }
         else animator.SetBool("Open", false);
+    }
+
+    public override bool MiddleMouseEvent()
+    {
+        gameObject.transform.Rotate(0,90,0);
+        return true;
+    }
+
+    public override void Serialize(JSONObject jsonObject)
+    {
+        base.Serialize(jsonObject);
+
+        // Save Event info
+        if (this.gameObject != null)
+        {
+            // Save to eventInformation
+            jsonObject.SetField("yRotation", gameObject.transform.eulerAngles.y);
+        }
+    }
+
+    public override void DeSerialize(JSONObject jsonObject)
+    {
+        base.DeSerialize(jsonObject);
+
+        // Load Event info
+        jsonObject.GetField(out float y, "yRotation", 0);
+        gameObject.transform.rotation = Quaternion.Euler(0, y,0);
     }
 }

@@ -50,6 +50,13 @@ public class EventObjButton : LevelBlock, ICellOccupier
     }
 
     public Vector3Int eventInformation = new Vector3Int();
+
+    public override bool MiddleMouseEvent()
+    {
+        MasterSingleton.Instance.UIManager.ShowLevelEditorConnectButtonMenu(this);
+        return true;
+    }
+
     public override void Serialize(JSONObject jsonObject)
     {
         base.Serialize(jsonObject);
@@ -75,11 +82,5 @@ public class EventObjButton : LevelBlock, ICellOccupier
 
         // Load from eventInformation
         eventInformation = new Vector3Int((int)x, (int)y, (int)z);
-    }
-
-    public override bool OpenMenu()
-    {
-        MasterSingleton.Instance.UIManager.ShowLevelEditorConnectButtonMenu(this);
-        return true;
     }
 }

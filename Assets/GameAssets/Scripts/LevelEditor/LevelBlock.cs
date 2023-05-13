@@ -34,7 +34,7 @@ public class LevelBlock : MonoBehaviour
         // Not yet
     }
 
-    public virtual bool OpenMenu()
+    public virtual bool MiddleMouseEvent()
     {
         return false;
     }
