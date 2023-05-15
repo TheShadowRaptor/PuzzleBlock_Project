@@ -25,6 +25,7 @@ public class PlayerControllerGrid : BlockCharacter
         }
         else if ((MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder"))
         {
+            //LevelArea.Instance.ReloadTiles();
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
             MasterSingleton.Instance.UIManager.SwitchToBuilder();
         }
@@ -94,7 +95,6 @@ public class PlayerControllerGrid : BlockCharacter
             Vector3 movement = new Vector3(moveDirection.x, 0, moveDirection.z);
             Vector3Int movementRounded = Vector3Int.RoundToInt(movement);
             if (movementRounded.x == movementRounded.z) movementRounded.x = 0;
-            
             DoMove(movementRounded);
         }
 

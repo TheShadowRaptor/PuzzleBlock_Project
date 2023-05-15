@@ -11,7 +11,7 @@ public class LevelBlock : MonoBehaviour
     public static List<LevelBlock> blocks = new List<LevelBlock>();
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         blocks.Add(this);
     }

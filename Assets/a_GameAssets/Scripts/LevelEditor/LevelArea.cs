@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,6 +10,9 @@ using UnityEngine.UI;
 public class LevelArea : MonoBehaviour
 {
     static public LevelArea Instance;
+    public GameObject levelAreaPrefab;
+    public GameObject levelAreaObj;
+    private GameObject previousLevelAreaObj;
     private Plane groundPlane;
     private Camera myCamera;
 
@@ -32,8 +36,7 @@ public class LevelArea : MonoBehaviour
     void Start()
     {        
         groundPlane = new Plane(Vector3.zero, Vector3.forward, Vector3.right);
-
-
+        
     }
 
     // Update is called once per frame
@@ -41,6 +44,12 @@ public class LevelArea : MonoBehaviour
     {
         if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.edit) return;
         if (myCamera == null) myCamera = Camera.main;
+        if (levelAreaObj == null)
+        {
+            levelAreaObj = Instantiate(levelAreaPrefab);
+            previousLevelAreaObj = levelAreaObj;
+        }
+
 
         Ray mouseRay = myCamera.ScreenPointToRay(Input.mousePosition);
         bool hasFoundPos = false;
@@ -78,7 +87,8 @@ public class LevelArea : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
-                Instantiate(ChooseTile(MasterSingleton.Instance.UIManager.chosenTile), foundPos, Quaternion.identity);
+                GameObject tile = Instantiate(ChooseTile(MasterSingleton.Instance.UIManager.chosenTile), foundPos, Quaternion.identity);
+                tile.gameObject.transform.parent = levelAreaObj.transform;
             }
         }
 
@@ -121,5 +131,13 @@ public class LevelArea : MonoBehaviour
         {
             levelEditorLight.enabled = true;
         }
+    }
+
+    public void ReloadTiles()
+    {
+        Destroy(levelAreaObj.gameObject);
+        Instantiate(levelAreaObj.gameObject);
+        GridCell.all.Clear();
+        //Instantiate(previousLevelAreaObj);
     }
 }

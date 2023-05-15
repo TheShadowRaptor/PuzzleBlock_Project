@@ -230,23 +230,33 @@ public class UIManager : MonoBehaviour
             }
         }
         ));
-        builderTopContainer.Add(CreateTopButton("Play", SwitchToPlaytest));
+        builderTopContainer.Add(CreateTopButton("Play", () =>
+        {
+            SwitchToPlaytest();
+            MasterSingleton.Instance.Player.ResetStats();
+
+        }));
         builderTopContainer.Add(CreateTopButton("Exit", SwitchToMainmenu));
     }
 
     public void ShowLevelCompleteMenu()
     {
-        ShowMenu("End Of Demo");
-        buttonsContainer.Add(CreateLabel("Thank you for playing!"));
+        ShowMenu("LevelComplete");
+        //buttonsContainer.Add(CreateLabel("Thank you for playing!"));
         buttonsContainer.Add(CreateSpacer(50));
-        buttonsContainer.Add(CreateButton("Exit", () => Application.Quit()));
+        buttonsContainer.Add(CreateButton("NextLevel", () =>
+        {
+            LevelArea.Instance.ReloadTiles();
+            SwitchToGameplay();
+        
+        }));
     }
 
     public void SwitchToGameplay()
     {
         HideMainmenu();
         HideBuilderMenu();
-        MasterSingleton.Instance.LevelManager.SwitchScene("TestScene2");
+        MasterSingleton.Instance.Player.ResetStats();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
         ShowGameplayHud();
     }
@@ -254,6 +264,7 @@ public class UIManager : MonoBehaviour
     {
         HideMainmenu();
         HideBuilderMenu();
+        LevelArea.Instance.ReloadTiles();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
         MasterSingleton.Instance.LevelManager.SpawnPlayer();
         CameraController.cameraController.ReAlignGameCamera();

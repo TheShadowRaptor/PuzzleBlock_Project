@@ -82,6 +82,7 @@ public class LevelSaveSystem : MonoBehaviour
             {
                 // Spawn block and give them information within child container
                 LevelBlock levelblockSpawned = Instantiate(levelblock, new Vector3(x, y, z), Quaternion.identity);
+                levelblockSpawned.gameObject.transform.parent = LevelArea.Instance.levelAreaObj.transform;
                 levelblockSpawned.DeSerialize(blockInfo);
             }
         }

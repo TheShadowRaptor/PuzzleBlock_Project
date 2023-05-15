@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Defective.JSON;
 
-public class Gate : LevelBlock
+public class Gate : EventObject
 {
     Animator animator;
     public bool exitGate = false;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         animator = transform.GetChild(0).GetChild(0).GetComponent<Animator>();
         animator.SetBool("false", true);
+        base.Start();
     }
 
     private void Update()
@@ -25,7 +26,7 @@ public class Gate : LevelBlock
         
     }
 
-    public void PlayEvent()
+    public override void PlayEvent()
     {
         // Open Gate
         if (exitGate)
@@ -35,7 +36,7 @@ public class Gate : LevelBlock
         else animator.SetBool("Open", true);
     }
 
-    public void CancelEvent()
+    public override void CancelEvent()
     {
         if (exitGate)
         {

@@ -10,6 +10,7 @@ using UnityEngine.Windows;
 
 public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 {
+    static public List<BlockCharacter> BlockCharacters = new List<BlockCharacter>();
     protected GridCell _currentCell, _nextCell;
 
     [Header("Settings")]
@@ -271,7 +272,8 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
     {
         timeUntilNextInteract -= Time.deltaTime;
         if (timeUntilNextInteract <= 0)
-        {           
+        {
+            timeUntilNextInteract = 0;
             return true;
         }
         return false;

@@ -1,36 +1,26 @@
+using Defective.JSON;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class LevelManager : MonoBehaviour
 {
     public List<string> validSceneNames = new List<string>();
+    public List<string> levels = new List<string>();
+    public List<JSONObject> Levels = new List<JSONObject>();
     private Vector3Int playerSpawnpoint;
 
     private string previousScene;
     private string currentScene;
-
-    Coroutine waitCoroutine = null;
 
     public string PreviousScene { get => previousScene; }
     public string CurrentScene { get => currentScene; }
 
     private void Update()
     {
-        ToggleLoadingCoroutine();
-    }
-
-    void ToggleLoadingCoroutine()
-    {
-        if (currentScene != "LoadingScene")
-        {
-            if (waitCoroutine != null) StopCoroutine(waitCoroutine);
-            return;
-        }
-
-        GridCell.all.Clear();
-        waitCoroutine = StartCoroutine(WaitInLoadingScene());     
+        
     }
 
     public void SwitchScene(string name)
@@ -70,17 +60,5 @@ public class LevelManager : MonoBehaviour
         MasterSingleton.Instance.Player.Teleport(PlayerSpawnpoint.spawnpoint.GetPositionInt());
         MasterSingleton.Instance.Player.ResetStats();
         //MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
-    }
-
-    IEnumerator WaitInLoadingScene()
-    {
-        if (currentScene == ("LoadingScene"))
-        {
-            // Do loading things here
-            yield return 0.05f;
-            Debug.Log($"LoadingScene - SwitchScene = {previousScene}");
-            SwitchScene(previousScene);
-            OnEnable();               
-        }
     }
 }

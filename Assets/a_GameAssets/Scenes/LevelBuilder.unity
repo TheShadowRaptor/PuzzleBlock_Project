@@ -420,6 +420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd7cf67a945cbe409484ceb1cef5bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelAreaPrefab: {fileID: 1071872567645537718, guid: fab81c15f49dfd24f9fa676a4698b059,
+    type: 3}
+  levelAreaObj: {fileID: 0}
   debugMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   debugMaterial: {fileID: 2100000, guid: c9f8076c87b8db449bede453e117fde8, type: 2}
   tiles:
