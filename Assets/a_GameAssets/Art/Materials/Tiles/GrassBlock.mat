@@ -46,6 +46,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _BottomTexture:
+        m_Texture: {fileID: 2800000, guid: a7b05dec520c8cf4c8e08dfef1f84db4, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -94,6 +98,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TopTexture:
+        m_Texture: {fileID: 2800000, guid: 87faeff29765dd54d93f5ba0cdabfa58, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _VornoiNoiseTexture:
         m_Texture: {fileID: 2800000, guid: 8fda172b188d7f342ba64c2c53acc2e4, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -134,10 +142,10 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GrassNoisePower: 0.5
+    - _GrassNoisePower: 0.68
     - _GrassNoiseStep: 0.9
-    - _GrassNoiseTiling: 0.75
-    - _GrassNoiseWidth: 0.25
+    - _GrassNoiseTiling: 0.38
+    - _GrassNoiseWidth: 0.93
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
     - _MoveSpeed: 0.01
