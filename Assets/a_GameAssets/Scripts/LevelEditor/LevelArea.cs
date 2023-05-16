@@ -34,9 +34,9 @@ public class LevelArea : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {        
+    {
         groundPlane = new Plane(Vector3.zero, Vector3.forward, Vector3.right);
-        
+
     }
 
     // Update is called once per frame
@@ -135,9 +135,13 @@ public class LevelArea : MonoBehaviour
 
     public void ReloadTiles()
     {
-        Destroy(levelAreaObj.gameObject);
-        Instantiate(levelAreaObj.gameObject);
+        levelAreaObj.gameObject.SetActive(false);
+        GameObject.Destroy(levelAreaObj.gameObject);
+        levelAreaObj = new GameObject("ParentOfLevel");
+        Debug.Log($"Clearing grid cell on reload tiles");
         GridCell.all.Clear();
         //Instantiate(previousLevelAreaObj);
+        //StartCoroutine(WaitBeforeDeserialize());
+        LevelSaveSystem.DeSerialize(LevelSaveSystem.lastLoadedString);
     }
 }

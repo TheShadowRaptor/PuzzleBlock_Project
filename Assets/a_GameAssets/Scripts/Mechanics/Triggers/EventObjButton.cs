@@ -62,13 +62,11 @@ public class EventObjButton : LevelBlock, ICellOccupier
         base.Serialize(jsonObject);
 
         // Save Event info
-        if (eventObject != null)
-        {
-            // Save to eventInformation
-            jsonObject.SetField("xEvent", eventInformation.x);
-            jsonObject.SetField("yEvent", eventInformation.y);
-            jsonObject.SetField("zEvent", eventInformation.z);
-        }
+        // Save to eventInformation
+        jsonObject.SetField("xEvent", eventInformation.x);
+        jsonObject.SetField("yEvent", eventInformation.y);
+        jsonObject.SetField("zEvent", eventInformation.z);
+        
     }
 
     public override void DeSerialize(JSONObject jsonObject)

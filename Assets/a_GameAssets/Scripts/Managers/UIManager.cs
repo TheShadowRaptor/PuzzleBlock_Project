@@ -246,7 +246,7 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("NextLevel", () =>
         {
-            LevelArea.Instance.ReloadTiles();
+            LevelSaveSystem.FindNextLevel();
             SwitchToGameplay();
         
         }));
