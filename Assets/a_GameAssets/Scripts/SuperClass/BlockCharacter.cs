@@ -43,7 +43,7 @@ public abstract class BlockCharacter : MonoBehaviour, ICellOccupier
 
     protected bool isMoving = false;
 
-    protected virtual bool DoMove(Vector3Int dir, bool withRotation = true)
+    public virtual bool DoMove(Vector3Int dir, bool withRotation = true)
     {
         //If my tween is still playing return.
         if (moveTween != null && moveTween.IsPlaying()) return false;

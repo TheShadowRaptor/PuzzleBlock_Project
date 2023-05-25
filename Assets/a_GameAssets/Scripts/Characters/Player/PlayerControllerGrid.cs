@@ -61,9 +61,9 @@ public class PlayerControllerGrid : BlockCharacter
     void Move()
     {
         if (Input.GetKey(KeyCode.A)) A = true;
-        if (Input.GetKey(KeyCode.W)) W = true;
-        if (Input.GetKey(KeyCode.S)) S = true;
-        if (Input.GetKey(KeyCode.D)) D = true;
+        else if (Input.GetKey(KeyCode.W)) W = true;
+        else if (Input.GetKey(KeyCode.S)) S = true;
+        else if (Input.GetKey(KeyCode.D)) D = true;
 
         if ((D || A || W || S) && !CameraController.isRotating)
         {

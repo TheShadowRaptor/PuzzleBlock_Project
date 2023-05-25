@@ -31,7 +31,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1582687917924261209}
   - {fileID: 2010139065205860137}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -50,9 +49,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockID: 
   hashID: 0
+  GemTransform: {fileID: 4182344570810983985}
   maxLightRange: 10
   minLightRange: 0
-  speed: 7
+  duration: 3
+  easeType: 1
 --- !u!114 &-7931130448986785649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,12 +115,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6640702266177486164}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.257, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0010739564}
+  m_LocalScale: {x: 0.02, y: 0.020000003, z: 0.020000003}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2498291113110190854}
+  m_Father: {fileID: 4182344570810983985}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &7370281501381167929
@@ -305,12 +306,22 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 60accad50dab8f446a97ad485c570232, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -6456640607635986701, guid: 543aea77012008b4ebcebab08ffe5f02,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1582687917924261209}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 543aea77012008b4ebcebab08ffe5f02, type: 3}
 --- !u!4 &2010139065205860137 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 543aea77012008b4ebcebab08ffe5f02,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049080282656948418}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4182344570810983985 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -6456640607635986701, guid: 543aea77012008b4ebcebab08ffe5f02,
     type: 3}
   m_PrefabInstance: {fileID: 2049080282656948418}
   m_PrefabAsset: {fileID: 0}
