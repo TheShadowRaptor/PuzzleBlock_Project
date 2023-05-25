@@ -3,13 +3,30 @@
   <component name="ChangeListManager">
     <list default="true" id="e3096d5e-76d1-44da-a536-a4c456ebe2dd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PuzzleBlock_Project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PuzzleBlock_Project/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Editor/DebugMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Editor/DebugMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Spawners/PlayerSpawner.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Spawners/PlayerSpawner.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Prefabs/Mechanics/Events/LightPillar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Prefabs/Mechanics/Events/LightPillar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP-HighFidelity.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/Test.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/Test.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/eeeeeeeeeeeeeeee.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/eeeeeeeeeeeeeeee.txt.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/UI Toolkit/PanelSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/UI Toolkit/PanelSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Box.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Box.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Button.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Button.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Spring.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Images/Spring.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Pushables/PushableBox.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Pushables/PushableBox.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Triggers/Button.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Triggers/Button.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Triggers/Spring.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Mechanics/Triggers/Spring.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Player.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Materials/Player.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Shaders/Outline/Outline.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Shaders/Outline/Outline.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Shaders/Shadow/Cheaper/CheaperBox.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Art/Shaders/Shadow/Cheaper/CheaperBox.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scenes/Mainmenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scenes/Mainmenu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Characters/Player/PlayerControllerGrid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Characters/Player/PlayerControllerGrid.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/LevelEditor/LevelBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/LevelEditor/LevelBlock.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/LevelEditor/LevelSaveSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/LevelEditor/LevelSaveSystem.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Managers/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Managers/UIManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/Events/Lightpillar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/Events/Lightpillar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/Events/Portal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/Events/Portal.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/ShadowBlock.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/Mechanics/ShadowBlock.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/SuperClass/BlockCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/a_GameAssets/Scripts/SuperClass/BlockCharacter.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +87,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1685039059265</updated>
-      <workItem from="1685039064562" duration="2455000" />
+      <workItem from="1685039064562" duration="6216000" />
     </task>
     <servers />
   </component>

@@ -130,6 +130,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DarknessSymbolLerp: 0
     - _DepthFade: 1
     - _DepthMaxHeight: 4
     - _DepthMinHeight: -1

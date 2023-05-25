@@ -31,6 +31,8 @@ public class Portal : MonoBehaviour, ICellOccupier
         {
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.win);
             MasterSingleton.Instance.UIManager.ShowLevelCompleteMenu();
+            PlayerPrefs.SetInt(LevelSaveSystem.LastSavedLevel,1);
+            PlayerPrefs.Save();
         }
     }
 

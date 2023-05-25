@@ -16,7 +16,7 @@ public class LevelBlock : MonoBehaviour
         blocks.Add(this);
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         blocks.Remove(this);   
     }

@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PushableBox
-  m_Shader: {fileID: -6465566751694194690, guid: eae28520f56c0664ebbcf6ec1ba4a087,
+  m_Shader: {fileID: -6465566751694194690, guid: c4f3bd0e2f39a624093bb9286132a2ef,
     type: 3}
   m_Parent: {fileID: 2100000, guid: 76f80902023ef9d47bdc34f27c4cb50b, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -48,6 +48,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DarknessSymbolLerp: 0.107
     - _GrassNoisePower: 0.25
     - _GrassNoiseStep: 0.91
     - _GrassNoiseTiling: 0.75

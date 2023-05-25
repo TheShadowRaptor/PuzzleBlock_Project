@@ -130,6 +130,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DarknessSymbolLerp: 0
     - _DepthFade: 1
     - _DepthMaxHeight: 4
     - _DepthMinHeight: -1
@@ -200,7 +201,7 @@ Material:
     - _OutlineColor: {r: 0, g: 0.047340393, b: 1, a: 0}
     - _RealLightShadowColor: {r: 0.7264151, g: 0.43516377, b: 0.4630224, a: 0}
     - _RegularBottemColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RegularColor: {r: 0.7454045, g: 0.023153365, b: 0, a: 1}
+    - _RegularColor: {r: 5.563896, g: 0.17282283, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
     - _RippleColor: {r: 1, g: 1, b: 1, a: 0}
     - _ShadowColor: {r: 10.703477, g: 0.30808672, b: 0, a: 0}

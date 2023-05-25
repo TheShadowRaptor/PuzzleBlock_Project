@@ -114,7 +114,7 @@ public class UIManager : MonoBehaviour
         //}));
 
         buttonsContainer.Add(CreateButton("Play game", ShowControlsMenu));
-        buttonsContainer.Add(CreateButton("Level Select", SwitchToBuilder));
+        buttonsContainer.Add(CreateButton("Level Select", ShowLevelsMenu));
         buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Settings", ShowSettingsMenu));
         buttonsContainer.Add(CreateButton("Quit Game", () =>
@@ -146,6 +146,49 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateLabel("ESC = Controls"));
         buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("Start", SwitchToGameplay));
+        buttonsContainer.Add(CreateButton("MainMenu", SwitchToMainmenu));
+    }
+
+    private void SwitchToGameplay()
+    {
+        SwitchToGameplay(false);
+    }
+
+    public void ShowLevelsMenu()
+    {
+        ShowMenu("Levels");
+        string levelsPath = Application.streamingAssetsPath;
+        //Find all files with extension .txt on the levelsPath folder and iterate through them on a for loop
+        // Find all files with the .txt extension in the levelsPath folder
+        string[] txtFiles = Directory.GetFiles(levelsPath, "*.txt");
+        bool addedAnyButtons = false;
+        // Iterate through the files using a foreach loop
+        foreach (string txtFile in txtFiles)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(txtFile);
+            if (PlayerPrefs.GetInt(fileName, 0) == 1) {
+                buttonsContainer.Add(CreateButton(fileName, () =>
+                {
+                    LevelSaveSystem.LoadFromPath(txtFile);
+                    SwitchToGameplay(true);
+                }));
+                addedAnyButtons = true;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(fileName))
+                {
+                    var newButton = CreateButton($"{fileName} LOCKED", () => { });
+                    newButton.style.backgroundColor = new Color(0.75f, 0.6f, 0.36f,0.4f);  
+                    buttonsContainer.Add(newButton);
+                }
+            }
+        }
+
+        if (!addedAnyButtons) {
+            buttonsContainer.Add(CreateLabel("You haven't beaten any levels yet"));
+        }
+        buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("MainMenu", SwitchToMainmenu));
     }
 
@@ -278,9 +321,11 @@ public class UIManager : MonoBehaviour
         }));
     }
 
-    public void SwitchToGameplay()
+    public void SwitchToGameplay( bool skipFindNextLevel)
     {
-        LevelSaveSystem.FindNextLevel();
+        if(!skipFindNextLevel)
+            LevelSaveSystem.FindNextLevel();
+        
         CameraController.cameraController.ReAlignGameCamera();
         HideMainmenu();
         HideBuilderMenu();

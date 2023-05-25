@@ -6,7 +6,7 @@ using UnityEngine;
 public class ShadowBlock : MonoBehaviour, ICellOccupier, LighListener
 {
     private void OnEnable() { Lightpillar.lightListeners.Add(this); }
-    private void OnDisable() { Lightpillar.lightListeners.Add(this); }
+    private void OnDisable() { Lightpillar.lightListeners.Remove(this); }
 
     public void LightHasChanged() {
         bool checkSolid = IsSolid;

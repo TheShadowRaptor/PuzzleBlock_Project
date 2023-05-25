@@ -108,7 +108,12 @@ public class LevelSaveSystem : MonoBehaviour
         string nextLevelFilePath = $"{Application.streamingAssetsPath}/{nextLevel}.txt";
         bool doesFileExist = File.Exists(nextLevelFilePath);
         Debug.Log($"Next level is {nextLevel} filepath is {nextLevelFilePath} does file exist? {doesFileExist}");
-       
+        
+        GridCell.all.Clear();
+        if (!doesFileExist) {
+            //TODO: SHOW GAME OVER YOU WIN!
+            return;
+        }
         var readText = File.ReadAllText(nextLevelFilePath);
         DeSerialize(readText);
         MasterSingleton.Instance.LevelManager.SpawnPlayer();
@@ -116,6 +121,15 @@ public class LevelSaveSystem : MonoBehaviour
         Debug.Log($"Level = {nextLevel}");
 
         LastSavedLevel = nextLevel;
+    }
+
+    static public void LoadFromPath(string filepath) {
+        GridCell.all.Clear();
+        var readText = File.ReadAllText(filepath);
+        DeSerialize(readText);
+        MasterSingleton.Instance.LevelManager.SpawnPlayer();
+        lastLoadedFilename = Path.GetFileNameWithoutExtension(filepath);
+        LastSavedLevel = lastLoadedFilename;
     }
 
     static public void LoadSavedLevel()

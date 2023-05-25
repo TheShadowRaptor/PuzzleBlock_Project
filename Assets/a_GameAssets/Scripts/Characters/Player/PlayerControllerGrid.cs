@@ -35,7 +35,7 @@ public class PlayerControllerGrid : BlockCharacter
         else if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay && MasterSingleton.Instance.GameManager.State != GameManager.GameState.mainmenu)
         {
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
-            MasterSingleton.Instance.UIManager.SwitchToGameplay();
+            MasterSingleton.Instance.UIManager.SwitchToGameplay(false);
             return;
         }
 

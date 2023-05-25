@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -22,11 +23,18 @@ public class Lightpillar : EventObject, ICellOccupier {
 
     bool playEvent = false;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         light = GetComponentInChildren<Light>();
         lightSize = light.transform;
         AnimateOff();
+    }
+
+    protected override void OnDestroy() {
+        base.OnDestroy();
+        GemTransform.DOKill();
+        light.DOKill();
+        light.transform.DOKill();
     }
 
     public float rotationDurationOn=0.5f,rotationDurationOff=0.5f;
@@ -64,9 +72,8 @@ public class Lightpillar : EventObject, ICellOccupier {
         {
             GemTransform.DOLocalMoveY(1.3f, 1).SetEase(Ease.InOutQuad).SetLoops(-1, LoopType.Yoyo);
         });
-        ;
     }
-
+    
     private void ChangeRange(float newRange)
     {
         light.DOKill();
