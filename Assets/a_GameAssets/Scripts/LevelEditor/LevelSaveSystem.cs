@@ -11,7 +11,8 @@ public class LevelSaveSystem : MonoBehaviour
     public static Dictionary<int, LevelBlock> prefabDic = new Dictionary<int, LevelBlock>();
     [SerializeField] private List<LevelBlock> levelBlocks = new List<LevelBlock>();
     [SerializeField] private string level;
-
+    static public string lastLoadedFilename;
+    static public string LastSavedLevel;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +21,7 @@ public class LevelSaveSystem : MonoBehaviour
             levelBlocks[i].hashID = Animator.StringToHash(levelBlocks[i].blockID);
             prefabDic[levelBlocks[i].hashID] = levelBlocks[i];
         }
+        lastLoadedFilename = "Level0";
     }
 
     // Update is called once per frame
@@ -86,8 +88,6 @@ public class LevelSaveSystem : MonoBehaviour
         }
     }
 
-    static public string lastLoadedFilename = "Level1";
-
     [ContextMenu("FindNextLevel")]
     static public void FindNextLevel()
     {
@@ -109,6 +109,23 @@ public class LevelSaveSystem : MonoBehaviour
         bool doesFileExist = File.Exists(nextLevelFilePath);
         Debug.Log($"Next level is {nextLevel} filepath is {nextLevelFilePath} does file exist? {doesFileExist}");
        
+        var readText = File.ReadAllText(nextLevelFilePath);
+        DeSerialize(readText);
+        MasterSingleton.Instance.LevelManager.SpawnPlayer();
+        lastLoadedFilename = nextLevel;
+        Debug.Log($"Level = {nextLevel}");
+
+        LastSavedLevel = nextLevel;
+    }
+
+    static public void LoadSavedLevel()
+    {
+        string levelName = LastSavedLevel;
+
+        string nextLevel = $"{levelName}";
+        string nextLevelFilePath = $"{Application.streamingAssetsPath}/{nextLevel}.txt";
+        bool doesFileExist = File.Exists(nextLevelFilePath);
+
         var readText = File.ReadAllText(nextLevelFilePath);
         DeSerialize(readText);
         MasterSingleton.Instance.LevelManager.SpawnPlayer();

@@ -26,6 +26,8 @@ public class PlayerControllerGrid : BlockCharacter
         else if ((MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder"))
         {
             //LevelArea.Instance.ReloadTiles();
+            LevelArea.Instance.ReloadTiles();
+            MasterSingleton.Instance.LevelManager.SpawnPlayer();
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
             MasterSingleton.Instance.UIManager.SwitchToBuilder();
         }
@@ -45,11 +47,9 @@ public class PlayerControllerGrid : BlockCharacter
         {
             if (FinishedDying() == true)
             {
-                if (MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder")
-                {
-                    MasterSingleton.Instance.LevelManager.SpawnPlayer();
-                }
-                else MasterSingleton.Instance.LevelManager.SwitchScene("LoadingScene");
+                LevelArea.Instance.ReloadTiles();
+                MasterSingleton.Instance.LevelManager.SpawnPlayer();
+
             }
         }
         CanInteract();

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spring
-  m_Shader: {fileID: -6465566751694194690, guid: eae28520f56c0664ebbcf6ec1ba4a087,
+  m_Shader: {fileID: -6465566751694194690, guid: c4f3bd0e2f39a624093bb9286132a2ef,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,6 +30,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BottomTexture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -57,6 +61,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _GrassNoise:
+        m_Texture: {fileID: 2800000, guid: 4fbec3043b4bcc941b84734f579dc2c8, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -79,6 +87,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TopTexture:
+        m_Texture: {fileID: 2800000, guid: 08a485b0548f8c24d97852696a64511b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VertexNoiseDisplace:
@@ -133,6 +145,10 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _GrassNoisePower: 0
+    - _GrassNoiseStep: 0
+    - _GrassNoiseTiling: 0
+    - _GrassNoiseWidth: 0
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
     - _MoveSpeed: 0.01
@@ -162,8 +178,9 @@ Material:
     - _Surface: 0
     - _ToonOffset: 0.383
     - _ToonSmoothness: 0.517
+    - _UseNormalOrVertexColorSeparation: 0
     - _VoronoiSize: 1
-    - _VoronoiTiling: 0.1
+    - _VoronoiTiling: 0
     - _WaterAlpha: 0.8
     - _WaterHeight: 1
     - _WaterNoiseScale: 0.25
@@ -182,12 +199,12 @@ Material:
     - _OuterOutlineColor: {r: 0.0064520836, g: 0, b: 1, a: 0}
     - _OutlineColor: {r: 0, g: 0.047340393, b: 1, a: 0}
     - _RealLightShadowColor: {r: 0.8962264, g: 0.7398095, b: 0.58762014, a: 0}
-    - _RegularBottemColor: {r: 0.8679245, g: 0.84750277, b: 0, a: 0}
+    - _RegularBottemColor: {r: 0, g: 0, b: 0, a: 0}
     - _RegularColor: {r: 1, g: 1, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
     - _RippleColor: {r: 1, g: 1, b: 1, a: 0}
-    - _ShadowColor: {r: 3.458506, g: 4.7183905, b: 0, a: 0}
-    - _ShadowColorTop: {r: 6.905259, g: 7.4408894, b: 0, a: 1}
+    - _ShadowColor: {r: 0.52885777, g: 6.2994223, b: 0, a: 0}
+    - _ShadowColorTop: {r: 0.7264861, g: 9.934172, b: 0, a: 1}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShallowColor: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

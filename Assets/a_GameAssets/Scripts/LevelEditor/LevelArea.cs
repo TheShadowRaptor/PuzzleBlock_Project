@@ -20,7 +20,7 @@ public class LevelArea : MonoBehaviour
     [SerializeField] private Material debugMaterial;
     [SerializeField] private List<GameObject> tiles = new List<GameObject>();
 
-    [SerializeField] private Light levelEditorLight;
+    public Light levelEditorLight;
 
     private void Awake()
     {
@@ -42,7 +42,6 @@ public class LevelArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.edit) return;
         if (myCamera == null) myCamera = Camera.main;
         if (levelAreaObj == null)
         {
@@ -50,6 +49,7 @@ public class LevelArea : MonoBehaviour
             previousLevelAreaObj = levelAreaObj;
         }
 
+        if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.edit) return;
 
         Ray mouseRay = myCamera.ScreenPointToRay(Input.mousePosition);
         bool hasFoundPos = false;

@@ -47,7 +47,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BottomTexture:
-        m_Texture: {fileID: 2800000, guid: a7b05dec520c8cf4c8e08dfef1f84db4, type: 3}
+        m_Texture: {fileID: 2800000, guid: c2e975e8a074dff45aee75e580a54344, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -71,7 +71,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GrassNoise:
-        m_Texture: {fileID: 2800000, guid: 8fda172b188d7f342ba64c2c53acc2e4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 10f0f05cdfbe64f44b9e3b2655c32308, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -99,7 +99,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _TopTexture:
-        m_Texture: {fileID: 2800000, guid: 87faeff29765dd54d93f5ba0cdabfa58, type: 3}
+        m_Texture: {fileID: 2800000, guid: 819311b7a66a8f740b104cf9f9ffadf5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _VornoiNoiseTexture:
@@ -131,8 +131,8 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthMaxHeight: 4
-    - _DepthMinHeight: 0
+    - _DepthMaxHeight: 3
+    - _DepthMinHeight: -2
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _Divide: -0.38
@@ -142,10 +142,10 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _GrassNoisePower: 0.68
-    - _GrassNoiseStep: 0.9
-    - _GrassNoiseTiling: 0.38
-    - _GrassNoiseWidth: 0.93
+    - _GrassNoisePower: 0.74
+    - _GrassNoiseStep: 0.98
+    - _GrassNoiseTiling: 0.56
+    - _GrassNoiseWidth: 0.77
     - _MAIN_LIGHT_SHADOWS: 1
     - _Metallic: 0
     - _MoveSpeed: 0.01
@@ -175,7 +175,7 @@ Material:
     - _ToonOffset: 0.383
     - _ToonSmoothness: 0.517
     - _UseNormalOrVertexColorSeparation: 1
-    - _VoronoiTiling: 0.1
+    - _VoronoiTiling: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -192,7 +192,7 @@ Material:
     - _RegularColor: {r: 0.9528302, g: 0.6254475, b: 0, a: 1}
     - _RimColor: {r: 1, g: 0.07366451, b: 0, a: 0}
     - _ShadowColor: {r: 0, g: 0.073611274, b: 0.75294113, a: 0}
-    - _ShadowColorTop: {r: 0, g: 0.5845216, b: 18.061583, a: 1}
+    - _ShadowColorTop: {r: 0, g: 0.1461304, b: 4.5153956, a: 1}
     - _ShadowRippleColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TopColor: {r: 0, g: 1.2965803, b: 0.01357663, a: 1}

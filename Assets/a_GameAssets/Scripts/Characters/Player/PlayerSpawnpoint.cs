@@ -27,6 +27,12 @@ public class PlayerSpawnpoint : MonoBehaviour, ICellOccupier
         _currentCell = GridCell.GetCell(cellPos);        
     }
 
+    private void Update()
+    {
+        if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay) gameObject.GetComponent<MeshRenderer>().enabled = false;
+        else gameObject.GetComponent<MeshRenderer>().enabled = false;
+    }
+
 
     public Vector3 GetPosition() { return transform.position; }
     public Vector3Int GetPositionInt()

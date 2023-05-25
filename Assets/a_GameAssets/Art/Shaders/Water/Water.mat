@@ -142,7 +142,8 @@ Material:
     - _Surface: 0
     - _ToonOffset: 0.2
     - _ToonSmoothness: 0.5
-    - _WaterDensity: 50.64
+    - _WaterAlpha: 1
+    - _WaterDensity: 110.54
     - _WaterPower: 1.6
     - _WaterShadowDensity: 14.36
     - _WaterShadowPower: 17.2

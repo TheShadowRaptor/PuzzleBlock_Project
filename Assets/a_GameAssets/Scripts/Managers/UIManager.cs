@@ -47,7 +47,7 @@ public class UIManager : MonoBehaviour
         IsInMenu = true;
     }
 
-    public void ShowGameplayHud()
+    public void ShowGameplayMenu()
     {
         gameplayContainer.SetDisplayBasedOnBool(true);
     }
@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainmenu()
     {
-        ShowMenu("PuzzleBlocks_Project");
+        ShowMenu("Lumina\nRise of Darkness");
 
         //buttonsContainer.Add(CreateButton("W", () => {
         //    MasterSingleton.Instance.Player.W = true;
@@ -114,6 +114,7 @@ public class UIManager : MonoBehaviour
         //}));
 
         buttonsContainer.Add(CreateButton("Play game", ShowControlsMenu));
+        buttonsContainer.Add(CreateButton("Level Select", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Settings", ShowSettingsMenu));
         buttonsContainer.Add(CreateButton("Quit Game", () =>
@@ -144,7 +145,8 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(CreateLabel("ESC = Controls"));
         buttonsContainer.Add(CreateSpacer(50));
-        buttonsContainer.Add(CreateButton("Next", ShowColourCodeMenu));
+        buttonsContainer.Add(CreateButton("Start", SwitchToGameplay));
+        buttonsContainer.Add(CreateButton("MainMenu", SwitchToMainmenu));
     }
 
     public void ShowColourCodeMenu()
@@ -162,24 +164,48 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(SquareGraphic(50, 50, lightBlue, "= Light", 50));
         buttonsContainer.Add(CreateSpacer(50));
-        buttonsContainer.Add(CreateButton("Next", SwitchToGameplay));
+        buttonsContainer.Add(CreateButton("Next", () => {
+            MasterSingleton.Instance.LevelManager.SwitchScene("Gameplay");
+            SwitchToGameplay();
+            }));
     }
 
     bool inTileMenu = false;
     private void ShowBuilderTileMenu()
     {
         ShowBuilderMenu("Tiles");
-        builderTileContainer.Add(CreateTileButton("GrassBlock", () => chosenTile = "GrassBlock"));
-        builderTileContainer.Add(CreateTileButton("DirtBlock", () => chosenTile = "DirtBlock"));
-        builderTileContainer.Add(CreateTileButton("LightBlock", () => chosenTile = "LightBlock"));
-        builderTileContainer.Add(CreateTileButton("ShadowBlock", () => chosenTile = "ShadowBlock"));
-        builderTileContainer.Add(CreateTileButton("Box", () => chosenTile = "Box"));
-        builderTileContainer.Add(CreateTileButton("Gate", () => chosenTile = "Gate"));
-        builderTileContainer.Add(CreateTileButton("Exit", () => chosenTile = "Exit"));
-        builderTileContainer.Add(CreateTileButton("LightPillar", () => chosenTile = "LightPillar"));
-        builderTileContainer.Add(CreateTileButton("Button", () => chosenTile = "Button"));
-        builderTileContainer.Add(CreateTileButton("Spring", () => chosenTile = "Spring"));
-        builderTileContainer.Add(CreateTileButton("PlayerSpawner", () => chosenTile = "PlayerSpawner"));
+        builderTileContainer.Add(CreateTileButton("GrassBlock", () =>
+        {
+            chosenTile = "GrassBlock";
+            builderTileContainer.SetDisplayBasedOnBool(false);
+            inTileMenu = false;
+        }));
+        builderTileContainer.Add(CreateTileButton("DirtBlock", () =>
+        {
+            chosenTile = "DirtBlock";
+            builderTileContainer.SetDisplayBasedOnBool(false);
+            inTileMenu = false;
+        }));
+        builderTileContainer.Add(CreateTileButton("SandBlock", () =>
+        {
+            chosenTile = "SandBlock";
+            builderTileContainer.SetDisplayBasedOnBool(false);
+            inTileMenu = false;
+        }));
+        builderTileContainer.Add(CreateTileButton("LightBlock", () =>
+        {
+            chosenTile = "LightBlock";
+            builderTileContainer.SetDisplayBasedOnBool(false);
+            inTileMenu = false;
+        }));
+        builderTileContainer.Add(CreateTileButton("ShadowBlock", () => { chosenTile = "ShadowBlock"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("Box", () => { chosenTile = "Box"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("Gate", () => { chosenTile = "Gate"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("Exit", () => { chosenTile = "Exit"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("LightPillar", () => { chosenTile = "LightPillar"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("Button", () => { chosenTile = "Button"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("Spring", () => { chosenTile = "Spring"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
+        builderTileContainer.Add(CreateTileButton("PlayerSpawner", () => { chosenTile = "PlayerSpawner"; builderTileContainer.SetDisplayBasedOnBool(false); inTileMenu = false; }));
     }
 
     private void ShowBuilderEventMenu()
@@ -241,24 +267,27 @@ public class UIManager : MonoBehaviour
 
     public void ShowLevelCompleteMenu()
     {
+        HideGameplayMenu();
         ShowMenu("LevelComplete");
         //buttonsContainer.Add(CreateLabel("Thank you for playing!"));
         buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("NextLevel", () =>
         {
-            LevelSaveSystem.FindNextLevel();
-            SwitchToGameplay();
-        
+            ShowGameplayMenu();
+            SwitchToGameplay();       
         }));
     }
 
     public void SwitchToGameplay()
     {
+        LevelSaveSystem.FindNextLevel();
+        CameraController.cameraController.ReAlignGameCamera();
         HideMainmenu();
         HideBuilderMenu();
         MasterSingleton.Instance.Player.ResetStats();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
-        ShowGameplayHud();
+        LevelArea.Instance.levelEditorLight.enabled = false;
+        ShowGameplayMenu();
     }
     public void SwitchToPlaytest()
     {
@@ -268,7 +297,7 @@ public class UIManager : MonoBehaviour
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
         MasterSingleton.Instance.LevelManager.SpawnPlayer();
         CameraController.cameraController.ReAlignGameCamera();
-        ShowGameplayHud();
+        ShowGameplayMenu();
     }
 
 
@@ -285,6 +314,7 @@ public class UIManager : MonoBehaviour
         HideMainmenu();
         HideGameplayMenu();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.edit);
+        MasterSingleton.Instance.LevelManager.SwitchScene("LevelBuilder");
         ShowBuilderTopMenu();
     }
 
