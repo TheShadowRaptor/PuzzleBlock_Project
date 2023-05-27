@@ -3,13 +3,17 @@
     <ui:VisualElement name="GameplayContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
         <ui:VisualElement name="Compass" class="Compass" style="display: flex;" />
     </ui:VisualElement>
-    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: none;">
+    <ui:VisualElement name="Container" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex;">
         <ui:VisualElement name="Header" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); display: flex; min-width: 20%; min-height: 25%;">
             <ui:Label tabindex="-1" text="PuzzleBlock_Project" display-tooltip-when-elided="true" name="HeaderLabel" class="TitleLabel" style="flex-shrink: 1;" />
         </ui:VisualElement>
         <ui:VisualElement name="MenuArea" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: flex-start; height: 100%; position: relative; width: 100%; display: flex; min-width: 100%; min-height: 50%;">
             <ui:VisualElement name="ButtonsContainer" class="ButtonsContainer">
                 <ui:Button text="Button" display-tooltip-when-elided="true" enable-rich-text="false" class="Button" style="flex-shrink: 1;" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
+                <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
                 <ui:Button text="Button" display-tooltip-when-elided="true" class="Button" />
             </ui:VisualElement>
         </ui:VisualElement>

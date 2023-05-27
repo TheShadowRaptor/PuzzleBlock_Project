@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowMainmenu()
     {
-        ShowMenu("Lumina\nRise of Darkness");
+        ShowMenu("Lumia");
 
         //buttonsContainer.Add(CreateButton("W", () => {
         //    MasterSingleton.Instance.Player.W = true;
@@ -113,10 +113,10 @@ public class UIManager : MonoBehaviour
         //    MasterSingleton.Instance.Player.D = true;
         //}));
 
-        buttonsContainer.Add(CreateButton("Play game", ShowControlsMenu));
+        buttonsContainer.Add(CreateButton("Play game", SwitchToGameplay));
         buttonsContainer.Add(CreateButton("Level Select", ShowLevelsMenu));
-        buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
-        buttonsContainer.Add(CreateButton("Settings", ShowSettingsMenu));
+        //buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
+        buttonsContainer.Add(CreateButton("Controls", ShowControlsMenu));
         buttonsContainer.Add(CreateButton("Quit Game", () =>
         {
             Application.Quit();
@@ -145,13 +145,29 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(CreateLabel("ESC = Controls"));
         buttonsContainer.Add(CreateSpacer(50));
-        buttonsContainer.Add(CreateButton("Start", SwitchToGameplay));
-        buttonsContainer.Add(CreateButton("MainMenu", SwitchToMainmenu));
+        buttonsContainer.Add(CreateButton("Back", SwitchToMainmenu));
+    }
+
+    public void ShowPauseMenu()
+    {
+        ShowMenu("Paused");
+        buttonsContainer.Add(CreateLabel("WASD = Movement"));
+        buttonsContainer.Add(CreateSpacer());
+        buttonsContainer.Add(CreateLabel("Q/E = Camera Rotate"));
+        buttonsContainer.Add(CreateSpacer());
+        buttonsContainer.Add(CreateLabel("R = Reset"));
+        buttonsContainer.Add(CreateSpacer());
+        buttonsContainer.Add(CreateLabel("ESC = Controls"));
+        buttonsContainer.Add(CreateSpacer(50));
+        buttonsContainer.Add(CreateButton("Back", () => {
+            SwitchToGameplay(true, false);
+            }));
+        buttonsContainer.Add(CreateButton("Mainmenu", SwitchToMainmenu));
     }
 
     private void SwitchToGameplay()
     {
-        SwitchToGameplay(false);
+        SwitchToGameplay(false, true);
     }
 
     public void ShowLevelsMenu()
@@ -170,7 +186,8 @@ public class UIManager : MonoBehaviour
                 buttonsContainer.Add(CreateButton(fileName, () =>
                 {
                     LevelSaveSystem.LoadFromPath(txtFile);
-                    SwitchToGameplay(true);
+                    LevelSaveSystem.lastLoadedFilename = txtFile;
+                    SwitchToGameplay(true, true);
                 }));
                 addedAnyButtons = true;
             }
@@ -316,22 +333,34 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("NextLevel", () =>
         {
-            ShowGameplayMenu();
-            SwitchToGameplay();       
+            if (LevelSaveSystem.lastLoadedFilename != "Level5")
+            {
+                ShowGameplayMenu();
+                SwitchToGameplay(false, false);       
+
+            }
+            else
+            {
+                SwitchToMainmenu();
+            }
         }));
     }
 
-    public void SwitchToGameplay( bool skipFindNextLevel)
+    public void SwitchToGameplay( bool skipFindNextLevel, bool isTitle)
     {
-        if(!skipFindNextLevel)
-            LevelSaveSystem.FindNextLevel();
-        
-        CameraController.cameraController.ReAlignGameCamera();
+        if (isTitle)
+        {
+            LevelSaveSystem.lastLoadedFilename = "Level0";
+            MasterSingleton.Instance.Player.ResetStats();
+            CameraController.cameraController.ReAlignGameCamera();
+        }
+
+        if (!skipFindNextLevel) LevelSaveSystem.FindNextLevel();
+        LevelArea.Instance.levelEditorLight.enabled = false;
+
         HideMainmenu();
         HideBuilderMenu();
-        MasterSingleton.Instance.Player.ResetStats();
         MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
-        LevelArea.Instance.levelEditorLight.enabled = false;
         ShowGameplayMenu();
     }
     public void SwitchToPlaytest()

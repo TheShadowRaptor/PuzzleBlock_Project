@@ -20,7 +20,8 @@ public class PlayerControllerGrid : BlockCharacter
         if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene != "LevelBuilder")
         {
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.paused);
-            MasterSingleton.Instance.UIManager.ShowControlsMenu();
+            MasterSingleton.Instance.UIManager.HideGameplayMenu();
+            MasterSingleton.Instance.UIManager.ShowPauseMenu();
             return;
         }
         else if ((MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State == GameManager.GameState.gameplay && MasterSingleton.Instance.LevelManager.CurrentScene == "LevelBuilder"))
@@ -35,7 +36,7 @@ public class PlayerControllerGrid : BlockCharacter
         else if (MasterSingleton.Instance.InputManager.Esc && MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay && MasterSingleton.Instance.GameManager.State != GameManager.GameState.mainmenu)
         {
             MasterSingleton.Instance.GameManager.SwitchGameState(GameManager.GameState.gameplay);
-            MasterSingleton.Instance.UIManager.SwitchToGameplay(false);
+            MasterSingleton.Instance.UIManager.SwitchToGameplay(true, false);
             return;
         }
 
