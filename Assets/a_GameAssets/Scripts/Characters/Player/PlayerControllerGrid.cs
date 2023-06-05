@@ -42,6 +42,9 @@ public class PlayerControllerGrid : BlockCharacter
 
         if (MasterSingleton.Instance.GameManager.State != GameManager.GameState.gameplay) return;
 
+        //if (LightEmitter.IsInLightRange(transform.position)) MasterSingleton.Instance.AudioManager.SwapMusic(AudioManager.Sound.SoundName.gameplayLight);
+        //else MasterSingleton.Instance.AudioManager.SwapMusic(AudioManager.Sound.SoundName.gameplayDark);
+
         if (MasterSingleton.Instance.InputManager.R) TakeDamage(int.MaxValue);
 
         if (IsAlive == false)

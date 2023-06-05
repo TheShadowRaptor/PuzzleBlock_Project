@@ -8,7 +8,15 @@ public class AudioManager : MonoBehaviour
     [Serializable]
     public class Sound
     {
-        public string name;
+        public enum SoundName
+        {
+            title,
+            gameplayLight,
+            gameplayDark
+
+        }
+
+        public SoundName name;
         public AudioClip clip;
         public bool loop = false;
         public float volume = 1f;
@@ -17,7 +25,15 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] public List<Sound> sounds = new List<Sound>();
     // Start is called before the first frame update
-    public void PlaySound(string name, AudioSource audioSource)
+    private void Update()
+    {
+        if (MasterSingleton.Instance.GameManager.State == GameManager.GameState.mainmenu)
+        {
+            PlaySound(Sound.SoundName.title, this.gameObject.GetComponent<AudioSource>());
+        }
+    }
+
+    public void PlaySound(Sound.SoundName name, AudioSource audioSource)
     {
         Sound sound = sounds.Find(s => s.name == name);
         if (sound == null)
@@ -25,6 +41,8 @@ public class AudioManager : MonoBehaviour
             Debug.LogWarning("Sound " + name + " not found!");
             return;
         }
+
+        if (audioSource.isPlaying) return;
 
         audioSource.clip = sound.clip;
         audioSource.volume = sound.volume;
@@ -34,7 +52,7 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
-    public void StopSound(string name, AudioSource audioSource)
+    public void StopSound(Sound.SoundName name, AudioSource audioSource)
     {
         Sound sound = sounds.Find(s => s.name == name);
         if (sound == null)
@@ -46,7 +64,7 @@ public class AudioManager : MonoBehaviour
         audioSource.Stop();
     }
 
-    public void PauseSound(string name, AudioSource audioSource)
+    public void PauseSound(Sound.SoundName name, AudioSource audioSource)
     {
         Sound sound = sounds.Find(s => s.name == name);
         if (sound == null)
@@ -58,7 +76,7 @@ public class AudioManager : MonoBehaviour
         audioSource.Pause();
     }
 
-    public void ResumeSound(string name, AudioSource audioSource)
+    public void ResumeSound(Sound.SoundName name, AudioSource audioSource)
     {
         Sound sound = sounds.Find(s => s.name == name);
         if (sound == null)
@@ -68,5 +86,17 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource.UnPause();
+    }
+
+    public void SwapMusic(Sound.SoundName name)
+    {
+        AudioSource audioSource = this.gameObject.GetComponent<AudioSource>();
+        if (audioSource.clip.name == "Title")
+        {
+            audioSource.Stop();
+        }
+        Sound sound = sounds.Find(s => s.name == name);
+        if (audioSource.isPlaying) return;
+        PlaySound(name, audioSource);
     }
 }

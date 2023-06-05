@@ -113,10 +113,14 @@ public class UIManager : MonoBehaviour
         //    MasterSingleton.Instance.Player.D = true;
         //}));
 
-        buttonsContainer.Add(CreateButton("Play game", SwitchToGameplay));
+        buttonsContainer.Add(CreateButton("Play Game", SwitchToGameplay));
         buttonsContainer.Add(CreateButton("Level Select", ShowLevelsMenu));
         //buttonsContainer.Add(CreateButton("Build Level", SwitchToBuilder));
         buttonsContainer.Add(CreateButton("Controls", ShowControlsMenu));
+        buttonsContainer.Add(CreateButton("Delete Save", () =>
+        {
+            PlayerPrefs.DeleteAll();
+        }));
         buttonsContainer.Add(CreateButton("Quit Game", () =>
         {
             Application.Quit();
@@ -130,7 +134,7 @@ public class UIManager : MonoBehaviour
         ShowMenu("Settings");
         buttonsContainer.Add(CreateLabel("Work In Progress"));
         buttonsContainer.Add(CreateSpacer());
-        buttonsContainer.Add(CreateSpacer(50));
+        buttonsContainer.Add(CreateSpacer(10));
         buttonsContainer.Add(CreateButton("Back to main menu", ShowMainmenu));
     }
 
@@ -144,7 +148,7 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateLabel("R = Reset"));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(CreateLabel("ESC = Controls"));
-        buttonsContainer.Add(CreateSpacer(50));
+        buttonsContainer.Add(CreateSpacer(10));
         buttonsContainer.Add(CreateButton("Back", SwitchToMainmenu));
     }
 
@@ -158,7 +162,7 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(CreateLabel("R = Reset"));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(CreateLabel("ESC = Controls"));
-        buttonsContainer.Add(CreateSpacer(50));
+        buttonsContainer.Add(CreateSpacer(10));
         buttonsContainer.Add(CreateButton("Back", () => {
             SwitchToGameplay(true, false);
             }));
@@ -183,6 +187,7 @@ public class UIManager : MonoBehaviour
         {
             string fileName = Path.GetFileNameWithoutExtension(txtFile);
             if (PlayerPrefs.GetInt(fileName, 0) == 1) {
+                Debug.Log(txtFile);
                 buttonsContainer.Add(CreateButton(fileName, () =>
                 {
                     LevelSaveSystem.LoadFromPath(txtFile);
@@ -202,10 +207,11 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        if (!addedAnyButtons) {
-            buttonsContainer.Add(CreateLabel("You haven't beaten any levels yet"));
-        }
-        buttonsContainer.Add(CreateSpacer(50));
+        //if (!addedAnyButtons) {
+        //    buttonsContainer.Add(CreateLabel("You haven't beaten any levels yet"));
+        //}
+
+        buttonsContainer.Add(CreateSpacer(10));
         buttonsContainer.Add(CreateButton("MainMenu", SwitchToMainmenu));
     }
 
@@ -223,7 +229,7 @@ public class UIManager : MonoBehaviour
         buttonsContainer.Add(SquareGraphic(50, 50, brown, "= Springs", 50));
         buttonsContainer.Add(CreateSpacer());
         buttonsContainer.Add(SquareGraphic(50, 50, lightBlue, "= Light", 50));
-        buttonsContainer.Add(CreateSpacer(50));
+        buttonsContainer.Add(CreateSpacer(10));
         buttonsContainer.Add(CreateButton("Next", () => {
             MasterSingleton.Instance.LevelManager.SwitchScene("Gameplay");
             SwitchToGameplay();
@@ -329,8 +335,6 @@ public class UIManager : MonoBehaviour
     {
         HideGameplayMenu();
         ShowMenu("LevelComplete");
-        //buttonsContainer.Add(CreateLabel("Thank you for playing!"));
-        buttonsContainer.Add(CreateSpacer(50));
         buttonsContainer.Add(CreateButton("NextLevel", () =>
         {
             if (LevelSaveSystem.lastLoadedFilename != "Level5")
